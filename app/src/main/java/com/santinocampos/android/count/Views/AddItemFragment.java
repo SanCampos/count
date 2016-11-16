@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.santinocampos.android.count.Listeners.DialogListener;
 import com.santinocampos.android.count.Models.Item;
 import com.santinocampos.android.count.R;
 
@@ -37,10 +38,6 @@ public class AddItemFragment extends AppCompatDialogFragment {
     private String mItemName = "";
     private String mItemPrice = "";
     private int mItemCount = MIN_ITEM_COUNT;
-
-    public interface DialogListener {
-        void addItem(Item item, int count);
-    }
 
     DialogListener mDialogListener;
 
