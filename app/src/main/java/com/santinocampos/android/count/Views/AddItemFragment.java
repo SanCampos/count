@@ -38,16 +38,16 @@ public class AddItemFragment extends AppCompatDialogFragment {
     private String mItemPrice = "";
     private int mItemCount = MIN_ITEM_COUNT;
 
-    public interface AddItemListener {
+    public interface DialogListener {
         void addItem(Item item, int count);
     }
 
-    AddItemListener mAddItemListener;
+    DialogListener mDialogListener;
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        mAddItemListener = (AddItemListener) activity;
+        mDialogListener = (DialogListener) activity;
     }
 
     @Override
@@ -130,7 +130,7 @@ public class AddItemFragment extends AppCompatDialogFragment {
                         if (mItemCount == 0 || mItemName.length() == 0 || Double.parseDouble(mItemPrice) == 0)
                             Toast.makeText(getActivity(), R.string.toast_error_adding_item, Toast.LENGTH_SHORT).show();
                         else {
-                            mAddItemListener.addItem(new Item(mItemName, Double.parseDouble(mItemPrice)), mItemCount);
+                            mDialogListener.addItem(new Item(mItemName, Double.parseDouble(mItemPrice)), mItemCount);
                             dismiss();
                         }
                     }

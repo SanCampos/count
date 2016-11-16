@@ -14,7 +14,7 @@ import com.santinocampos.android.count.Views.ChangeFragment;
 import com.santinocampos.android.count.Views.ItemListFragment;
 import com.santinocampos.android.count.Views.WalletFragment;
 
-public class CounterActivity extends AppCompatActivity implements WalletFragment.Callbacks, AddItemFragment.AddItemListener {
+public class CounterActivity extends AppCompatActivity implements WalletFragment.Callbacks, AddItemFragment.DialogListener {
 
     private final static String DIALOG_ADD = "DialogAdd";
 
