@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.santinocampos.android.count.Listeners.DialogListener;
 import com.santinocampos.android.count.Models.Accountant;
 import com.santinocampos.android.count.Models.Item;
 import com.santinocampos.android.count.R;
@@ -14,7 +15,7 @@ import com.santinocampos.android.count.Views.ChangeFragment;
 import com.santinocampos.android.count.Views.ItemListFragment;
 import com.santinocampos.android.count.Views.WalletFragment;
 
-public class CounterActivity extends AppCompatActivity implements WalletFragment.Callbacks, AddItemFragment.DialogListener {
+public class CounterActivity extends AppCompatActivity implements WalletFragment.Callbacks, DialogListener {
 
     private final static String DIALOG_ADD = "DialogAdd";
 
@@ -46,6 +47,11 @@ public class CounterActivity extends AppCompatActivity implements WalletFragment
         fm.beginTransaction().add(new AddItemFragment(), DIALOG_ADD).commit();
     }
 
+    @Override
+    public void addMoney(double money) {
+        Accountant.get(this).addMoney(money);
+    }
+
     private void updateUI() {
         ItemListFragment ilf = (ItemListFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container_second);
         ChangeFragment cf = (ChangeFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container_third);
@@ -55,7 +61,7 @@ public class CounterActivity extends AppCompatActivity implements WalletFragment
 
     @Override
     public void addItem(Item item, int count) {
-        Accountant.get(this).add(item, count);
+        Accountant.get(this).addItem(item, count);
         updateUI();
     }
 }

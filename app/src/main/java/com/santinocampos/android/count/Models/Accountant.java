@@ -29,9 +29,13 @@ public class Accountant {
         mItemList = new LinkedHashMap<>();
     }
 
-    public void add(Item item, int count) {
+    public void addItem(Item item, int count) {
         int updatedCount = mItemList.containsKey(item) ? mItemList.get(item) + count : count;
         mItemList.put(item, updatedCount);
+    }
+
+    public void addMoney(double money) {
+        mTotalMoney += money;
     }
 
     public double getTotalMoney() {
