@@ -18,7 +18,7 @@ import com.santinocampos.android.count.Listeners.DialogListener;
 import com.santinocampos.android.count.Models.Item;
 import com.santinocampos.android.count.R;
 
-public class AddItemFragment extends AppCompatDialogFragment {
+public class AddItemDialog extends AppCompatDialogFragment {
     private static final String ITEM_COUNT = "itemCount";
     private static final String ITEM_NAME = "itemName";
     private static final String ITEM_PRICE = "itemPrice";

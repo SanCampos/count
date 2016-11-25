@@ -16,7 +16,7 @@ import com.santinocampos.android.count.R;
 /**
  * Created by thedr on 11/16/2016.
  */
-public class AddMoneyFragment extends DialogFragment {
+public class AddMoneyDialog extends DialogFragment {
 
     private DialogListener mDialogListener;
     private EditText mAddMoneyEditText;
