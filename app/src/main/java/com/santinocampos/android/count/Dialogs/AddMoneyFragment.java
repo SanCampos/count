@@ -39,7 +39,7 @@ public class AddMoneyFragment extends DialogFragment {
                                 mDialogListener.addMoney(Double.parseDouble(mAddMoneyEditText.getText().toString()));
                             }
                         })
-                        .setNegativeButton(R.string.btn_addMoney_negative, new DialogInterface.OnClickListener() {
+                        .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dismiss();

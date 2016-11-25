@@ -76,7 +76,7 @@ public class AddItemFragment extends AppCompatDialogFragment {
         final AlertDialog dialog = new AlertDialog.Builder(getActivity())
                             .setView(v)
                             .setTitle(R.string.label_add_item_title)
-                            .setNegativeButton(R.string.button_cancel_add_item, null)
+                            .setNegativeButton(android.R.string.cancel, null)
                             .setPositiveButton(R.string.button_add_item, null)
                             .create();
 
