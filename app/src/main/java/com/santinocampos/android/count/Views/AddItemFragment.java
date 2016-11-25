@@ -14,6 +14,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.santinocampos.android.count.Listeners.DialogListener;
 import com.santinocampos.android.count.Models.Item;
 import com.santinocampos.android.count.R;
 
@@ -32,16 +33,12 @@ public class AddItemFragment extends AppCompatDialogFragment {
     private static final int MIN_ITEM_COUNT = 1;
     private static final int MAX_ITEM_COUNT = 9;
 
-    public interface AddItemListener {
-        void addItem(Item item, int count);
-    }
-
-    AddItemListener mAddItemListener;
+    DialogListener mDialogListener;
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        mAddItemListener = (AddItemListener) activity;
+        mDialogListener = (DialogListener) activity;
     }
 
     @Override
@@ -66,6 +63,8 @@ public class AddItemFragment extends AppCompatDialogFragment {
             }
         });
 
+        mItemCountTextView.setText(String.valueOf(MIN_ITEM_COUNT));
+
         mIncreaseCount = (ImageButton) v.findViewById(R.id.btn_increase_count);
         mIncreaseCount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,8 +72,6 @@ public class AddItemFragment extends AppCompatDialogFragment {
                 changeCount(1);
             }
         });
-
-
 
         final AlertDialog dialog = new AlertDialog.Builder(getActivity())
                             .setView(v)
@@ -96,7 +93,7 @@ public class AddItemFragment extends AppCompatDialogFragment {
                         if (itemCount == 0 || itemName.length() == 0 || itemPrice == 0)
                             Toast.makeText(getActivity(), R.string.toast_error_adding_item, Toast.LENGTH_SHORT).show();
                         else {
-                            mAddItemListener.addItem(new Item(itemName, itemPrice), itemCount);
+                            mDialogListener.addItem(new Item(itemName, itemPrice), itemCount);
                             dismiss();
                         }
                     }
@@ -128,7 +125,7 @@ public class AddItemFragment extends AppCompatDialogFragment {
     private void changeCount(int i) {
         if (Integer.parseInt(mItemCountTextView.getText().toString()) + i <= MAX_ITEM_COUNT &&
             Integer.parseInt(mItemCountTextView.getText().toString()) + i >= MIN_ITEM_COUNT)
-            mItemCountTextView.setText(Integer.parseInt(mItemCountTextView.getText().toString()) + i);
+            mItemCountTextView.setText(String.valueOf(Integer.parseInt(mItemCountTextView.getText().toString()) + i));
         checkToHideButton();
     }
 }

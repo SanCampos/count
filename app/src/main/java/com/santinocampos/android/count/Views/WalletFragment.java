@@ -19,7 +19,7 @@ public class WalletFragment extends Fragment {
 
     private TextView mWalletTextView;
     private ImageButton mAddItemButton;
-    private ImageButton mIncreaseCashButton;
+    private ImageButton mAddMoneyButton;
     private Callbacks mCallbacks;
 
 
@@ -45,6 +45,14 @@ public class WalletFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_wallet_layout, container, false);
 
         Accountant accountant = Accountant.get(getActivity());
+
+        mAddMoneyButton = (ImageButton) view.findViewById(R.id.btn_add_money);
+        mAddMoneyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCallbacks.addMoney();
+            }
+        });
 
         mWalletTextView = (TextView) view.findViewById(R.id.wallet_text_view);
         update();
