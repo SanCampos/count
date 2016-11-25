@@ -12,9 +12,9 @@ import com.santinocampos.android.count.Models.Item;
 import com.santinocampos.android.count.R;
 import com.santinocampos.android.count.Dialogs.AddItemFragment;
 import com.santinocampos.android.count.Dialogs.AddMoneyFragment;
-import com.santinocampos.android.count.Views.ChangeFragment;
-import com.santinocampos.android.count.Views.ItemListFragment;
-import com.santinocampos.android.count.Views.WalletFragment;
+import com.santinocampos.android.count.ViewFragments.ChangeFragment;
+import com.santinocampos.android.count.ViewFragments.ItemListFragment;
+import com.santinocampos.android.count.ViewFragments.WalletFragment;
 
 public class CounterActivity extends AppCompatActivity implements WalletFragment.Callbacks, DialogListener {
 

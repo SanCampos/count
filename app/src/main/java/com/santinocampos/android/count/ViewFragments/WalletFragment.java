@@ -1,4 +1,4 @@
-package com.santinocampos.android.count.Views;
+package com.santinocampos.android.count.ViewFragments;
 
 import android.content.Context;
 import android.os.Bundle;
