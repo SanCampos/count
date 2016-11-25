@@ -44,8 +44,6 @@ public class WalletFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_wallet_layout, container, false);
 
-        Accountant accountant = Accountant.get(getActivity());
-
         mAddMoneyButton = (ImageButton) view.findViewById(R.id.btn_add_money);
         mAddMoneyButton.setOnClickListener(new View.OnClickListener() {
             @Override
