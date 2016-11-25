@@ -1,4 +1,4 @@
-package com.santinocampos.android.count.Views;
+package com.santinocampos.android.count.Dialogs;
 
 import android.app.Activity;
 import android.app.AlertDialog;
