@@ -11,13 +11,15 @@ import com.santinocampos.android.count.Models.Accountant;
 import com.santinocampos.android.count.Models.Item;
 import com.santinocampos.android.count.R;
 import com.santinocampos.android.count.Views.AddItemFragment;
+import com.santinocampos.android.count.Views.AddMoneyFragment;
 import com.santinocampos.android.count.Views.ChangeFragment;
 import com.santinocampos.android.count.Views.ItemListFragment;
 import com.santinocampos.android.count.Views.WalletFragment;
 
 public class CounterActivity extends AppCompatActivity implements WalletFragment.Callbacks, DialogListener {
 
-    private final static String DIALOG_ADD = "DialogAdd";
+    private final static String DIALOG_ADD_ITEM = "DialogAddItem";
+    private final static String DIALOG_ADD_MONEY = "DialogAddMoney";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,19 +46,28 @@ public class CounterActivity extends AppCompatActivity implements WalletFragment
     @Override
     public void addItem() {
         FragmentManager fm = getSupportFragmentManager();
-        fm.beginTransaction().add(new AddItemFragment(), DIALOG_ADD).commit();
+        fm.beginTransaction().add(new AddItemFragment(), DIALOG_ADD_ITEM).commit();
     }
 
     @Override
     public void addMoney(double money) {
         Accountant.get(this).addMoney(money);
+        updateUI();
+    }
+
+    @Override
+    public void addMoney() {
+        FragmentManager fm = getSupportFragmentManager();
+        fm.beginTransaction().add(new AddMoneyFragment(), DIALOG_ADD_MONEY).commit();
     }
 
     private void updateUI() {
+        WalletFragment wf = (WalletFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container_first);
         ItemListFragment ilf = (ItemListFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container_second);
         ChangeFragment cf = (ChangeFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container_third);
-        ilf.updateUI();
-        cf.setChange();
+        wf.update();
+        ilf.update();
+        cf.update();
     }
 
     @Override

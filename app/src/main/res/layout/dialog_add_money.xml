@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="22dp"
         android:layout_marginLeft="22dp"
+        android:inputType="numberDecimal"
         android:hint="@string/hint_addMoney"/>
 
 </RelativeLayout>

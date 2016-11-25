@@ -21,14 +21,12 @@ public class ChangeFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_change, container, false);
-
         mTextView = (TextView) v.findViewById(R.id.change_text_view);
-        setChange();
-
+        update();
         return v;
     }
 
-    public void setChange() {
+    public void update() {
         mTextView.setText(String.valueOf(Math.round(Accountant.get(getActivity()).getChange())));
     }
 

@@ -25,6 +25,7 @@ public class WalletFragment extends Fragment {
 
     public interface Callbacks {
         void addItem();
+        void addMoney();
     }
 
     @Override
@@ -46,7 +47,7 @@ public class WalletFragment extends Fragment {
         Accountant accountant = Accountant.get(getActivity());
 
         mWalletTextView = (TextView) view.findViewById(R.id.wallet_text_view);
-        mWalletTextView.setText(String.valueOf(accountant.getTotalMoney()));
+        update();
 
         mAddItemButton = (ImageButton) view.findViewById(R.id.btn_add_item);
         mAddItemButton.setOnClickListener(new View.OnClickListener() {
@@ -57,5 +58,9 @@ public class WalletFragment extends Fragment {
         });
 
         return view;
+    }
+
+    public void update() {
+        mWalletTextView.setText(String.valueOf(Math.round((Accountant.get(getActivity()).getTotalMoney()))));
     }
 }

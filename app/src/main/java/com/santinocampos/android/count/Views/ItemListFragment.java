@@ -14,9 +14,6 @@ import com.santinocampos.android.count.Models.Item;
 import com.santinocampos.android.count.R;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -82,12 +79,12 @@ public class ItemListFragment extends Fragment {
         mRecyclerView = (RecyclerView) v.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        updateUI();
+        update();
 
         return v;
     }
 
-    public void updateUI() {
+    public void update() {
         Accountant accountant = Accountant.get(getActivity());
 
         if (mAdapter == null) {

@@ -11,4 +11,7 @@
     <string name="label_add_item_amount">Item amount</string>
     <string name="toast_error_adding_item">Invalid item name/price/amount!</string>
     <string name="hint_addMoney">Add money</string>
+    <string name="label_dialog_addMoney">Add money</string>
+    <string name="btn_addMoney_positive">ADD</string>
+    <string name="btn_addMoney_negative">CANCEL</string>
 </resources>
