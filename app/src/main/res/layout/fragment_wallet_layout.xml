@@ -9,8 +9,6 @@
         android:id="@+id/btn_add_money"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:src="@android:drawable/btn_default"/>
 
     <TextView
@@ -33,7 +31,7 @@
         android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_alignBottom="@+id/wallet_text_view"
+        android:layout_alignBottom="@id/wallet_text_view"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:background="@color/colorVerticalDivider"/>
