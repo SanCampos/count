@@ -10,11 +10,11 @@ import com.santinocampos.android.count.Listeners.DialogListener;
 import com.santinocampos.android.count.Models.Accountant;
 import com.santinocampos.android.count.Models.Item;
 import com.santinocampos.android.count.R;
-import com.santinocampos.android.count.Views.AddItemFragment;
-import com.santinocampos.android.count.Views.AddMoneyFragment;
-import com.santinocampos.android.count.Views.ChangeFragment;
-import com.santinocampos.android.count.Views.ItemListFragment;
-import com.santinocampos.android.count.Views.WalletFragment;
+import com.santinocampos.android.count.Dialogs.AddItemDialog;
+import com.santinocampos.android.count.Dialogs.AddMoneyDialog;
+import com.santinocampos.android.count.ViewFragments.ChangeFragment;
+import com.santinocampos.android.count.ViewFragments.ItemListFragment;
+import com.santinocampos.android.count.ViewFragments.WalletFragment;
 
 public class CounterActivity extends AppCompatActivity implements WalletFragment.Callbacks, DialogListener {
 
@@ -46,7 +46,7 @@ public class CounterActivity extends AppCompatActivity implements WalletFragment
     @Override
     public void addItem() {
         FragmentManager fm = getSupportFragmentManager();
-        fm.beginTransaction().add(new AddItemFragment(), DIALOG_ADD_ITEM).commit();
+        fm.beginTransaction().add(new AddItemDialog(), DIALOG_ADD_ITEM).commit();
     }
 
     @Override
@@ -58,7 +58,7 @@ public class CounterActivity extends AppCompatActivity implements WalletFragment
     @Override
     public void addMoney() {
         FragmentManager fm = getSupportFragmentManager();
-        fm.beginTransaction().add(new AddMoneyFragment(), DIALOG_ADD_MONEY).commit();
+        fm.beginTransaction().add(new AddMoneyDialog(), DIALOG_ADD_MONEY).commit();
     }
 
     private void updateUI() {

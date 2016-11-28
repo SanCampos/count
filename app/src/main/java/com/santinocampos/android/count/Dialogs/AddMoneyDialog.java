@@ -1,11 +1,11 @@
-package com.santinocampos.android.count.Views;
+package com.santinocampos.android.count.Dialogs;
 
 import android.app.Activity;
-import android.app.AlertDialog;
+import android.support.v7.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AppCompatDialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -16,7 +16,7 @@ import com.santinocampos.android.count.R;
 /**
  * Created by thedr on 11/16/2016.
  */
-public class AddMoneyFragment extends DialogFragment {
+public class AddMoneyDialog extends AppCompatDialogFragment {
 
     private DialogListener mDialogListener;
     private EditText mAddMoneyEditText;
@@ -39,7 +39,7 @@ public class AddMoneyFragment extends DialogFragment {
                                 mDialogListener.addMoney(Double.parseDouble(mAddMoneyEditText.getText().toString()));
                             }
                         })
-                        .setNegativeButton(R.string.btn_addMoney_negative, new DialogInterface.OnClickListener() {
+                        .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dismiss();

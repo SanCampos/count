@@ -8,13 +8,11 @@
     tools:context=".Controllers.CounterActivity">
 
 
-
     <FrameLayout
+        android:id="@+id/fragment_container_first"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/fragment_container_first">
+        android:layout_height="wrap_content">
     </FrameLayout>
-
 
     <LinearLayout
         android:id="@+id/wrapper"
@@ -23,18 +21,17 @@
         android:layout_below="@id/fragment_container_first">
 
         <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/fragment_container_second"
-            android:layout_below="@id/fragment_container_first">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         </FrameLayout>
 
     </LinearLayout>
 
     <FrameLayout
+        android:id="@+id/fragment_container_third"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/fragment_container_third"
         android:layout_below="@id/wrapper">
     </FrameLayout>
 

@@ -1,4 +1,4 @@
-package com.santinocampos.android.count.Views;
+package com.santinocampos.android.count.Dialogs;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -18,7 +18,7 @@ import com.santinocampos.android.count.Listeners.DialogListener;
 import com.santinocampos.android.count.Models.Item;
 import com.santinocampos.android.count.R;
 
-public class AddItemFragment extends AppCompatDialogFragment {
+public class AddItemDialog extends AppCompatDialogFragment {
     private static final String ITEM_COUNT = "itemCount";
     private static final String ITEM_NAME = "itemName";
     private static final String ITEM_PRICE = "itemPrice";
@@ -43,6 +43,37 @@ public class AddItemFragment extends AppCompatDialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        final AlertDialog dialog = new AlertDialog.Builder(getActivity())
+                            .setView(createView(savedInstanceState))
+                            .setTitle(R.string.label_add_item_title)
+                            .setNegativeButton(android.R.string.cancel, null)
+                            .setPositiveButton(R.string.button_add_item, null)
+                            .create();
+
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button addItem = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                addItem.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int itemCount = Integer.parseInt(mItemCountTextView.getText().toString());
+                        double itemPrice = Double.parseDouble(mItemPriceEditText.getText().toString());
+                        String itemName = mItemNameEditText.getText().toString();
+                        if (itemCount == 0 || itemName.length() == 0 || itemPrice == 0)
+                            Toast.makeText(getActivity(), R.string.toast_error_adding_item, Toast.LENGTH_SHORT).show();
+                        else {
+                            mDialogListener.addItem(new Item(itemName, itemPrice), itemCount);
+                            dismiss();
+                        }
+                    }
+                });
+            }
+        });
+        return dialog;
+    }
+
+    private View createView(Bundle savedInstanceState) {
         View v = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_add_item, null);
 
         mItemNameEditText = (EditText) v.findViewById(R.id.input_add_item_name);
@@ -72,35 +103,7 @@ public class AddItemFragment extends AppCompatDialogFragment {
                 changeCount(1);
             }
         });
-
-        final AlertDialog dialog = new AlertDialog.Builder(getActivity())
-                            .setView(v)
-                            .setTitle(R.string.label_add_item_title)
-                            .setNegativeButton(R.string.button_cancel_add_item, null)
-                            .setPositiveButton(R.string.button_add_item, null)
-                            .create();
-
-        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
-            @Override
-            public void onShow(DialogInterface dialog) {
-                Button addItem = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
-                addItem.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        int itemCount = Integer.parseInt(mItemCountTextView.getText().toString());
-                        double itemPrice = Double.parseDouble(mItemPriceEditText.getText().toString());
-                        String itemName = mItemNameEditText.getText().toString();
-                        if (itemCount == 0 || itemName.length() == 0 || itemPrice == 0)
-                            Toast.makeText(getActivity(), R.string.toast_error_adding_item, Toast.LENGTH_SHORT).show();
-                        else {
-                            mDialogListener.addItem(new Item(itemName, itemPrice), itemCount);
-                            dismiss();
-                        }
-                    }
-                });
-            }
-        });
-        return dialog;
+        return v;
     }
 
     @Override

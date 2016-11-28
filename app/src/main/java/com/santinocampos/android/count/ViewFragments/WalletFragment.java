@@ -1,4 +1,4 @@
-package com.santinocampos.android.count.Views;
+package com.santinocampos.android.count.ViewFragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -43,8 +43,6 @@ public class WalletFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_wallet_layout, container, false);
-
-        Accountant accountant = Accountant.get(getActivity());
 
         mAddMoneyButton = (ImageButton) view.findViewById(R.id.btn_add_money);
         mAddMoneyButton.setOnClickListener(new View.OnClickListener() {

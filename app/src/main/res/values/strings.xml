@@ -3,15 +3,13 @@
     <string name="label_change">Change:</string>
     <string name="label_add_item_title">Add an item</string>
     <string name="button_add_item">ADD ITEM</string>
-    <string name="button_cancel_add_item">CANCEL</string>
     <string name="hint_add_item_name">Enter item name</string>
     <string name="label_add_item_name_text_view">Item name</string>
     <string name="hint_add_item_price">Enter item price</string>
     <string name="label_add_item_price_text_view">Item price</string>
     <string name="label_add_item_amount">Item amount</string>
-    <string name="toast_error_adding_item">Invalid item name/price/amount!</string>
+    <string name="toast_error_adding_item">Your item name or price is invalid!</string>
     <string name="hint_addMoney">Add money</string>
     <string name="label_dialog_addMoney">Add money</string>
-    <string name="btn_addMoney_positive">ADD</string>
-    <string name="btn_addMoney_negative">CANCEL</string>
+    <string name="btn_addMoney_positive">ADD MONEY</string>
 </resources>
