@@ -28,5 +28,4 @@
         android:layout_width="match_parent"
         layout="@layout/content_counter"/>
 
-
 </android.support.design.widget.CoordinatorLayout>
