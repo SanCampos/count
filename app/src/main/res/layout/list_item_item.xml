@@ -4,8 +4,15 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorVerticalDivider"
+        android:layout_alignParentTop="true"
+        android:id="@+id/view"/>
+
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="275dp"
         android:layout_height="wrap_content"
         android:id="@+id/item_name_textView"
         android:textSize="30sp"
@@ -19,6 +26,7 @@
         android:textSize="30sp"
         tools:text="500P"
         android:gravity="end"
+        android:layout_centerVertical="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"/>
@@ -27,20 +35,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/item_count_textView"
-        android:textSize="23sp"
+        android:textSize="19sp"
         android:textStyle="bold"
         tools:text="(5)"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/item_price_textView"
         android:layout_toStartOf="@+id/item_price_textView"
-        android:layout_marginRight="6dp"
-        android:layout_marginEnd="6dp"/>
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/colorVerticalDivider"
-        android:layout_alignBottom="@id/item_name_textView"
-        android:id="@+id/view"/>
+
 
 </RelativeLayout>

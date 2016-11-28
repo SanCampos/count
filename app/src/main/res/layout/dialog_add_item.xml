@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="22dp"
+        android:layout_marginStart="22dp"
         android:text="@string/label_add_item_name_text_view"/>
 
     <EditText
@@ -19,6 +20,7 @@
         android:id="@+id/input_add_item_name"
         android:hint="@string/hint_add_item_name"
         android:textSize="15sp"
+        android:maxLength="30"
         android:layout_marginEnd="22dp"
         android:layout_marginRight="22dp"
         android:layout_below="@+id/label_add_item_name"
@@ -40,7 +42,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/hint_add_item_price"
         android:textSize="15sp"
-        android:maxLength="12"
+        android:maxLength="7"
         android:inputType="numberDecimal"
         android:id="@+id/input_add_item_price"
         android:layout_below="@+id/label_add_item_price"
@@ -53,6 +55,7 @@
         android:src="@drawable/ic_btn_right"
         android:id="@+id/btn_increase_count"
         android:layout_alignRight="@id/input_add_item_name"
+        android:layout_alignEnd="@id/input_add_item_name"
         android:layout_below="@id/label_add_item_price"
         android:layout_alignBottom="@+id/item_count"/>
 
