@@ -5,6 +5,8 @@ import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.santinocampos.android.count.Listeners.DialogListener;
 import com.santinocampos.android.count.Models.Accountant;
@@ -44,14 +46,33 @@ public class CounterActivity extends AppCompatActivity implements WalletFragment
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_change, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+
+        switch (itemId) {
+            case R.id.action_add_money : addMoney();
+                break;
+            case R.id.action_export : //export();
+                break;
+        }
+        return true;
+    }
+
+    @Override
     public void addItem() {
         FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction().add(new AddItemDialog(), DIALOG_ADD_ITEM).commit();
     }
 
     @Override
-    public void addMoney(double money) {
-        Accountant.get(this).addMoney(money);
+    public void addMoney(double money, boolean isSet) {
+        Accountant.get(this).addMoney(money, isSet);
         updateUI();
     }
 

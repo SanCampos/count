@@ -13,4 +13,12 @@
         android:maxLength="8"
         android:hint="@string/hint_addMoney"/>
 
+    <CheckBox
+        android:id="@+id/checkBox_AddMoney"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editText_addMoney"
+        android:layout_alignLeft="@id/editText_addMoney"
+        android:layout_alignStart="@id/editText_addMoney"
+        android:text="@string/dialog_addOrSet"/>
 </RelativeLayout>

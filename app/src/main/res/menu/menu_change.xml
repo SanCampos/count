@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context=".Controllers.CounterActivity">
+
+     <item
+         android:id="@+id/action_add_money"
+         android:title="@string/add_money_label"
+         android:icon="@drawable/ic_action_setmoney"
+         app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/action_export"
+        android:title="@string/action_export"
+        android:icon="@drawable/ic_action_export"
+        app:showAsAction="always"/>
+
+</menu>

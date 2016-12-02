@@ -34,8 +34,8 @@ public class Accountant {
         mItemList.put(item, updatedCount);
     }
 
-    public void addMoney(double money) {
-        mTotalMoney += money;
+    public void addMoney(double money, boolean isSet) {
+        mTotalMoney += isSet ? money - mTotalMoney : money;
     }
 
     public double getTotalMoney() {

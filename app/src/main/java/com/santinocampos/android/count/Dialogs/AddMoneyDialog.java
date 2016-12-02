@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.santinocampos.android.count.Listeners.DialogListener;
@@ -20,6 +21,7 @@ public class AddMoneyDialog extends AppCompatDialogFragment {
 
     private DialogListener mDialogListener;
     private EditText mAddMoneyEditText;
+    private CheckBox mCheckBox;
 
     @Override
     public void onAttach(Activity activity) {
@@ -36,7 +38,7 @@ public class AddMoneyDialog extends AppCompatDialogFragment {
                         .setPositiveButton(R.string.btn_addMoney_positive, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                mDialogListener.addMoney(Double.parseDouble(mAddMoneyEditText.getText().toString()));
+                                mDialogListener.addMoney(Double.parseDouble(mAddMoneyEditText.getText().toString()), mCheckBox.isChecked());
                             }
                         })
                         .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
@@ -51,6 +53,7 @@ public class AddMoneyDialog extends AppCompatDialogFragment {
     private View createView(Bundle savedInstanceState) {
         View v = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_add_money, null);
         mAddMoneyEditText = (EditText) v.findViewById(R.id.editText_addMoney);
+        mCheckBox = (CheckBox) v.findViewById(R.id.checkBox_AddMoney);
         return v;
     }
 }
