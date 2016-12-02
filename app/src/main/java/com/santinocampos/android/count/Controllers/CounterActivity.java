@@ -1,5 +1,7 @@
 package com.santinocampos.android.count.Controllers;
 
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.os.Bundle;
@@ -43,6 +45,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         setContentView(R.layout.activity_counter);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mAccountant = Accountant.get(this);
 
