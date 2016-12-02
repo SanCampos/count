@@ -11,7 +11,7 @@
     <string name="toast_error_adding_item">Your item name or price is invalid!</string>
     <string name="hint_addMoney">Add money</string>
     <string name="label_dialog_addMoney">Add money</string>
-    <string name="btn_addMoney_positive">ADD MONEY</string>
+    <string name="btn_addMoney_positive">ADD</string>
     <string name="add_money_label">Add money</string>
     <string name="action_export">Export record</string>
     <string name="dialog_addOrSet">Reset money</string>

@@ -57,7 +57,7 @@
         android:layout_alignEnd="@id/input_add_item_name"
         android:layout_below="@id/label_add_item_price"
         android:layout_alignBottom="@+id/item_count"
-        android:src="@drawable/ic_btn_right"/>
+        android:src="@drawable/ic_arrow_right"/>
 
     <ImageButton
         android:id="@+id/btn_decrease_count"

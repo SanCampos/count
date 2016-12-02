@@ -10,8 +10,7 @@
         android:layout_marginRight="22dp"
         android:layout_marginLeft="22dp"
         android:inputType="numberDecimal"
-        android:maxLength="8"
-        android:hint="@string/hint_addMoney"/>
+        android:maxLength="8"/>
 
     <CheckBox
         android:id="@+id/checkBox_AddMoney"
