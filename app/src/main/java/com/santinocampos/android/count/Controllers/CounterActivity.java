@@ -27,6 +27,8 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     private Button mWalletButton;
     private Button mChangeButton;
 
+    private Accountant mAccountant;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,9 +45,12 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
                     .add(R.id.fragment_container_second, itemListFragment)
                     .commit();
         }
+        mAccountant = Accountant.get(this);
 
         mWalletButton =  (Button) findViewById(R.id.wallet_totalMoney);
         mChangeButton =  (Button) findViewById(R.id.wallet_totalChange);
+
+        updateUI();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_addItem);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -82,18 +87,21 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
 
     @Override
     public void addItem(Item item, int count) {
-        Accountant.get(this).addItem(item, count);
+        mAccountant.addItem(item, count);
         updateUI();
     }
 
     @Override
     public void addMoney(double money, boolean isSet) {
-        Accountant.get(this).addMoney(money, isSet);
+        mAccountant.addMoney(money, isSet);
         updateUI();
     }
 
     private void updateUI() {
         ItemListFragment ilf = (ItemListFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container_second);
         ilf.update();
+
+        mWalletButton.setText(String.valueOf(Math.round(mAccountant.getTotalMoney())));
+        mChangeButton.setText(String.valueOf(Math.round(mAccountant.getChange())));
     }
 }
