@@ -1,5 +1,6 @@
 package com.santinocampos.android.count.Controllers;
 
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.santinocampos.android.count.Listeners.DialogListener;
 import com.santinocampos.android.count.Models.Accountant;
@@ -43,6 +45,13 @@ public class CounterActivity extends AppCompatActivity implements WalletFragment
             ft.add(R.id.fragment_container_third, changeFragment);
             ft.commit();
         }
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_addItem);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addItem();
+            }
+        });
     }
 
     @Override
