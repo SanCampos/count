@@ -15,8 +15,9 @@
         android:layout_marginTop="13dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textSize="23sp"
         android:background="@drawable/rounded_rectangle"
+        android:elevation="4dp"
+        android:textSize="23sp"
         tools:text="10000"/>
 
     <LinearLayout
@@ -33,11 +34,15 @@
 
     </LinearLayout>
 
-    <FrameLayout
-        android:id="@+id/fragment_container_third"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/wrapper">
-    </FrameLayout>
+    <Button
+        android:id="@+id/wallet_totalChange"
+        android:layout_width="175dp"
+        android:layout_height="45dp"
+        android:layout_below="@+id/wrapper"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/rounded_rectangle"
+        android:elevation="4dp"
+        android:textSize="23sp"
+        tools:text="10000"/>
 
 </RelativeLayout>

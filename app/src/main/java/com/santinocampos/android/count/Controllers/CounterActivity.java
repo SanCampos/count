@@ -17,7 +17,6 @@ import com.santinocampos.android.count.Models.Item;
 import com.santinocampos.android.count.R;
 import com.santinocampos.android.count.Dialogs.AddItemDialog;
 import com.santinocampos.android.count.Dialogs.AddMoneyDialog;
-import com.santinocampos.android.count.ViewFragments.ChangeFragment;
 import com.santinocampos.android.count.ViewFragments.ItemListFragment;
 
 public class CounterActivity extends AppCompatActivity implements DialogListener {
@@ -26,6 +25,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     private final static String DIALOG_ADD_MONEY = "DialogAddMoney";
 
     private Button mWalletButton;
+    private Button mChangeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,15 +38,14 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
             FragmentManager fm = getSupportFragmentManager();
 
             ItemListFragment itemListFragment = new ItemListFragment();
-            ChangeFragment changeFragment = new ChangeFragment();
 
             fm.beginTransaction()
                     .add(R.id.fragment_container_second, itemListFragment)
-                    .add(R.id.fragment_container_third, changeFragment)
                     .commit();
         }
 
         mWalletButton =  (Button) findViewById(R.id.wallet_totalMoney);
+        mChangeButton =  (Button) findViewById(R.id.wallet_totalChange);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_addItem);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -95,8 +94,6 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
 
     private void updateUI() {
         ItemListFragment ilf = (ItemListFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container_second);
-        ChangeFragment cf = (ChangeFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container_third);
         ilf.update();
-        cf.update();
     }
 }
