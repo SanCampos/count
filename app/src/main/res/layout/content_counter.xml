@@ -26,11 +26,14 @@
         android:layout_height="425dp"
         android:layout_below="@id/wallet_totalMoney">
 
-        <FrameLayout
-            android:id="@+id/fragment_container_second"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </FrameLayout>
+        <android.support.v7.widget.RecyclerView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/recycler_view"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3">
+        </android.support.v7.widget.RecyclerView>
 
     </LinearLayout>
 
