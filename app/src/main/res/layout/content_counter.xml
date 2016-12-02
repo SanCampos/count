@@ -8,17 +8,22 @@
     tools:context=".Controllers.CounterActivity">
 
 
-    <FrameLayout
-        android:id="@+id/fragment_container_first"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </FrameLayout>
+    <Button
+        android:id="@+id/wallet_totalMoney"
+        android:layout_width="190dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="13dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="23sp"
+        android:background="@drawable/rounded_rectangle"
+        tools:text="10000"/>
 
     <LinearLayout
         android:id="@+id/wrapper"
         android:layout_width="match_parent"
         android:layout_height="425dp"
-        android:layout_below="@id/fragment_container_first">
+        android:layout_below="@id/wallet_totalMoney">
 
         <FrameLayout
             android:id="@+id/fragment_container_second"
