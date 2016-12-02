@@ -103,6 +103,8 @@ public class AddItemDialog extends AppCompatDialogFragment {
                 changeCount(1);
             }
         });
+
+        checkToHideButton();
         return v;
     }
 
