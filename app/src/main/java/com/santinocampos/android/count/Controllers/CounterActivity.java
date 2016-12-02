@@ -1,6 +1,7 @@
 package com.santinocampos.android.count.Controllers;
 
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
@@ -20,7 +21,7 @@ import com.santinocampos.android.count.ViewFragments.ChangeFragment;
 import com.santinocampos.android.count.ViewFragments.ItemListFragment;
 import com.santinocampos.android.count.ViewFragments.WalletFragment;
 
-public class CounterActivity extends AppCompatActivity implements WalletFragment.Callbacks, DialogListener {
+public class CounterActivity extends AppCompatActivity implements DialogListener {
 
     private final static String DIALOG_ADD_ITEM = "DialogAddItem";
     private final static String DIALOG_ADD_MONEY = "DialogAddMoney";
@@ -49,7 +50,7 @@ public class CounterActivity extends AppCompatActivity implements WalletFragment
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addItem();
+                startDialog(new AddItemDialog());
             }
         });
     }
@@ -65,7 +66,7 @@ public class CounterActivity extends AppCompatActivity implements WalletFragment
         int itemId = item.getItemId();
 
         switch (itemId) {
-            case R.id.action_add_money : addMoney();
+            case R.id.action_add_money : startDialog(new AddMoneyDialog());
                 break;
             case R.id.action_export : //export();
                 break;
@@ -73,22 +74,21 @@ public class CounterActivity extends AppCompatActivity implements WalletFragment
         return true;
     }
 
+    private void startDialog(DialogFragment df) {
+        String tag = df.getClass() == AddItemDialog.class ? DIALOG_ADD_ITEM : DIALOG_ADD_MONEY;
+        getSupportFragmentManager().beginTransaction().add(df, tag).commit();
+    }
+
     @Override
-    public void addItem() {
-        FragmentManager fm = getSupportFragmentManager();
-        fm.beginTransaction().add(new AddItemDialog(), DIALOG_ADD_ITEM).commit();
+    public void addItem(Item item, int count) {
+        Accountant.get(this).addItem(item, count);
+        updateUI();
     }
 
     @Override
     public void addMoney(double money, boolean isSet) {
         Accountant.get(this).addMoney(money, isSet);
         updateUI();
-    }
-
-    @Override
-    public void addMoney() {
-        FragmentManager fm = getSupportFragmentManager();
-        fm.beginTransaction().add(new AddMoneyDialog(), DIALOG_ADD_MONEY).commit();
     }
 
     private void updateUI() {
@@ -98,11 +98,5 @@ public class CounterActivity extends AppCompatActivity implements WalletFragment
         wf.update();
         ilf.update();
         cf.update();
-    }
-
-    @Override
-    public void addItem(Item item, int count) {
-        Accountant.get(this).addItem(item, count);
-        updateUI();
     }
 }

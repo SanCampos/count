@@ -33,11 +33,13 @@
         android:id="@+id/item_count_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/item_price_textView"
-        android:layout_toStartOf="@+id/item_price_textView"
         android:textSize="16sp"
         android:textStyle="bold"
-        tools:text="(5)"/>
+        tools:text="(5)"
+        android:layout_marginRight="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/item_price_textView"
+        android:layout_toStartOf="@+id/item_price_textView"/>
 
 </RelativeLayout>
