@@ -1,7 +1,5 @@
 package com.santinocampos.android.count.Controllers;
 
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.os.Bundle;
@@ -22,6 +20,8 @@ import com.santinocampos.android.count.Models.Item;
 import com.santinocampos.android.count.R;
 import com.santinocampos.android.count.Dialogs.AddItemDialog;
 import com.santinocampos.android.count.Dialogs.AddMoneyDialog;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -68,20 +68,24 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
 
     private class ItemHolder extends RecyclerView.ViewHolder {
         private TextView mItemNameTextView;
-        private TextView mItemPriceTextView;
+        private TextView mItemInitialPriceTextView;
+        private TextView mItemTotalPriceTextView;
         private TextView mItemCountTextView;
 
+        /** HACKY V1 OF NEW ITEM VIEW, NOT FOR PRODUCTION **/
         public ItemHolder(View itemView) {
             super(itemView);
             mItemNameTextView = (TextView) itemView.findViewById(R.id.item_name_textView);
-            mItemPriceTextView = (TextView) itemView.findViewById(R.id.item_price_textView);
             mItemCountTextView = (TextView) itemView.findViewById(R.id.item_count_textView);
+            mItemInitialPriceTextView = (TextView) itemView.findViewById(R.id.item_initialPrice_textView);
+            mItemTotalPriceTextView = (TextView) itemView.findViewById(R.id.item_totalPrice_textView);
         }
 
         public void bindItem(Item item, int count) {
             mItemNameTextView.setText(item.getName());
-            mItemPriceTextView.setText(String.valueOf(item.getPrice()));
-            mItemCountTextView.setText('(' + String.valueOf(count) + ')');
+            mItemCountTextView.setText('x' + String.valueOf(count));
+            mItemInitialPriceTextView.setText(String.valueOf(item.getPrice()));
+            mItemTotalPriceTextView.setText(String.valueOf(item.getPrice() * count));
         }
     }
 
