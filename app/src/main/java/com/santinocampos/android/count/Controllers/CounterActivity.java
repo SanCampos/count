@@ -20,7 +20,7 @@ import com.santinocampos.android.count.Models.Item;
 import com.santinocampos.android.count.R;
 import com.santinocampos.android.count.Dialogs.AddItemDialog;
 import com.santinocampos.android.count.Dialogs.AddMoneyDialog;
-import com.santinocampos.android.count.utils.DecimalUtils;
+import com.santinocampos.android.count.Utils.DecimalUtils;
 
 import java.util.ArrayList;
 import java.util.Map;
