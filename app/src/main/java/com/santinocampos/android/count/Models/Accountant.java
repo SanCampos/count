@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
 /**
@@ -27,6 +28,10 @@ public class Accountant {
     private Accountant(Context context) {
         mTotalMoney = 0;
         mItemList = new LinkedHashMap<>();
+
+        /** Item generation code - DO NOT PUT IN PRODUCTION **/
+        for (int i = 0; i < 100; i++)
+            addItem(new Item("test", new Random().nextInt(43)), 4);
     }
 
     public void addItem(Item item, int count) {
