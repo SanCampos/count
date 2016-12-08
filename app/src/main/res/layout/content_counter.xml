@@ -16,7 +16,6 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:background="@drawable/rounded_rectangle"
-        android:elevation="4dp"
         android:textSize="23sp"
         tools:text="10000"/>
 

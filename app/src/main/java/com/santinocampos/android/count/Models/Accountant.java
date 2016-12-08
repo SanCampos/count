@@ -29,9 +29,9 @@ public class Accountant {
         mTotalMoney = 0;
         mItemList = new LinkedHashMap<>();
 
-        /** Item generation code - DO NOT PUT IN PRODUCTION **/
+        /** Item generation code - DO NOT PUT IN PRODUCTION
         for (int i = 0; i < 100; i++)
-            addItem(new Item("test", new Random().nextInt(43)), 4);
+            addItem(new Item("test", new Random().nextInt(43)), 4); **/
     }
 
     public void addItem(Item item, int count) {
