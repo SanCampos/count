@@ -20,7 +20,7 @@ import com.santinocampos.android.count.Models.Item;
 import com.santinocampos.android.count.R;
 import com.santinocampos.android.count.Dialogs.AddItemDialog;
 import com.santinocampos.android.count.Dialogs.AddMoneyDialog;
-import com.santinocampos.android.count.Utils.DecimalUtils;
+import com.santinocampos.android.count.Utils.MoneyUtils;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -83,8 +83,8 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         public void bindItem(Item item, int count) {
             mItemNameTextView.setText(item.getName());
             mItemCountTextView.setText('x' + String.valueOf(count));
-            mItemInitialPriceTextView.setText(DecimalUtils.clean(item.getPrice()));
-            mItemTotalPriceTextView.setText(DecimalUtils.clean(item.getPrice() * count));
+            mItemInitialPriceTextView.setText(MoneyUtils.convert(item.getPrice()));
+            mItemTotalPriceTextView.setText(MoneyUtils.convert(item.getPrice() * count));
         }
     }
 
@@ -129,8 +129,8 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     }
 
     private void updateUI() {
-        mWalletButton.setText(DecimalUtils.clean(mAccountant.getTotalMoney()));
-        mChangeButton.setText(DecimalUtils.clean(mAccountant.getChange()));
+        mWalletButton.setText(MoneyUtils.convert(mAccountant.getTotalMoney()));
+        mChangeButton.setText(MoneyUtils.convert(mAccountant.getChange()));
 
         if (mAdapter == null) {
             mAdapter = new ItemAdapter(mAccountant.getItemList());
