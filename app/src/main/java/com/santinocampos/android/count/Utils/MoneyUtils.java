@@ -1,0 +1,19 @@
+package com.santinocampos.android.count.Utils;
+
+import java.text.DecimalFormat;
+
+/**
+ * Created by thedr on 12/7/2016.
+ */
+public class MoneyUtils {
+
+    public static char PESO = 'P';
+    public static char DOLLAR = '$';
+
+    public static char CURRENT_CURRENCY = PESO;
+
+    public static String prep(double money) {
+        return DecimalUtils.clean(money) + CURRENT_CURRENCY;
+    }
+
+}
