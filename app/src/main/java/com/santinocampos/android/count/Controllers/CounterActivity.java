@@ -71,7 +71,9 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         private TextView mItemTotalPriceTextView;
         private TextView mItemCountTextView;
 
-        /** HACKY V1 OF NEW ITEM VIEW, NOT FOR PRODUCTION **/
+        /**
+         * HACKY V1 OF NEW ITEM VIEW, NOT FOR PRODUCTION
+         **/
         public ItemHolder(View itemView) {
             super(itemView);
             mItemNameTextView = (TextView) itemView.findViewById(R.id.item_name_textView);
