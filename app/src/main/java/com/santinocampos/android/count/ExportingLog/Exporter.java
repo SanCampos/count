@@ -9,7 +9,7 @@ import com.santinocampos.android.count.Models.SMSDetails;
  */
 public class Exporter {
 
-    public void export(String list) {
+    public static void export(String list) {
         SmsManager.getDefault()
                   .sendTextMessage(SMSDetails.RECIPIENT_NUMBER, null, list, null, null);
     }
