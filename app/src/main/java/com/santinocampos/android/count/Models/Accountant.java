@@ -56,7 +56,28 @@ public class Accountant {
         return mTotalMoney - cost;
     }
 
+    public String getList() {
+        StringBuilder output = new StringBuilder("");
+
+        for (Item i : getItemList().keySet())
+            output.append(i.getName())
+                  .append(" - ")
+                  .append('(' + mItemList.get(i) + ')')
+                  .append(i.getPrice() + "\n")
+                  .append(totalPriceOf(i));
+
+        return output.toString();
+    }
+
     public Map<Item, Integer> getItemList() {
         return mItemList;
+    }
+
+    public double totalPriceOf(Item i) {
+        return i.getPrice() * mItemList.get(i);
+    }
+
+    public int getCountOf(Item i) {
+        return mItemList.get(i);
     }
 }

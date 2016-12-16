@@ -82,11 +82,11 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
             mItemTotalPriceTextView = (TextView) itemView.findViewById(R.id.item_totalPrice_textView);
         }
 
-        public void bindItem(Item item, int count) {
+        public void bindItem(Item item) {
             mItemNameTextView.setText(item.getName());
-            mItemCountTextView.setText('x' + String.valueOf(count));
+            mItemCountTextView.setText('x' + String.valueOf(mAccountant.getCountOf(item)));
             mItemInitialPriceTextView.setText(MoneyUtils.prep(item.getPrice()));
-            mItemTotalPriceTextView.setText(MoneyUtils.prep(item.getPrice() * count));
+            mItemTotalPriceTextView.setText(MoneyUtils.prep(mAccountant.totalPriceOf(item)));
         }
     }
 
@@ -104,8 +104,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
 
         public void onBindViewHolder(ItemHolder holder, int position) {
             Item item = new ArrayList<>(mItemList.keySet()).get(position);
-            int count = mItemList.get(item);
-            holder.bindItem(item, count);
+            holder.bindItem(item);
         }
 
         public int getItemCount() {
@@ -157,5 +156,9 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
                 break;
         }
         return true;
+    }
+
+    public void export() {
+        //Exporter.get(this).export(list);
     }
 }
