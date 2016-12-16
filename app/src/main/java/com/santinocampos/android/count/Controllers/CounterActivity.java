@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.santinocampos.android.count.Dialogs.ConfirmExportDialog;
 import com.santinocampos.android.count.ExportingLog.Exporter;
 import com.santinocampos.android.count.Listeners.DialogListener;
 import com.santinocampos.android.count.Models.Accountant;
@@ -30,6 +31,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
 
     private final static String DIALOG_ADD_ITEM = "DialogAddItem";
     private final static String DIALOG_ADD_MONEY = "DialogAddMoney";
+    private static final String DIALOG_EXPORT_LOG = "DialogExportLog";
 
     private Button mWalletButton;
     private Button mChangeButton;
@@ -114,7 +116,15 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     }
 
     private void startDialog(DialogFragment df) {
-        String tag = df.getClass() == AddItemDialog.class ? DIALOG_ADD_ITEM : DIALOG_ADD_MONEY;
+        String tag = "";
+
+        if (df.getClass() == AddItemDialog.class)
+            tag = DIALOG_ADD_ITEM;
+        else if (df.getClass() == AddMoneyDialog.class)
+            tag = DIALOG_ADD_MONEY;
+        else
+            tag = DIALOG_EXPORT_LOG;
+
         getSupportFragmentManager().beginTransaction().add(df, tag).commit();
     }
 
@@ -151,7 +161,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         int itemId = item.getItemId();
 
         switch (itemId) {
-            case R.id.action_add_money : startDialog(new AddMoneyDialog());
+            case R.id.action_add_money : startDialog(new AddItemDialog());
                 break;
             case R.id.action_export : export();
                 break;
@@ -159,13 +169,17 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         return true;
     }
 
-    public void export() {
+    private void export() {
         String list = mAccountant.getList();
 
         if (list.length() != 0) {
-            Exporter.export(mAccountant.getList());
-            Toast.makeText(CounterActivity.this, R.string.toast_success_export, Toast.LENGTH_LONG).show();
-        } else
-            Toast.makeText(CounterActivity.this, R.string.toast_error_export, Toast.LENGTH_SHORT).show();
+            startDialog(new ConfirmExportDialog());
+        } else Toast.makeText(CounterActivity.this, R.string.toast_error_export, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void exportList()  {
+        Exporter.export(mAccountant.getList());
+        Toast.makeText(CounterActivity.this, R.string.toast_success_export, Toast.LENGTH_LONG).show();
     }
 }

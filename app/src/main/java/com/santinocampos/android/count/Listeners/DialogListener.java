@@ -8,4 +8,5 @@ import com.santinocampos.android.count.Models.Item;
 public interface DialogListener {
     void addMoney(double money, boolean isSet);
     void addItem(Item item, int count);
+    void exportList();
 }
