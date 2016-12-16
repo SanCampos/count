@@ -22,7 +22,6 @@ import com.santinocampos.android.count.Models.Item;
 import com.santinocampos.android.count.R;
 import com.santinocampos.android.count.Dialogs.AddItemDialog;
 import com.santinocampos.android.count.Dialogs.AddMoneyDialog;
-import com.santinocampos.android.count.Utils.MoneyUtils;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -86,9 +85,9 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
 
         public void bindItem(Item item) {
             mItemNameTextView.setText(item.getName());
-            mItemCountTextView.setText('x' + String.valueOf(mAccountant.getCountOf(item)));
-            mItemInitialPriceTextView.setText(MoneyUtils.prep(item.getPrice()));
-            mItemTotalPriceTextView.setText(MoneyUtils.prep(mAccountant.totalPriceOf(item)));
+            mItemCountTextView.setText('x' + mAccountant.countOf(item));
+            mItemInitialPriceTextView.setText(mAccountant.individualPriceOf(item));
+            mItemTotalPriceTextView.setText(mAccountant.totalPriceOf(item));
         }
     }
 
@@ -132,8 +131,8 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     }
 
     private void updateUI() {
-        mWalletButton.setText(MoneyUtils.prep(mAccountant.getTotalMoney()));
-        mChangeButton.setText(MoneyUtils.prep(mAccountant.getChange()));
+        mWalletButton.setText(mAccountant.getTotalMoney());
+        mChangeButton.setText(mAccountant.getChange());
 
         if (mAdapter == null) {
             mAdapter = new ItemAdapter(mAccountant.getItemList());
@@ -163,9 +162,10 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     public void export() {
         String list = mAccountant.getList();
 
-        if (list.length() != 0)
+        if (list.length() != 0) {
             Exporter.export(mAccountant.getList());
-        else
+            Toast.makeText(CounterActivity.this, R.string.toast_success_export, Toast.LENGTH_LONG).show();
+        } else
             Toast.makeText(CounterActivity.this, R.string.toast_error_export, Toast.LENGTH_SHORT).show();
     }
 }

@@ -16,4 +16,5 @@
     <string name="action_export">Export record</string>
     <string name="dialog_addOrSet">Reset money</string>
     <string name="toast_error_export">Your list is empty!</string>
+    <string name="toast_success_export">Successfully exported log!</string>
 </resources>

@@ -2,6 +2,8 @@ package com.santinocampos.android.count.Models;
 
 import android.content.Context;
 
+import com.santinocampos.android.count.Utils.MoneyUtils;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -43,17 +45,17 @@ public class Accountant {
         mTotalMoney += isSet ? money - mTotalMoney : money;
     }
 
-    public double getTotalMoney() {
-        return mTotalMoney;
+    public String getTotalMoney() {
+        return MoneyUtils.prep(mTotalMoney);
     }
 
-    public double getChange() {
+    public String getChange() {
         double cost = 0;
 
         for (Item item : mItemList.keySet())
             cost += item.getPrice() * mItemList.get(item);
 
-        return mTotalMoney - cost;
+        return MoneyUtils.prep(mTotalMoney - cost);
     }
 
     public String getList() {
@@ -62,22 +64,26 @@ public class Accountant {
         for (Item i : getItemList().keySet())
             output.append(i.getName())
                   .append(" - ")
-                  .append('(' + mItemList.get(i) + ')')
-                  .append(i.getPrice() + "\n")
-                  .append(totalPriceOf(i));
+                  .append("(" + mItemList.get(i) + "x) ")
+                  .append(individualPriceOf(i) + "\n")
+                  .append(totalPriceOf(i) + "\n\n");
 
         return output.toString();
     }
 
-    public Map<Item, Integer> getItemList() {
+     public Map<Item, Integer> getItemList() {
         return mItemList;
     }
 
-    public double totalPriceOf(Item i) {
-        return i.getPrice() * mItemList.get(i);
+    public String individualPriceOf(Item i) {
+        return MoneyUtils.prep(i.getPrice());
     }
 
-    public int getCountOf(Item i) {
-        return mItemList.get(i);
+    public String totalPriceOf(Item i) {
+        return MoneyUtils.prep(i.getPrice() * mItemList.get(i));
+    }
+
+    public String countOf(Item i) {
+        return String.valueOf(mItemList.get(i));
     }
 }
