@@ -13,7 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.santinocampos.android.count.ExportingLog.Exporter;
 import com.santinocampos.android.count.Listeners.DialogListener;
 import com.santinocampos.android.count.Models.Accountant;
 import com.santinocampos.android.count.Models.Item;
@@ -152,13 +154,18 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         switch (itemId) {
             case R.id.action_add_money : startDialog(new AddMoneyDialog());
                 break;
-            case R.id.action_export : //export();
+            case R.id.action_export : export();
                 break;
         }
         return true;
     }
 
     public void export() {
-        //Exporter.get(this).export(list);
+        String list = mAccountant.getList();
+
+        if (list.length() != 0)
+            Exporter.export(mAccountant.getList());
+        else
+            Toast.makeText(CounterActivity.this, R.string.toast_error_export, Toast.LENGTH_SHORT).show();
     }
 }
