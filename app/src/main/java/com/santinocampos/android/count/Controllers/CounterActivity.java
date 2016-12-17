@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -57,6 +58,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         updateUI();
+        startItemHelper();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_addItem);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -147,6 +149,24 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
             mAdapter = new ItemAdapter(mAccountant.getItemList());
             mRecyclerView.setAdapter(mAdapter);
         } else mAdapter.notifyDataSetChanged();
+    }
+
+    private void startItemHelper() {
+        ItemTouchHelper.SimpleCallback mSimpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                mAccountant.removeItem(viewHolder.getLayoutPosition());
+                updateUI();
+            }
+        };
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(mSimpleCallback);
+        itemTouchHelper.attachToRecyclerView(mRecyclerView);
     }
 
     @Override

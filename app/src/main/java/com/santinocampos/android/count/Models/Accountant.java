@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
+import java.util.SortedSet;
 
 /**
  * Created by thedr on 11/1/2016.
@@ -31,14 +32,19 @@ public class Accountant {
         mTotalMoney = 0;
         mItemList = new LinkedHashMap<>();
 
-        /** Item generation code - DO NOT PUT IN PRODUCTION
+
         for (int i = 0; i < 100; i++)
-            addItem(new Item("test", new Random().nextInt(43)), 4); **/
+            addItem(new Item("test", new Random().nextInt(43)), 4);
     }
 
     public void addItem(Item item, int count) {
         int updatedCount = mItemList.containsKey(item) ? mItemList.get(item) + count : count;
         mItemList.put(item, updatedCount);
+    }
+
+    public void removeItem(int i) {
+        List<Item> keys = new ArrayList(mItemList.keySet());
+        mItemList.remove(keys.get(i));
     }
 
     public void addMoney(double money, boolean isSet) {
