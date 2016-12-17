@@ -33,7 +33,7 @@ public class ConfirmExportDialog extends AppCompatDialogFragment {
                                       mDialogListener.exportList();
                                   }
                               })
-                              .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                              .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                                   @Override
                                   public void onClick(DialogInterface dialog, int which) {
                                       dismiss();

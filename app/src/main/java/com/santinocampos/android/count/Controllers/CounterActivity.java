@@ -47,7 +47,6 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         setContentView(R.layout.activity_counter);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mAccountant = Accountant.get(this);
 
@@ -116,7 +115,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     }
 
     private void startDialog(DialogFragment df) {
-        String tag = "";
+        String tag;
 
         if (df.getClass() == AddItemDialog.class)
             tag = DIALOG_ADD_ITEM;
