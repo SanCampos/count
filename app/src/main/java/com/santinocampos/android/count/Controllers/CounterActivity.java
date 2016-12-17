@@ -160,7 +160,9 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                mAccountant.removeItem(viewHolder.getLayoutPosition());
+                int position = viewHolder.getLayoutPosition();
+                mAccountant.removeItem(position);
+                mAdapter.notifyItemRemoved(position);
                 updateUI();
             }
         };

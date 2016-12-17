@@ -1,7 +1,5 @@
 package com.santinocampos.android.count.Utils;
 
-import java.text.DecimalFormat;
-
 /**
  * Created by thedr on 12/7/2016.
  */
