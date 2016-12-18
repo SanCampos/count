@@ -29,9 +29,9 @@ public class Accountant {
         mTotalMoney = 0;
         mItemList = new LinkedHashMap<>();
 
-
+        /** ITEM CREATION CODE - NOT FOR PRODUCTION
         for (int i = 0; i < 100; i++)
-            addItem(new Item("test", new Random().nextInt(43)), 4);
+            addItem(new Item("test", new Random().nextInt(43)), 4); **/
     }
 
     public void addItem(Item item, int count) {
@@ -61,7 +61,7 @@ public class Accountant {
         return MoneyUtils.prep(mTotalMoney - cost);
     }
 
-    public String getList() {
+    public String getStringOfList() {
         StringBuilder output = new StringBuilder("");
 
         for (Item i : getItemList().keySet())
@@ -74,7 +74,7 @@ public class Accountant {
         return output.toString();
     }
 
-     public Map<Item, Integer> getItemList() {
+    public Map<Item, Integer> getItemList() {
         return mItemList;
     }
 

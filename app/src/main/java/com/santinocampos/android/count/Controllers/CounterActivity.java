@@ -191,7 +191,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     }
 
     private void export() {
-        String list = mAccountant.getList();
+        String list = mAccountant.getStringOfList();
 
         if (list.length() != 0) {
             startDialog(new ConfirmExportDialog());
@@ -200,7 +200,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
 
     @Override
     public void exportList()  {
-        Exporter.export(mAccountant.getList());
+        Exporter.export(mAccountant.getStringOfList());
         Toast.makeText(CounterActivity.this, R.string.toast_success_export, Toast.LENGTH_LONG).show();
     }
 }
