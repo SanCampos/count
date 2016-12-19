@@ -48,7 +48,7 @@ public class Accountant {
         Collections.sort(mItemList, new Comparator<Item>() {
             @Override
             public int compare(Item lhs, Item rhs) {
-                return (int) (totalPriceOf(lhs) - totalPriceOf(rhs));
+                return (int) (totalPriceOf(rhs) - totalPriceOf(lhs));
             }
         });
     }
