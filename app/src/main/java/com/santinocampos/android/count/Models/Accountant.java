@@ -18,7 +18,8 @@ public class Accountant {
     private static Accountant sAccountant;
 
     private double mTotalMoney;
-    private Map<Item, Integer> mItemList;
+    private Map<Item, Integer> mItemMap;
+    private List<Item> mItemList;
 
     public static Accountant get(Context context) {
         sAccountant = sAccountant == null ? new Accountant(context) : sAccountant;
@@ -27,7 +28,8 @@ public class Accountant {
 
     private Accountant(Context context) {
         mTotalMoney = 0;
-        mItemList = new LinkedHashMap<>();
+        mItemMap = new LinkedHashMap<>();
+        mItemList = new ArrayList<>();
 
 
         for (int i = 0; i < 100; i++)
@@ -35,13 +37,14 @@ public class Accountant {
     }
 
     public void addItem(Item item, int count) {
-        int updatedCount = mItemList.containsKey(item) ? mItemList.get(item) + count : count;
-        mItemList.put(item, updatedCount);
+        int updatedCount = mItemMap.containsKey(item) ? mItemMap.get(item) + count : count;
+        mItemMap.put(item, updatedCount);
+        mItemList.add(item);
     }
 
     public void removeItem(int i) {
-        List<Item> keys = new ArrayList(mItemList.keySet());
-        mItemList.remove(keys.get(i));
+        mItemMap.remove(mItemList.get(i));
+        mItemList.remove(i);
     }
 
     public void addMoney(double money, boolean isSet) {
@@ -55,8 +58,8 @@ public class Accountant {
     public String getChange() {
         double cost = 0;
 
-        for (Item item : mItemList.keySet())
-            cost += item.getPrice() * mItemList.get(item);
+        for (Item item : mItemMap.keySet())
+            cost += item.getPrice() * mItemMap.get(item);
 
         return MoneyUtils.prep(mTotalMoney - cost);
     }
@@ -64,29 +67,29 @@ public class Accountant {
     public String getList() {
         StringBuilder output = new StringBuilder("");
 
-        for (Item i : getItemList().keySet())
+        for (Item i : getItemList())
             output.append(i.getName())
                   .append(" - ")
-                  .append("(" + mItemList.get(i) + "x) ")
+                  .append("(" + mItemMap.get(i) + "x) ")
                   .append(individualPriceOf(i) + "\n")
                   .append(totalPriceOf(i) + "\n\n");
 
         return output.toString();
     }
 
-     public Map<Item, Integer> getItemList() {
+     public List<Item> getItemList() {
         return mItemList;
-    }
+     }
 
     public String individualPriceOf(Item i) {
         return MoneyUtils.prep(i.getPrice());
     }
 
     public String totalPriceOf(Item i) {
-        return MoneyUtils.prep(i.getPrice() * mItemList.get(i));
+        return MoneyUtils.prep(i.getPrice() * mItemMap.get(i));
     }
 
     public String countOf(Item i) {
-        return String.valueOf(mItemList.get(i));
+        return String.valueOf(mItemMap.get(i));
     }
 }

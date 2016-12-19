@@ -25,8 +25,7 @@ import com.santinocampos.android.count.R;
 import com.santinocampos.android.count.Dialogs.AddItemDialog;
 import com.santinocampos.android.count.Dialogs.AddMoneyDialog;
 
-import java.util.ArrayList;
-import java.util.Map;
+import java.util.List;
 
 public class CounterActivity extends AppCompatActivity implements DialogListener {
 
@@ -88,16 +87,16 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
 
         public void bindItem(Item item) {
             mItemNameTextView.setText(item.getName());
-            mItemCountTextView.setText('x' + mAccountant.countOf(item));
+            mItemCountTextView.setText(mAccountant.countOf(item));
             mItemInitialPriceTextView.setText(mAccountant.individualPriceOf(item));
             mItemTotalPriceTextView.setText(mAccountant.totalPriceOf(item));
         }
     }
 
     private class ItemAdapter extends RecyclerView.Adapter<ItemHolder> {
-        private Map<Item, Integer> mItemList;
+        private List<Item> mItemList;
 
-        public ItemAdapter(Map<Item, Integer> itemList) {
+        public ItemAdapter(List<Item> itemList) {
             mItemList = itemList;
         }
 
@@ -107,7 +106,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         }
 
         public void onBindViewHolder(ItemHolder holder, int position) {
-            Item item = new ArrayList<>(mItemList.keySet()).get(position);
+            Item item = mItemList.get(position);
             holder.bindItem(item);
         }
 
@@ -182,7 +181,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         int itemId = item.getItemId();
 
         switch (itemId) {
-            case R.id.action_add_money : startDialog(new AddItemDialog());
+            case R.id.action_add_money : startDialog(new AddMoneyDialog());
                 break;
             case R.id.action_export : export();
                 break;
