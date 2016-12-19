@@ -57,7 +57,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        updateUI();
+        startUI();
         startItemHelper();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_addItem);
@@ -132,28 +132,28 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     @Override
     public void addItem(Item item, int count) {
         mAccountant.addItem(item, count);
-        updateUI();
+        mAdapter.notifyDataSetChanged();
+        mChangeButton.setText(mAccountant.getChange());
     }
 
     public void removeItem(int position) {
         mAccountant.removeItem(position);
-        updateUI();
+        mAdapter.notifyItemRemoved(position);
+        mChangeButton.setText(mAccountant.getChange());
     }
 
     @Override
     public void addMoney(double money, boolean isSet) {
         mAccountant.addMoney(money, isSet);
-        updateUI();
+        updateMoney();
     }
 
-    private void updateUI() {
-        mWalletButton.setText(mAccountant.getTotalMoney());
-        mChangeButton.setText(mAccountant.getChange());
-
+    private void startUI() {
+        updateMoney();
         if (mAdapter == null) {
             mAdapter = new ItemAdapter(mAccountant.getItemList());
             mRecyclerView.setAdapter(mAdapter);
-        } else mAdapter.notifyDataSetChanged();
+        }
     }
 
     private void startItemHelper() {
@@ -204,5 +204,10 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     public void exportList()  {
         Exporter.export(mAccountant.getList());
         Toast.makeText(CounterActivity.this, R.string.toast_success_export, Toast.LENGTH_LONG).show();
+    }
+
+    private void updateMoney() {
+        mWalletButton.setText(mAccountant.getTotalMoney());
+        mChangeButton.setText(mAccountant.getChange());
     }
 }
