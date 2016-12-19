@@ -34,8 +34,8 @@ public class Accountant {
         mItemList = new ArrayList<>();
 
 
-        /** for (int i = 0; i < 100; i++)
-            addItem(new Item("test", new Random().nextInt(43)), 4); **/
+        for (int i = 0; i < 100; i++)
+            addItem(new Item("test", new Random().nextInt(43)), 4);
     }
 
     public void addItem(Item item, int count) {
