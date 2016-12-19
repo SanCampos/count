@@ -69,8 +69,8 @@ public class Accountant {
     public String getChange() {
         double cost = 0;
 
-        for (Item item : mItemMap.keySet())
-            cost += item.getPrice() * mItemMap.get(item);
+        for (Item item : mItemList)
+            cost += totalPriceOf(item);
 
         return MoneyUtils.prep(mTotalMoney - cost);
     }
@@ -102,5 +102,9 @@ public class Accountant {
 
     public int countOf(Item i) {
         return mItemMap.get(i);
+    }
+
+    public void clearList() {
+         mItemList.clear();
     }
 }

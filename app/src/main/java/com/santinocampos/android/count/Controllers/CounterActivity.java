@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.santinocampos.android.count.Dialogs.ConfirmClearDialog;
 import com.santinocampos.android.count.Dialogs.ConfirmExportDialog;
 import com.santinocampos.android.count.ExportingLog.Exporter;
 import com.santinocampos.android.count.Listeners.DialogListener;
@@ -33,6 +34,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     private final static String DIALOG_ADD_ITEM = "DialogAddItem";
     private final static String DIALOG_ADD_MONEY = "DialogAddMoney";
     private static final String DIALOG_EXPORT_LOG = "DialogExportLog";
+    private static final String DIALOG_CLEAR_LIST = "DialogClearList";
 
     private Button mWalletButton;
     private Button mChangeButton;
@@ -123,8 +125,10 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
             tag = DIALOG_ADD_ITEM;
         else if (df.getClass() == AddMoneyDialog.class)
             tag = DIALOG_ADD_MONEY;
-        else
+        else if (df.getClass() == ConfirmExportDialog.class)
             tag = DIALOG_EXPORT_LOG;
+        else
+            tag = DIALOG_CLEAR_LIST;
 
         getSupportFragmentManager().beginTransaction().add(df, tag).commit();
     }
@@ -188,8 +192,16 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
                 break;
             case R.id.action_export : export();
                 break;
+            case R.id.action_clear : startDialog(new ConfirmClearDialog());
         }
         return true;
+    }
+
+    @Override
+    public void clearList() {
+        mAccountant.clearList();
+        mAdapter.notifyDataSetChanged();
+        updateMoney();
     }
 
     private void export() {

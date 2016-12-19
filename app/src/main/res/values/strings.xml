@@ -19,4 +19,7 @@
     <string name="toast_success_export">Successfully exported log!</string>
     <string name="title_confirm_export">Confirm export</string>
     <string name="message_confirm_export">Are you sure you want to export the list?</string>
+    <string name="action_clear">Clear list</string>
+    <string name="title_confirm_clear">Confirm clearing list</string>
+    <string name="message_confirm_clear">Are you sure you want to clear your item list?</string>
 </resources>
