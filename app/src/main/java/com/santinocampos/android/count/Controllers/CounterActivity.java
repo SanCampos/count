@@ -135,6 +135,11 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         updateUI();
     }
 
+    public void removeItem(int position) {
+        mAccountant.removeItem(position);
+        updateUI();
+    }
+
     @Override
     public void addMoney(double money, boolean isSet) {
         mAccountant.addMoney(money, isSet);
@@ -160,10 +165,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                int position = viewHolder.getLayoutPosition();
-                mAccountant.removeItem(position);
-                mAdapter.notifyItemRemoved(position);
-                updateUI();
+                removeItem(viewHolder.getLayoutPosition());
             }
         };
 
