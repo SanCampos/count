@@ -5,6 +5,8 @@ import android.content.Context;
 import com.santinocampos.android.count.Utils.MoneyUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,14 +34,23 @@ public class Accountant {
         mItemList = new ArrayList<>();
 
 
-        for (int i = 0; i < 100; i++)
-            addItem(new Item("test", new Random().nextInt(43)), 4);
+        /** for (int i = 0; i < 100; i++)
+            addItem(new Item("test", new Random().nextInt(43)), 4); **/
     }
 
     public void addItem(Item item, int count) {
         int updatedCount = mItemMap.containsKey(item) ? mItemMap.get(item) + count : count;
         mItemMap.put(item, updatedCount);
-        mItemList.add(item);
+
+
+        if (!mItemList.contains(item)) mItemList.add(item);
+
+        Collections.sort(mItemList, new Comparator<Item>() {
+            @Override
+            public int compare(Item lhs, Item rhs) {
+                return (int) (totalPriceOf(lhs) - totalPriceOf(rhs));
+            }
+        });
     }
 
     public void removeItem(int i) {
@@ -81,15 +92,15 @@ public class Accountant {
         return mItemList;
      }
 
-    public String individualPriceOf(Item i) {
-        return MoneyUtils.prep(i.getPrice());
+    public double individualPriceOf(Item i) {
+        return i.getPrice();
     }
 
-    public String totalPriceOf(Item i) {
-        return MoneyUtils.prep(i.getPrice() * mItemMap.get(i));
+    public double totalPriceOf(Item i) {
+        return i.getPrice() * mItemMap.get(i);
     }
 
-    public String countOf(Item i) {
-        return String.valueOf(mItemMap.get(i));
+    public int countOf(Item i) {
+        return mItemMap.get(i);
     }
 }

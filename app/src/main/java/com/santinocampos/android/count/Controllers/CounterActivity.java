@@ -24,6 +24,7 @@ import com.santinocampos.android.count.Models.Item;
 import com.santinocampos.android.count.R;
 import com.santinocampos.android.count.Dialogs.AddItemDialog;
 import com.santinocampos.android.count.Dialogs.AddMoneyDialog;
+import com.santinocampos.android.count.Utils.MoneyUtils;
 
 import java.util.List;
 
@@ -87,9 +88,9 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
 
         public void bindItem(Item item) {
             mItemNameTextView.setText(item.getName());
-            mItemCountTextView.setText(mAccountant.countOf(item));
-            mItemInitialPriceTextView.setText(mAccountant.individualPriceOf(item));
-            mItemTotalPriceTextView.setText(mAccountant.totalPriceOf(item));
+            mItemCountTextView.setText("x" + String.valueOf(mAccountant.countOf(item)));
+            mItemInitialPriceTextView.setText(MoneyUtils.prep(mAccountant.individualPriceOf(item)));
+            mItemTotalPriceTextView.setText(MoneyUtils.prep(mAccountant.totalPriceOf(item)));
         }
     }
 
