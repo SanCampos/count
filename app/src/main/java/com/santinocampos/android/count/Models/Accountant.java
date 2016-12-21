@@ -1,16 +1,15 @@
 package com.santinocampos.android.count.Models;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 
+import com.santinocampos.android.count.Database.ItemBaseHelper;
+import com.santinocampos.android.count.Database.ItemDbSchema.ItemTable;
 import com.santinocampos.android.count.Utils.MoneyUtils;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Random;
 
 /**
  * Created by thedr on 11/1/2016.
@@ -20,8 +19,8 @@ public class Accountant {
     private static Accountant sAccountant;
 
     private double mTotalMoney;
-    private Map<Item, Integer> mItemMap;
-    private List<Item> mItemList;
+    private Context mContext;
+    private SQLiteDatabase mDatabase;
 
     public static Accountant get(Context context) {
         sAccountant = sAccountant == null ? new Accountant(context) : sAccountant;
@@ -30,32 +29,26 @@ public class Accountant {
 
     private Accountant(Context context) {
         mTotalMoney = 0;
-        mItemMap = new LinkedHashMap<>();
-        mItemList = new ArrayList<>();
-
-
-        for (int i = 0; i < 100; i++)
-            addItem(new Item("test", new Random().nextInt(43)), 4);
+        mContext = context.getApplicationContext();
+        mDatabase = new ItemBaseHelper(mContext).getWritableDatabase();
     }
 
+    private static ContentValues getContentValues(Item i, int count) {
+        ContentValues values = new ContentValues();
+        values.put(ItemTable.cols.NAME, i.getName());
+        values.put(ItemTable.cols.PRICE, i.getPrice());
+        values.put(ItemTable.cols.COUNT, count);
+
+        return values;
+    }
     public void addItem(Item item, int count) {
-        int updatedCount = mItemMap.containsKey(item) ? mItemMap.get(item) + count : count;
-        mItemMap.put(item, updatedCount);
+        ContentValues values = getContentValues(item, count);
 
-
-        if (!mItemList.contains(item)) mItemList.add(item);
-
-        Collections.sort(mItemList, new Comparator<Item>() {
-            @Override
-            public int compare(Item lhs, Item rhs) {
-                return (int) (totalPriceOf(rhs) - totalPriceOf(lhs));
-            }
-        });
+        mDatabase.insert(ItemTable.NAME, null, values);
     }
 
     public void removeItem(int i) {
-        mItemMap.remove(mItemList.get(i));
-        mItemList.remove(i);
+
     }
 
     public void addMoney(double money, boolean isSet) {
@@ -69,14 +62,14 @@ public class Accountant {
     public String getChange() {
         double cost = 0;
 
-        for (Item item : mItemList)
+        for (Item item : new ArrayList<Item>())
             cost += totalPriceOf(item);
 
         return MoneyUtils.prep(mTotalMoney - cost);
     }
 
      public List<Item> getItemList() {
-        return mItemList;
+        return new ArrayList<>();
      }
 
     public double individualPriceOf(Item i) {
@@ -84,14 +77,14 @@ public class Accountant {
     }
 
     public double totalPriceOf(Item i) {
-        return i.getPrice() * mItemMap.get(i);
+       return 0;
     }
 
     public int countOf(Item i) {
-        return mItemMap.get(i);
+       return 0;
     }
 
     public void clearList() {
-         mItemList.clear();
+
     }
 }

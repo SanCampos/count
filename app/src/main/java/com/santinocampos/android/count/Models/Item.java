@@ -1,8 +1,7 @@
 package com.santinocampos.android.count.Models;
 
 
-import java.util.Comparator;
-import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Created by thedr on 11/1/2016.
@@ -26,10 +25,6 @@ public class Item {
 
     public double getPrice() {
         return mPrice;
-    }
-
-    public void setPrice(double price) {
-        mPrice = price;
     }
 
     @Override
