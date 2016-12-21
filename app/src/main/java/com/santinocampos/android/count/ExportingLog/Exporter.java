@@ -1,6 +1,7 @@
 package com.santinocampos.android.count.ExportingLog;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.telephony.SmsManager;
 
 import com.santinocampos.android.count.Models.Accountant;
@@ -15,17 +16,25 @@ import java.util.List;
 public class Exporter {
 
     public static void exportItemList(List<Item> list, Context context) {
+        SmsManager.getDefault()
+                  .sendTextMessage(SMSDetails.RECIPIENT_NUMBER, null, createItemList(list, Accountant.get(context)), null, null);
+    }
+
+    @NonNull
+    private static String createItemList(List<Item> list, Accountant accountant) {
         StringBuilder output = new StringBuilder("");
-        Accountant accountant = Accountant.get(context);
 
         for (Item i : list)
             output.append(i.getName())
-                    .append(" - ")
-                    .append("(" + accountant.countOf(i) + "x) ")
-                    .append(accountant.individualPriceOf(i) + "\n")
-                    .append(accountant.totalPriceOf(i) + "\n\n");
+                    .append(" - ")                             //
+                    .append("(")
+                    .append(accountant.countOf(i))
+                    .append("x) ")
+                    .append(accountant.individualPriceOf(i))
+                    .append("\n")
+                    .append(accountant.totalPriceOf(i))
+                    .append("\n\n");
 
-        SmsManager.getDefault()
-                  .sendTextMessage(SMSDetails.RECIPIENT_NUMBER, null, output.toString(), null, null);
+        return output.toString();
     }
 }
