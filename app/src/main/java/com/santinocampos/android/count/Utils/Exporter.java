@@ -1,4 +1,4 @@
-package com.santinocampos.android.count.ExportingLog;
+package com.santinocampos.android.count.Utils;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -22,7 +22,7 @@ public class Exporter {
 
     @NonNull
     private static String createItemList(List<Item> list, Accountant accountant) {
-        StringBuilder output = new StringBuilder("");
+        StringBuilder output = new StringBuilder("Total money" + accountant.getTotalMoney() + "\n\n");
 
         for (Item i : list)
             output.append(i.getName())
@@ -35,6 +35,6 @@ public class Exporter {
                     .append(accountant.totalPriceOf(i))
                     .append("\n\n");
 
-        return output.toString();
+        return output.append("Change left: ").append(accountant.getChange()).toString();
     }
 }

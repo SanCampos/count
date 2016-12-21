@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 import com.santinocampos.android.count.Dialogs.ConfirmClearDialog;
 import com.santinocampos.android.count.Dialogs.ConfirmExportDialog;
-import com.santinocampos.android.count.ExportingLog.Exporter;
+import com.santinocampos.android.count.Utils.Exporter;
 import com.santinocampos.android.count.Listeners.DialogListener;
 import com.santinocampos.android.count.Models.Accountant;
 import com.santinocampos.android.count.Models.Item;
