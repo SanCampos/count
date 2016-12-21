@@ -75,19 +75,6 @@ public class Accountant {
         return MoneyUtils.prep(mTotalMoney - cost);
     }
 
-    public String getList() {
-        StringBuilder output = new StringBuilder("");
-
-        for (Item i : getItemList())
-            output.append(i.getName())
-                  .append(" - ")
-                  .append("(" + mItemMap.get(i) + "x) ")
-                  .append(individualPriceOf(i) + "\n")
-                  .append(totalPriceOf(i) + "\n\n");
-
-        return output.toString();
-    }
-
      public List<Item> getItemList() {
         return mItemList;
      }

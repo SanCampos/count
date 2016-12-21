@@ -214,7 +214,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
 
     @Override
     public void exportList()  {
-        Exporter.export(mAccountant.getList());
+        Exporter.exportItemList(mAccountant.getList());
         Toast.makeText(CounterActivity.this, R.string.toast_success_export, Toast.LENGTH_LONG).show();
     }
 
