@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -77,6 +78,9 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         private TextView mItemTotalPriceTextView;
         private TextView mItemCountTextView;
 
+        private ImageButton mIncreaseCurrentCount;
+        private ImageButton mDecreaseCurrentCount;
+
         /**
          * HACKY V1 OF NEW ITEM VIEW, NOT FOR PRODUCTION
          **/
@@ -86,19 +90,46 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
             mItemCountTextView = (TextView) itemView.findViewById(R.id.item_count_textView);
             mItemInitialPriceTextView = (TextView) itemView.findViewById(R.id.item_initialPrice_textView);
             mItemTotalPriceTextView = (TextView) itemView.findViewById(R.id.item_totalPrice_textView);
+
+
+            mIncreaseCurrentCount = (ImageButton) itemView.findViewById(R.id.btn_increase_currentCount);
+            mIncreaseCurrentCount.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    changeItemCount(1);
+                }
+            });
+            mDecreaseCurrentCount = (ImageButton) itemView.findViewById(R.id.btn_decrease_currentCount);
+            mDecreaseCurrentCount.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    changeItemCount(-1);
+                }
+            });
         }
 
         public void bindItem(Item item) {
             mItemNameTextView.setText(item.getName());
-            mItemCountTextView.setText("x" + String.valueOf(mAccountant.countOf(item)));
             mItemInitialPriceTextView.setText(MoneyUtils.prep(mAccountant.individualPriceOf(item)));
+            updateCountAndTotalOf(item);
+        }
+
+        private void updateCountAndTotalOf(Item item) {
+            mItemCountTextView.setText("x" + String.valueOf(mAccountant.countOf(item)));
             mItemTotalPriceTextView.setText(MoneyUtils.prep(mAccountant.totalPriceOf(item)));
+        }
+
+        private void changeItemCount(int amount) {
+            Item item = mAccountant.getItemList().get(this.getLayoutPosition());
+            mAccountant.changeCountOfBy(item, amount);
+
+            updateCountAndTotalOf(item);
+            updateMoney();
         }
     }
 
     private class ItemAdapter extends RecyclerView.Adapter<ItemHolder> {
         private List<Item> mItemList;
-
         public ItemAdapter(List<Item> itemList) {
             mItemList = itemList;
         }

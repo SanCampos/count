@@ -21,12 +21,23 @@
         tools:text="5000P"/>
 
     <TextView
+        android:id="@+id/item_name_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@id/item_totalPrice_textView"
+        android:layout_toStartOf="@id/item_totalPrice_textView"
+        android:textSize="20sp"
+        tools:text="Speech Training Lesson"/>
+
+    <TextView
         android:id="@+id/item_initialPrice_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/item_name_textView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_alignStart="@id/item_totalPrice_textView"
+        android:layout_alignLeft="@id/item_totalPrice_textView"
         android:textSize="13sp"
         tools:text="1000P"/>
 
@@ -42,17 +53,26 @@
         android:textSize="12sp"
         tools:text="x5"/>
 
-
-
-    <TextView
-        android:id="@+id/item_name_textView"
+    <ImageButton
+        android:id="@+id/btn_increase_currentCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@id/item_totalPrice_textView"
         android:layout_toStartOf="@id/item_totalPrice_textView"
-        android:textSize="20sp"
-        tools:text="Speech Training Lesson"/>
+        android:layout_toLeftOf="@id/item_totalPrice_textView"
+        android:layout_alignTop="@id/item_totalPrice_textView"
+        android:layout_alignBottom="@id/item_totalPrice_textView"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_pluss"/>
+
+    <ImageButton
+        android:id="@+id/btn_decrease_currentCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_increase_currentCount"
+        android:layout_toStartOf="@id/item_totalPrice_textView"
+        android:layout_toLeftOf="@id/item_totalPrice_textView"
+        android:layout_alignBottom="@id/item_initialPrice_textView"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_minus"/>
 
 </RelativeLayout>

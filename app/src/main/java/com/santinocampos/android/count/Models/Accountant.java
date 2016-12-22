@@ -58,6 +58,11 @@ public class Accountant {
         mItemList.remove(i);
     }
 
+    public void changeCountOfBy(Item i, int amount) {
+        int changed = mItemMap.get(i) + amount;
+        if (changed != 0) mItemMap.put(i, changed);
+    }
+
     public void addMoney(double money, boolean isSet) {
         mTotalMoney += isSet ? money - mTotalMoney : money;
     }
