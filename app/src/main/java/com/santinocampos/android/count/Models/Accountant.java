@@ -107,6 +107,6 @@ public class Accountant {
     }
 
     public void clearList() {
-
+        mDatabase.delete(ItemTable.NAME, null, null);
     }
 }
