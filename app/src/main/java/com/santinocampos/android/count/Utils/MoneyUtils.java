@@ -11,7 +11,7 @@ public class MoneyUtils {
     public static char CURRENT_CURRENCY = PESO;
 
     public static String prep(double money) {
-        return DecimalUtils.clean(money) + CURRENT_CURRENCY;
+        return DecUtils.clean(money) + CURRENT_CURRENCY;
     }
 
 }

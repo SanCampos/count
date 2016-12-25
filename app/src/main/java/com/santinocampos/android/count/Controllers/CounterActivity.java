@@ -134,8 +134,8 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     }
 
     @Override
-    public void addItem(Item item, int count) {
-        mAccountant.addItem(item, count);
+    public void addItem(Item item) {
+        mAccountant.addItem(item);
         mAdapter.notifyDataSetChanged();
         mChangeButton.setText(mAccountant.getChange());
     }

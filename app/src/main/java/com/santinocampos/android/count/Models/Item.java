@@ -9,10 +9,12 @@ import java.util.UUID;
 public class Item {
     private String mName;
     private double mPrice;
+    private int count;
 
-    public Item(String mName, double mPrice) {
+    public Item(String mName, double mPrice, int count) {
         this.mName = mName;
         this.mPrice = mPrice;
+        this.count = count;
     }
 
     public String getName() {
@@ -26,6 +28,11 @@ public class Item {
     public double getPrice() {
         return mPrice;
     }
+
+    public int getCount() {
+        return count;
+    }
+
 
     @Override
     public boolean equals(Object object) {

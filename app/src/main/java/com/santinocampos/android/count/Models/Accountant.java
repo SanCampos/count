@@ -33,18 +33,16 @@ public class Accountant {
         mDatabase = new ItemBaseHelper(mContext).getWritableDatabase();
     }
 
-    private static ContentValues getContentValues(Item i, int count) {
+    private static ContentValues getContentValues(Item i) {
         ContentValues values = new ContentValues();
         values.put(ItemTable.cols.NAME, i.getName());
         values.put(ItemTable.cols.PRICE, i.getPrice());
-        values.put(ItemTable.cols.COUNT, count);
+        values.put(ItemTable.cols.COUNT, i.getCount());
 
         return values;
     }
-    public void addItem(Item item, int count) {
-        ContentValues values = getContentValues(item, count);
+    public void addItem(Item item) {
 
-        mDatabase.insert(ItemTable.NAME, null, values);
     }
 
     public void removeItem(int i) {
