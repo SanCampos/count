@@ -2,9 +2,11 @@ package com.santinocampos.android.count.Models;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.santinocampos.android.count.Database.ItemBaseHelper;
+import com.santinocampos.android.count.Database.ItemCursorWrapper;
 import com.santinocampos.android.count.Database.ItemDbSchema.ItemTable;
 import com.santinocampos.android.count.Utils.MoneyUtils;
 
@@ -45,7 +47,8 @@ public class Accountant {
         return values;
     }
     public void addItem(Item item) {
-
+        ContentValues cv = getContentValues(item);
+        mDatabase.insert(ItemTable.NAME, null, cv);
     }
 
     public void removeItem(int i) {
@@ -70,8 +73,26 @@ public class Accountant {
     }
 
      public List<Item> getItemList() {
-        return new ArrayList<>();
+         List<Item> itemList = new ArrayList<>();
+
+         ItemCursorWrapper cursor = queryItems(null, null);
+         try {
+             cursor.moveToFirst();
+             while (!cursor.isAfterLast()) {
+                 cursor.moveToNext();
+                 itemList.add(cursor.getItem());
+             }
+         } finally {
+             cursor.close();
+         }
+         return itemList;
      }
+
+    public ItemCursorWrapper queryItems(String whereClause, String[] whereArgs) {
+        Cursor cursor = mDatabase.query(ItemTable.NAME, null, whereClause, whereArgs, null, null, null);
+
+        return new ItemCursorWrapper(cursor);
+    }
 
     public double individualPriceOf(Item i) {
         return i.getPrice();
