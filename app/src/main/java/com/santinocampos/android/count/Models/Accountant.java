@@ -24,6 +24,8 @@ public class Accountant {
     private Context mContext;
     private SQLiteDatabase mDatabase;
 
+    private List<Item> mItemList;
+
     public static Accountant get(Context context) {
         sAccountant = sAccountant == null ? new Accountant(context) : sAccountant;
         return sAccountant;
@@ -33,6 +35,7 @@ public class Accountant {
         mTotalMoney = 0;
         mContext = context.getApplicationContext();
         mDatabase = new ItemBaseHelper(mContext).getWritableDatabase();
+        updateItemList();
     }
 
     private static ContentValues getContentValues(Item i) {
@@ -46,8 +49,8 @@ public class Accountant {
     }
 
     public void addItem(Item latestItem) {
-        if (getItemList().contains(latestItem)) {
-            Item origItem = getItemList().get(getItemList().indexOf(latestItem));
+        if (mItemList.contains(latestItem)) {
+            Item origItem = mItemList.get(mItemList.indexOf(latestItem));
             latestItem.setUUID(origItem.getUUID());
             latestItem.changeCountBy(origItem.getCount());
 
@@ -61,10 +64,12 @@ public class Accountant {
             //mDatabase.delete(ItemTable.NAME, ItemTable.cols.NAME + " = ?", new String[] {latestItem.getName()});
         }
         mDatabase.insert(ItemTable.NAME, null, getContentValues(latestItem));
+        updateItemList();
     }
 
     public void removeItem(int i) {
         mDatabase.delete(ItemTable.NAME, "_id = ?", new String[] {String.valueOf(i+1)});
+        updateItemList();
     }
 
     public void addMoney(double money, boolean isSet) {
@@ -75,29 +80,32 @@ public class Accountant {
         return MoneyUtils.prep(mTotalMoney);
     }
 
+    public List<Item> getItemList() {
+        return mItemList;
+    }
+
     public String getChange() {
         double cost = 0;
 
-        for (Item item : getItemList())
+        for (Item item : mItemList)
             cost += item.getPrice() * item.getCount();
 
         return MoneyUtils.prep(mTotalMoney - cost);
     }
 
-     public List<Item> getItemList() {
-         List<Item> itemList = new ArrayList<>();
+     private void updateItemList() {
+         mItemList = new ArrayList<>();
 
          ItemCursorWrapper cursor = queryItems(null, null);
          try {
              cursor.moveToFirst();
              while (!cursor.isAfterLast()) {
-                 itemList.add(cursor.getItem());
+                 mItemList.add(cursor.getItem());
                  cursor.moveToNext();
              }
          } finally {
              cursor.close();
          }
-         return itemList;
      }
 
     public ItemCursorWrapper queryItems(String whereClause, String[] whereArgs) {
