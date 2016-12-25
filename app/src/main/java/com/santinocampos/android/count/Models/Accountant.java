@@ -44,20 +44,27 @@ public class Accountant {
 
         return values;
     }
-    public void addItem(Item item) {
-        /**
-        if (getItemList().contains(item)) {
-            int count = item.getCount()
-            ContentValues cv = getContentValues(item);
 
-            mDatabase.update(ItemTable.NAME, cv, )
-        }**/
+    public void addItem(Item latestItem) {
+        if (getItemList().contains(latestItem)) {
+            Item origItem = getItemList().get(getItemList().indexOf(latestItem));
+            latestItem.setUUID(origItem.getUUID());
+            latestItem.changeCountBy(origItem.getCount());
 
-        mDatabase.insert(ItemTable.NAME, null, cv);
+            String deleteDuplicate = "DELETE FROM " + ItemTable.NAME +
+                                     " WHERE " + ItemTable.cols.NAME +
+                                     "  = '"  + latestItem.getName() +
+                                     "' AND " +  + latestItem.getPrice() +
+                                     " = '" + ItemTable.cols.PRICE + "'";
+
+           mDatabase.execSQL(deleteDuplicate);
+            //mDatabase.delete(ItemTable.NAME, ItemTable.cols.NAME + " = ?", new String[] {latestItem.getName()});
+        }
+        mDatabase.insert(ItemTable.NAME, null, getContentValues(latestItem));
     }
 
     public void removeItem(int i) {
-
+        mDatabase.delete(ItemTable.NAME, "_id = ?", new String[] {String.valueOf(i+1)});
     }
 
     public void addMoney(double money, boolean isSet) {

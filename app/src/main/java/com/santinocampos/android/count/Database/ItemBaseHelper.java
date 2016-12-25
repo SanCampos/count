@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.santinocampos.android.count.Models.Item;
+
 import static com.santinocampos.android.count.Database.ItemDbSchema.ItemTable;
 
 /**
@@ -18,12 +20,12 @@ public class ItemBaseHelper extends SQLiteOpenHelper {
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table  " + DATABASE_NAME + "(" +
-                    "_id integer primary key autoincrement, " +
-                    ItemTable.cols.UUID + ", " +
-                    ItemTable.cols.NAME + ", " +
-                    ItemTable.cols.PRICE + ", " +
-                    ItemTable.cols.COUNT);
+        db.execSQL("create table " + ItemTable.NAME + "(" +
+                   " _id integer primary key autoincrement, " +
+                   ItemTable.cols.UUID + ", " +
+                   ItemTable.cols.NAME + ", " +
+                   ItemTable.cols.PRICE + ", " +
+                   ItemTable.cols.COUNT + ")");
     }
 
     @Override

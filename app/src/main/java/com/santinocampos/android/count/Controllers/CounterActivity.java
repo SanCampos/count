@@ -141,7 +141,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
 
     public void removeItem(int position) {
         mAccountant.removeItem(position);
-        mAdapter.notifyItemRemoved(position);
+        mAdapter.swapCursor(mAccountant.queryItems(null, null));
         mChangeButton.setText(mAccountant.getChange());
     }
 

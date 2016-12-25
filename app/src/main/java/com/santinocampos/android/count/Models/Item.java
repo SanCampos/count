@@ -9,13 +9,13 @@ import java.util.UUID;
 public class Item {
     private String mName;
     private double mPrice;
-    private int count;
+    private int mCount;
     private UUID mUUID;
 
     public Item(String mName, double mPrice, int count) {
         this.mName = mName;
         this.mPrice = mPrice;
-        this.count = count;
+        this.mCount = count;
         mUUID = UUID.randomUUID();
     }
 
@@ -32,7 +32,7 @@ public class Item {
     }
 
     public int getCount() {
-        return count;
+        return mCount;
     }
 
 
@@ -63,5 +63,9 @@ public class Item {
 
     public UUID getUUID() {
         return mUUID;
+    }
+
+    public void changeCountBy(int amount) {
+        mCount += amount;
     }
 }
