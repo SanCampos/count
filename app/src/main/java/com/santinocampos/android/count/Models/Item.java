@@ -56,4 +56,12 @@ public class Item {
         hash = 17 * hash + (int) (Double.doubleToLongBits(this.mPrice) ^ (Double.doubleToLongBits(this.mPrice) >>> 32));
         return hash;
     }
+
+    public void setUUID(UUID UUID) {
+        mUUID = UUID;
+    }
+
+    public UUID getUUID() {
+        return mUUID;
+    }
 }

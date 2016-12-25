@@ -8,6 +8,7 @@ public class ItemDbSchema {
          public static final String NAME = "items";
 
          public static final class cols {
+             public static final String UUID = "uuid";
              public static final String NAME = "name";
              public static final String PRICE = "price";
              public static final String COUNT = "count";

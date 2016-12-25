@@ -37,6 +37,7 @@ public class Accountant {
 
     private static ContentValues getContentValues(Item i) {
         ContentValues values = new ContentValues();
+        values.put(ItemTable.cols.UUID, i.getUUID().toString());
         values.put(ItemTable.cols.NAME, i.getName());
         values.put(ItemTable.cols.PRICE, i.getPrice());
         values.put(ItemTable.cols.COUNT, i.getCount());
