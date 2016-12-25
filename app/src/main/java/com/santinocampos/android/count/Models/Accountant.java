@@ -63,8 +63,8 @@ public class Accountant {
     public String getChange() {
         double cost = 0;
 
-        for (Item item : new ArrayList<Item>())
-            cost += totalPriceOf(item);
+        for (Item item : getItemList())
+            cost += item.getPrice() * item.getCount();
 
         return MoneyUtils.prep(mTotalMoney - cost);
     }
@@ -76,8 +76,8 @@ public class Accountant {
          try {
              cursor.moveToFirst();
              while (!cursor.isAfterLast()) {
-                 cursor.moveToNext();
                  itemList.add(cursor.getItem());
+                 cursor.moveToNext();
              }
          } finally {
              cursor.close();
@@ -91,16 +91,16 @@ public class Accountant {
         return new ItemCursorWrapper(cursor);
     }
 
-    public double individualPriceOf(Item i) {
-        return i.getPrice();
+    public String individualPriceOf(Item i) {
+        return MoneyUtils.prep(i.getPrice());
     }
 
-    public double totalPriceOf(Item i) {
-       return 0;
+    public String totalPriceOf(Item i) {
+       return MoneyUtils.prep(i.getCount() * i.getPrice());
     }
 
-    public int countOf(Item i) {
-       return 0;
+    public String countOf(Item i) {
+       return String.valueOf(i.getCount());
     }
 
     public void clearList() {

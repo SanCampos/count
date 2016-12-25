@@ -90,9 +90,9 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
 
         public void bindItem(Item item) {
             mItemNameTextView.setText(item.getName());
-            mItemCountTextView.setText("x" + String.valueOf(mAccountant.countOf(item)));
-            mItemInitialPriceTextView.setText(MoneyUtils.prep(mAccountant.individualPriceOf(item)));
-            mItemTotalPriceTextView.setText(MoneyUtils.prep(mAccountant.totalPriceOf(item)));
+            mItemCountTextView.setText("x" + mAccountant.countOf(item));
+            mItemInitialPriceTextView.setText(mAccountant.individualPriceOf(item));
+            mItemTotalPriceTextView.setText(mAccountant.totalPriceOf(item));
         }
     }
 
@@ -136,6 +136,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     @Override
     public void addItem(Item item) {
         mAccountant.addItem(item);
+        //mAdapter.notifyItemInserted(mAccountant.getItemList().size() - 1);
         mAdapter.notifyDataSetChanged();
         mChangeButton.setText(mAccountant.getChange());
     }
