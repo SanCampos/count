@@ -22,6 +22,8 @@ public class Accountant {
     private Context mContext;
     private SQLiteDatabase mDatabase;
 
+    private List<Item> mItemList;
+
     public static Accountant get(Context context) {
         sAccountant = sAccountant == null ? new Accountant(context) : sAccountant;
         return sAccountant;
@@ -31,6 +33,7 @@ public class Accountant {
         mTotalMoney = 0;
         mContext = context.getApplicationContext();
         mDatabase = new ItemBaseHelper(mContext).getWritableDatabase();
+        mItemList = new ArrayList<>();
     }
 
     private static ContentValues getContentValues(Item i) {
