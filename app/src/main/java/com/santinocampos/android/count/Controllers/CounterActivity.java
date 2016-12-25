@@ -25,7 +25,6 @@ import com.santinocampos.android.count.Models.Item;
 import com.santinocampos.android.count.R;
 import com.santinocampos.android.count.Dialogs.AddItemDialog;
 import com.santinocampos.android.count.Dialogs.AddMoneyDialog;
-import com.santinocampos.android.count.Utils.MoneyUtils;
 
 import java.util.List;
 
@@ -136,7 +135,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     @Override
     public void addItem(Item item) {
         mAccountant.addItem(item);
-        //mAdapter.notifyItemInserted(mAccountant.getItemList().size() - 1);
+        //mAdapter.notifyItemInserted(mAccountant.getListFromSQL().size() - 1);
         mAdapter.notifyDataSetChanged();
         mChangeButton.setText(mAccountant.getChange());
     }

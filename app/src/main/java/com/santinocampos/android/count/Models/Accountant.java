@@ -24,6 +24,8 @@ public class Accountant {
     private Context mContext;
     private SQLiteDatabase mDatabase;
 
+    private List<Item> mItemList;
+
     public static Accountant get(Context context) {
         sAccountant = sAccountant == null ? new Accountant(context) : sAccountant;
         return sAccountant;
@@ -33,6 +35,7 @@ public class Accountant {
         mTotalMoney = 0;
         mContext = context.getApplicationContext();
         mDatabase = new ItemBaseHelper(mContext).getWritableDatabase();
+        mItemList = getListFromSQL();
     }
 
     private static ContentValues getContentValues(Item i) {
@@ -46,6 +49,7 @@ public class Accountant {
     public void addItem(Item item) {
         ContentValues cv = getContentValues(item);
         mDatabase.insert(ItemTable.NAME, null, cv);
+        mItemList = getListFromSQL();
     }
 
     public void removeItem(int i) {
@@ -69,7 +73,11 @@ public class Accountant {
         return MoneyUtils.prep(mTotalMoney - cost);
     }
 
-     public List<Item> getItemList() {
+    public List<Item> getItemList() {
+        return mItemList;
+    }
+
+     private List<Item> getListFromSQL() {
          List<Item> itemList = new ArrayList<>();
 
          ItemCursorWrapper cursor = queryItems(null, null);
