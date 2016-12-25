@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.santinocampos.android.count.Adapter.CursorRecyclerAdapter;
+import com.santinocampos.android.count.Database.ItemCursorWrapper;
 import com.santinocampos.android.count.Dialogs.ConfirmClearDialog;
 import com.santinocampos.android.count.Dialogs.ConfirmExportDialog;
 import com.santinocampos.android.count.Utils.Exporter;
@@ -43,7 +44,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     private Accountant mAccountant;
 
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private ItemAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,8 +112,8 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
 
         @Override
         public void onBindViewHolderCursor(ItemHolder holder, Cursor c) {
-            Item item = mItemList.get(position);
-            holder.bindItem(item);
+            ItemCursorWrapper cw = (ItemCursorWrapper) c;
+            holder.bindItem(cw.getItem());
         }
     }
 
@@ -134,8 +135,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     @Override
     public void addItem(Item item) {
         mAccountant.addItem(item);
-        //mAdapter.notifyItemInserted(mAccountant.getListFromSQL().size() - 1);
-        mAdapter.notifyDataSetChanged();
+        mAdapter.swapCursor(mAccountant.queryItems(null, null));
         mChangeButton.setText(mAccountant.getChange());
     }
 
@@ -154,7 +154,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     private void startUI() {
         updateMoney();
         if (mAdapter == null) {
-            mAdapter = new ItemAdapter(mAccountant.getItemList());
+            mAdapter = new ItemAdapter(mAccountant.queryItems(null, null));
             mRecyclerView.setAdapter(mAdapter);
         }
     }
@@ -199,7 +199,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     @Override
     public void clearList() {
         mAccountant.clearList();
-        mAdapter.notifyDataSetChanged();
+        mAdapter.swapCursor(mAccountant.queryItems(null, null));
         updateMoney();
     }
 
