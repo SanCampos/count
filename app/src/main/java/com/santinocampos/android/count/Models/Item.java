@@ -10,11 +10,13 @@ public class Item {
     private String mName;
     private double mPrice;
     private int count;
+    private UUID mUUID;
 
     public Item(String mName, double mPrice, int count) {
         this.mName = mName;
         this.mPrice = mPrice;
         this.count = count;
+        mUUID = UUID.randomUUID();
     }
 
     public String getName() {

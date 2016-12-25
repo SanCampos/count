@@ -44,7 +44,14 @@ public class Accountant {
         return values;
     }
     public void addItem(Item item) {
-        ContentValues cv = getContentValues(item);
+        /**
+        if (getItemList().contains(item)) {
+            int count = item.getCount()
+            ContentValues cv = getContentValues(item);
+
+            mDatabase.update(ItemTable.NAME, cv, )
+        }**/
+
         mDatabase.insert(ItemTable.NAME, null, cv);
     }
 
