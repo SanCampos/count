@@ -1,5 +1,6 @@
 package com.santinocampos.android.count.Controllers;
 
+import android.database.Cursor;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.santinocampos.android.count.Adapter.CursorRecyclerAdapter;
 import com.santinocampos.android.count.Dialogs.ConfirmClearDialog;
 import com.santinocampos.android.count.Dialogs.ConfirmExportDialog;
 import com.santinocampos.android.count.Utils.Exporter;
@@ -95,11 +97,11 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         }
     }
 
-    private class ItemAdapter extends RecyclerView.Adapter<ItemHolder> {
-        private List<Item> mItemList;
+    private class ItemAdapter extends CursorRecyclerAdapter<ItemHolder> {
+        private Cursor mCursor;
 
-        public ItemAdapter(List<Item> itemList) {
-            mItemList = itemList;
+        public ItemAdapter(Cursor c) {
+            super(c);
         }
 
         public ItemHolder onCreateViewHolder(ViewGroup parent, int ViewType) {
@@ -107,13 +109,10 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
             return new ItemHolder(view);
         }
 
-        public void onBindViewHolder(ItemHolder holder, int position) {
+        @Override
+        public void onBindViewHolderCursor(ItemHolder holder, Cursor c) {
             Item item = mItemList.get(position);
             holder.bindItem(item);
-        }
-
-        public int getItemCount() {
-            return mItemList.size();
         }
     }
 
