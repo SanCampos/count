@@ -10,13 +10,11 @@ public class Item {
     private String mName;
     private double mPrice;
     private int mCount;
-    private UUID mUUID;
 
     public Item(String mName, double mPrice, int count) {
         this.mName = mName;
         this.mPrice = mPrice;
         this.mCount = count;
-        mUUID = UUID.randomUUID();
     }
 
     public String getName() {
@@ -55,14 +53,6 @@ public class Item {
         hash = 17 * hash + this.mName.hashCode();
         hash = 17 * hash + (int) (Double.doubleToLongBits(this.mPrice) ^ (Double.doubleToLongBits(this.mPrice) >>> 32));
         return hash;
-    }
-
-    public void setUUID(UUID UUID) {
-        mUUID = UUID;
-    }
-
-    public UUID getUUID() {
-        return mUUID;
     }
 
     public void increaseCountBy(int amount) {

@@ -41,7 +41,6 @@ public class Accountant {
 
     private static ContentValues getContentValues(Item i) {
         ContentValues values = new ContentValues();
-        values.put(ItemTable.cols.UUID, i.getUUID().toString());
         values.put(ItemTable.cols.NAME, i.getName());
         values.put(ItemTable.cols.PRICE, String.valueOf(i.getPrice()));
         values.put(ItemTable.cols.COUNT, String.valueOf(i.getCount()));
@@ -53,7 +52,6 @@ public class Accountant {
         String sql;
         if (mItemList.contains(latestItem)) {
             Item origItem = mItemList.get(mItemList.indexOf(latestItem));
-            latestItem.setUUID(origItem.getUUID());
             latestItem.increaseCountBy(origItem.getCount());
 
             sql = "UPDATE " + ItemTable.NAME +

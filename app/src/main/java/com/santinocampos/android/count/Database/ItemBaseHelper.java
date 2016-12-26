@@ -22,7 +22,6 @@ public class ItemBaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table " + ItemTable.NAME + "(" +
                    " _id integer primary key autoincrement, " +
-                   ItemTable.cols.UUID + " TEXT(255), " +
                    ItemTable.cols.NAME + " TEXT(255), " +
                    ItemTable.cols.PRICE + " TEXT(255), " +
                    ItemTable.cols.COUNT + " TEXT(255))");
