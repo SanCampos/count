@@ -65,7 +65,7 @@ public class Item {
         return mUUID;
     }
 
-    public void changeCountBy(int amount) {
+    public void increaseCountBy(int amount) {
         mCount += amount;
     }
 }

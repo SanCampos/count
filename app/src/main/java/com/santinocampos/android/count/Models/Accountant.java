@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.santinocampos.android.count.Database.ItemBaseHelper;
 import com.santinocampos.android.count.Database.ItemCursorWrapper;
@@ -35,35 +36,38 @@ public class Accountant {
         mTotalMoney = 0;
         mContext = context.getApplicationContext();
         mDatabase = new ItemBaseHelper(mContext).getWritableDatabase();
-        updateItemList();
+        mItemList = new ArrayList<>();
     }
 
     private static ContentValues getContentValues(Item i) {
         ContentValues values = new ContentValues();
         values.put(ItemTable.cols.UUID, i.getUUID().toString());
         values.put(ItemTable.cols.NAME, i.getName());
-        values.put(ItemTable.cols.PRICE, i.getPrice());
-        values.put(ItemTable.cols.COUNT, i.getCount());
+        values.put(ItemTable.cols.PRICE, String.valueOf(i.getPrice()));
+        values.put(ItemTable.cols.COUNT, String.valueOf(i.getCount()));
 
         return values;
     }
 
     public void addItem(Item latestItem) {
+        String sql;
         if (mItemList.contains(latestItem)) {
             Item origItem = mItemList.get(mItemList.indexOf(latestItem));
             latestItem.setUUID(origItem.getUUID());
-            latestItem.changeCountBy(origItem.getCount());
+            latestItem.increaseCountBy(origItem.getCount());
 
-            String deleteDuplicate = "DELETE FROM " + ItemTable.NAME +
-                                     " WHERE " + ItemTable.cols.NAME +
-                                     "  = '"  + latestItem.getName() +
-                                     "' AND " +  + latestItem.getPrice() +
-                                     " = '" + ItemTable.cols.PRICE + "'";
-
-           mDatabase.execSQL(deleteDuplicate);
-            //mDatabase.delete(ItemTable.NAME, ItemTable.cols.NAME + " = ?", new String[] {latestItem.getName()});
+            sql = "UPDATE " + ItemTable.NAME +
+                              " SET " + ItemTable.cols.COUNT + " = " +String.valueOf(latestItem.getCount()) +
+                              " WHERE " + ItemTable.cols.NAME + " = '" + String.valueOf(latestItem.getName()) +
+                              "' AND " + ItemTable.cols.PRICE + " = '" + String.valueOf(latestItem.getPrice()) +
+                              "';";
+         } else {
+            sql = "INSERT INTO " + ItemTable.NAME + " (" + ItemTable.cols.NAME + ", " +
+                         ItemTable.cols.PRICE + ", " + ItemTable.cols.COUNT + ") " +
+                         "VALUES ('" + latestItem.getName() + "', '" + latestItem.getPrice() + "', '" +
+                         latestItem.getCount() + "');";
         }
-        mDatabase.insert(ItemTable.NAME, null, getContentValues(latestItem));
+        mDatabase.execSQL(sql);
         updateItemList();
     }
 
@@ -94,7 +98,7 @@ public class Accountant {
     }
 
      private void updateItemList() {
-         mItemList = new ArrayList<>();
+         mItemList.clear();
 
          ItemCursorWrapper cursor = queryItems(null, null);
          try {
@@ -128,5 +132,6 @@ public class Accountant {
 
     public void clearList() {
         mDatabase.delete(ItemTable.NAME, null, null);
+        updateItemList();
     }
 }
