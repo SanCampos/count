@@ -45,7 +45,7 @@ public class Accountant {
         values.put(ItemTable.cols.NAME, i.getName());
         values.put(ItemTable.cols.PRICE, String.valueOf(i.getPrice()));
         values.put(ItemTable.cols.COUNT, String.valueOf(i.getCount()));
-
+        values.put(ItemTable.cols.TOTAL_PRICE, String.valueOf(i.getPrice() * i.getCount()));
         return values;
     }
 
@@ -74,6 +74,7 @@ public class Accountant {
             mDatabase.insert(ItemTable.NAME, null, getContentValues(latestItem));
         }
         //mDatabase.execSQL(sql);
+        sortItemTable();
         updateItemList();
     }
 
@@ -117,6 +118,12 @@ public class Accountant {
              cursor.close();
          }
      }
+
+    private void sortItemTable() {
+        String sql = "SELECT * FROM " + ItemTable.NAME + " " +
+                     " ORDER BY " + ItemTable.cols.TOTAL_PRICE;
+        mDatabase.execSQL(sql);
+    }
 
     public ItemCursorWrapper queryItems(String whereClause, String[] whereArgs) {
         Cursor cursor = mDatabase.query(ItemTable.NAME, null, whereClause, whereArgs, null, null, null);

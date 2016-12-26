@@ -24,7 +24,8 @@ public class ItemBaseHelper extends SQLiteOpenHelper {
                    " _id integer primary key autoincrement, " +
                    ItemTable.cols.NAME + " TEXT(255), " +
                    ItemTable.cols.PRICE + " TEXT(255), " +
-                   ItemTable.cols.COUNT + " TEXT(255))");
+                   ItemTable.cols.COUNT + " TEXT(255), " +
+                   ItemTable.cols.TOTAL_PRICE + " TEXT(255))");
     }
 
     @Override

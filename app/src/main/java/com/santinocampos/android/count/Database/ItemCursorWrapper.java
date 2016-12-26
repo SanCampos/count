@@ -24,7 +24,6 @@ public class ItemCursorWrapper extends CursorWrapper {
         String itemName = getString(getColumnIndex(ItemTable.cols.NAME));
         double itemPrice = getDouble(getColumnIndex(ItemTable.cols.PRICE));
         int itemCount = getInt(getColumnIndex(ItemTable.cols.COUNT));
-
         return new Item(itemName, itemPrice, itemCount);
     }
 }
