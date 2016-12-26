@@ -13,6 +13,7 @@ import com.santinocampos.android.count.Utils.MoneyUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 /**
  * Created by thedr on 11/1/2016.
@@ -54,18 +55,25 @@ public class Accountant {
             Item origItem = mItemList.get(mItemList.indexOf(latestItem));
             latestItem.increaseCountBy(origItem.getCount());
 
-            sql = "UPDATE " + ItemTable.NAME +
+            /**sql = "UPDATE " + ItemTable.NAME +
                               " SET " + ItemTable.cols.COUNT + " = " +String.valueOf(latestItem.getCount()) +
                               " WHERE " + ItemTable.cols.NAME + " = '" + String.valueOf(latestItem.getName()) +
                               "' AND " + ItemTable.cols.PRICE + " = '" + String.valueOf(latestItem.getPrice()) +
-                              "';";
+                              "';"; **/
+
+            mDatabase.update(ItemTable.NAME, getContentValues(latestItem),
+                             ItemTable.cols.NAME + " = ? AND " +
+                             ItemTable.cols.PRICE + " = ?", new String[] {latestItem.getName(),
+                             String.valueOf(latestItem.getPrice())});
          } else {
-            sql = "INSERT INTO " + ItemTable.NAME + " (" + ItemTable.cols.NAME + ", " +
+           /** sql = "INSERT INTO " + ItemTable.NAME + " (" + ItemTable.cols.NAME + ", " +
                          ItemTable.cols.PRICE + ", " + ItemTable.cols.COUNT + ") " +
                          "VALUES ('" + latestItem.getName() + "', '" + latestItem.getPrice() + "', '" +
-                         latestItem.getCount() + "');";
+                         latestItem.getCount() + "');";**/
+
+            mDatabase.insert(ItemTable.NAME, null, getContentValues(latestItem));
         }
-        mDatabase.execSQL(sql);
+        //mDatabase.execSQL(sql);
         updateItemList();
     }
 
