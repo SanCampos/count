@@ -15,10 +15,10 @@
     <string name="add_money_label">Add money</string>
     <string name="action_export">Export record</string>
     <string name="dialog_addOrSet">Reset money</string>
-    <string name="toast_error_export">Your list is empty!</string>
+    <string name="toast_error_empty_list">Your list is empty!</string>
     <string name="toast_success_export">Successfully exported log!</string>
     <string name="title_confirm_export">Confirm export</string>
-    <string name="message_confirm_export">Are you sure you want to export the list?</string>
+    <string name="message_confirm_export">Are you sure you want to export your item list?</string>
     <string name="action_clear">Clear list</string>
     <string name="title_confirm_clear">Confirm clearing list</string>
     <string name="message_confirm_clear">Are you sure you want to clear your item list?</string>

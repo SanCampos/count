@@ -218,9 +218,9 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         switch (itemId) {
             case R.id.action_add_money : startDialog(new AddMoneyDialog());
                 break;
-            case R.id.action_export : export();
+            case R.id.action_export : checkIfListIsEmptyToStart(new ConfirmExportDialog());
                 break;
-            case R.id.action_clear : startDialog(new ConfirmClearDialog());
+            case R.id.action_clear : checkIfListIsEmptyToStart(new ConfirmClearDialog());
         }
         return true;
     }
@@ -232,12 +232,12 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         updateMoney();
     }
 
-    private void export() {
+    private void checkIfListIsEmptyToStart(DialogFragment df) {
         List<Item> list = mAccountant.getItemList();
 
         if (list.size() != 0) {
-            startDialog(new ConfirmExportDialog());
-        } else Toast.makeText(CounterActivity.this, R.string.toast_error_export, Toast.LENGTH_SHORT).show();
+            startDialog(df);
+        } else Toast.makeText(CounterActivity.this, R.string.toast_error_empty_list, Toast.LENGTH_SHORT).show();
     }
 
     @Override
