@@ -22,7 +22,7 @@ public class Exporter {
 
     @NonNull
     private static String createItemList(List<Item> list, Accountant accountant) {
-        StringBuilder output = new StringBuilder("Total money" + accountant.getTotalMoneyInformation() + "\n\n");
+        StringBuilder output = new StringBuilder("Total money: " + accountant.getTotalMoneyInformation() + "\n\n");
 
         for (Item i : list)
             output.append(i.getName())
