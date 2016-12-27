@@ -92,9 +92,9 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
 
         public void bindItem(Item item) {
             mItemNameTextView.setText(item.getName());
-            mItemCountTextView.setText("x" + mAccountant.countOf(item));
-            mItemInitialPriceTextView.setText(mAccountant.individualPriceOf(item));
-            mItemTotalPriceTextView.setText(mAccountant.totalPriceOf(item));
+            mItemCountTextView.setText("x" + Accountant.countOf(item));
+            mItemInitialPriceTextView.setText(Accountant.individualPriceOf(item));
+            mItemTotalPriceTextView.setText(Accountant.totalPriceOf(item));
         }
 
         public String getItemName()  {
@@ -108,7 +108,6 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     }
 
     private class ItemAdapter extends CursorRecyclerAdapter<ItemHolder> {
-        private Cursor mCursor;
 
         public ItemAdapter(Cursor c) {
             super(c);
@@ -144,13 +143,13 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     @Override
     public void addItem(Item item) {
         mAccountant.addItem(item);
-        mAdapter.swapCursor(mAccountant.querySOrtedItems(null, null));
+        mAdapter.swapCursor(mAccountant.querySortedItems(null, null));
         mChangeButton.setText(mAccountant.getChange());
     }
 
     public void removeItem(String itemName, String itemPrice) {
         mAccountant.removeItem(itemName, itemPrice);
-        mAdapter.swapCursor(mAccountant.querySOrtedItems(null, null));
+        mAdapter.swapCursor(mAccountant.querySortedItems(null, null));
         mChangeButton.setText(mAccountant.getChange());
     }
 
@@ -163,7 +162,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     private void startUI() {
         updateMoney();
         if (mAdapter == null) {
-            mAdapter = new ItemAdapter(mAccountant.querySOrtedItems(null, null));
+            mAdapter = new ItemAdapter(mAccountant.querySortedItems(null, null));
             mRecyclerView.setAdapter(mAdapter);
         }
     }
@@ -209,7 +208,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     @Override
     public void clearList() {
         mAccountant.clearList();
-        mAdapter.swapCursor(mAccountant.querySOrtedItems(null, null));
+        mAdapter.swapCursor(mAccountant.querySortedItems(null, null));
         updateMoney();
     }
 

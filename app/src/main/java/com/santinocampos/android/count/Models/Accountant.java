@@ -8,10 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 import com.santinocampos.android.count.Database.ItemBaseHelper;
 import com.santinocampos.android.count.Database.ItemCursorWrapper;
 import com.santinocampos.android.count.Database.ItemDbSchema.ItemTable;
-import com.santinocampos.android.count.Utils.DecUtils;
 import com.santinocampos.android.count.Utils.MoneyUtils;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,9 +41,9 @@ public class Accountant {
     private static ContentValues getContentValues(Item i) {
         ContentValues values = new ContentValues();
         values.put(ItemTable.cols.NAME, i.getName());
-        values.put(ItemTable.cols.PRICE, DecUtils.clean(i.getPrice()));
-        values.put(ItemTable.cols.COUNT, String.valueOf(i.getCount()));
-        values.put(ItemTable.cols.TOTAL_PRICE, (int) (i.getPrice() * i.getCount()) * 100);
+        values.put(ItemTable.cols.PRICE, i.getPrice());
+        values.put(ItemTable.cols.COUNT, i.getCount());
+        values.put(ItemTable.cols.TOTAL_PRICE, i.getPrice() * i.getCount());
         return values;
     }
 
@@ -107,7 +105,7 @@ public class Accountant {
      private void updateItemList() {
          mItemList.clear();
 
-         ItemCursorWrapper cursor = querySOrtedItems(null, null);
+         ItemCursorWrapper cursor = querySortedItems(null, null);
          try {
              cursor.moveToFirst();
              while (!cursor.isAfterLast()) {
@@ -119,20 +117,20 @@ public class Accountant {
          }
      }
 
-    public ItemCursorWrapper querySOrtedItems(String whereClause, String[] whereArgs) {
+    public ItemCursorWrapper querySortedItems(String whereClause, String[] whereArgs) {
         Cursor cursor = mDatabase.query(ItemTable.NAME, null, whereClause, whereArgs, null, null, ItemTable.cols.TOTAL_PRICE + " DESC");
         return new ItemCursorWrapper(cursor);
     }
 
-    public String individualPriceOf(Item i) {
+    public static String individualPriceOf(Item i) {
         return MoneyUtils.prep(i.getPrice());
     }
 
-    public String totalPriceOf(Item i) {
+    public static String totalPriceOf(Item i) {
        return MoneyUtils.prep(i.getCount() * i.getPrice());
     }
 
-    public String countOf(Item i) {
+    public static String countOf(Item i) {
        return String.valueOf(i.getCount());
     }
 
