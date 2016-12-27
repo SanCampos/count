@@ -4,16 +4,16 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.santinocampos.android.count.Database.ItemBaseHelper;
 import com.santinocampos.android.count.Database.ItemCursorWrapper;
 import com.santinocampos.android.count.Database.ItemDbSchema.ItemTable;
+import com.santinocampos.android.count.Utils.DecUtils;
 import com.santinocampos.android.count.Utils.MoneyUtils;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 /**
  * Created by thedr on 11/1/2016.
@@ -43,9 +43,9 @@ public class Accountant {
     private static ContentValues getContentValues(Item i) {
         ContentValues values = new ContentValues();
         values.put(ItemTable.cols.NAME, i.getName());
-        values.put(ItemTable.cols.PRICE, String.valueOf(i.getPrice()));
+        values.put(ItemTable.cols.PRICE, DecUtils.clean(i.getPrice()));
         values.put(ItemTable.cols.COUNT, String.valueOf(i.getCount()));
-        values.put(ItemTable.cols.TOTAL_PRICE, String.valueOf(i.getPrice() * i.getCount()));
+        values.put(ItemTable.cols.TOTAL_PRICE, (int) (i.getPrice() * i.getCount()) * 100);
         return values;
     }
 
@@ -57,8 +57,8 @@ public class Accountant {
 
             /**sql = "UPDATE " + ItemTable.NAME +
                               " SET " + ItemTable.cols.COUNT + " = " +String.valueOf(latestItem.getCount()) +
-                              " WHERE " + ItemTable.cols.NAME + " = '" + String.valueOf(latestItem.getName()) +
-                              "' AND " + ItemTable.cols.PRICE + " = '" + String.valueOf(latestItem.getPrice()) +
+                              " WHERE " + ItemTable.cols.NAME + " = '" + String.valueOf(latestItem.getItemName()) +
+                              "' AND " + ItemTable.cols.PRICE + " = '" + String.valueOf(latestItem.getItemPrice()) +
                               "';"; **/
 
             mDatabase.update(ItemTable.NAME, getContentValues(latestItem),
@@ -68,18 +68,18 @@ public class Accountant {
          } else {
            /** sql = "INSERT INTO " + ItemTable.NAME + " (" + ItemTable.cols.NAME + ", " +
                          ItemTable.cols.PRICE + ", " + ItemTable.cols.COUNT + ") " +
-                         "VALUES ('" + latestItem.getName() + "', '" + latestItem.getPrice() + "', '" +
+                         "VALUES ('" + latestItem.getItemName() + "', '" + latestItem.getItemPrice() + "', '" +
                          latestItem.getCount() + "');";**/
 
             mDatabase.insert(ItemTable.NAME, null, getContentValues(latestItem));
         }
         //mDatabase.execSQL(sql);
-        sortItemTable();
         updateItemList();
     }
 
-    public void removeItem(int i) {
-        mDatabase.delete(ItemTable.NAME, "_id = ?", new String[] {String.valueOf(i+1)});
+    public void removeItem(String itemName, String itemPrice) {
+        mDatabase.delete(ItemTable.NAME, ItemTable.cols.NAME + " = ? AND " +
+                                         ItemTable.cols.PRICE + " = ?" , new String[] {itemName, itemPrice});
         updateItemList();
     }
 
@@ -107,7 +107,7 @@ public class Accountant {
      private void updateItemList() {
          mItemList.clear();
 
-         ItemCursorWrapper cursor = queryItems(null, null);
+         ItemCursorWrapper cursor = querySOrtedItems(null, null);
          try {
              cursor.moveToFirst();
              while (!cursor.isAfterLast()) {
@@ -119,15 +119,8 @@ public class Accountant {
          }
      }
 
-    private void sortItemTable() {
-        String sql = "SELECT * FROM " + ItemTable.NAME + " " +
-                     " ORDER BY " + ItemTable.cols.TOTAL_PRICE;
-        mDatabase.execSQL(sql);
-    }
-
-    public ItemCursorWrapper queryItems(String whereClause, String[] whereArgs) {
-        Cursor cursor = mDatabase.query(ItemTable.NAME, null, whereClause, whereArgs, null, null, null);
-
+    public ItemCursorWrapper querySOrtedItems(String whereClause, String[] whereArgs) {
+        Cursor cursor = mDatabase.query(ItemTable.NAME, null, whereClause, whereArgs, null, null, ItemTable.cols.TOTAL_PRICE + " DESC");
         return new ItemCursorWrapper(cursor);
     }
 

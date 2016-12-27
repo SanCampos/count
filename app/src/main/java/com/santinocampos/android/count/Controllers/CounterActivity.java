@@ -96,6 +96,15 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
             mItemInitialPriceTextView.setText(mAccountant.individualPriceOf(item));
             mItemTotalPriceTextView.setText(mAccountant.totalPriceOf(item));
         }
+
+        public String getItemName()  {
+            return mItemNameTextView.getText().toString();
+        }
+
+        public String getItemPrice() {
+            String price = mItemInitialPriceTextView.getText().toString();
+            return price.substring(0, price.length() - 1);
+        }
     }
 
     private class ItemAdapter extends CursorRecyclerAdapter<ItemHolder> {
@@ -135,13 +144,13 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     @Override
     public void addItem(Item item) {
         mAccountant.addItem(item);
-        mAdapter.swapCursor(mAccountant.queryItems(null, null));
+        mAdapter.swapCursor(mAccountant.querySOrtedItems(null, null));
         mChangeButton.setText(mAccountant.getChange());
     }
 
-    public void removeItem(int position) {
-        mAccountant.removeItem(position);
-        mAdapter.swapCursor(mAccountant.queryItems(null, null));
+    public void removeItem(String itemName, String itemPrice) {
+        mAccountant.removeItem(itemName, itemPrice);
+        mAdapter.swapCursor(mAccountant.querySOrtedItems(null, null));
         mChangeButton.setText(mAccountant.getChange());
     }
 
@@ -154,7 +163,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     private void startUI() {
         updateMoney();
         if (mAdapter == null) {
-            mAdapter = new ItemAdapter(mAccountant.queryItems(null, null));
+            mAdapter = new ItemAdapter(mAccountant.querySOrtedItems(null, null));
             mRecyclerView.setAdapter(mAdapter);
         }
     }
@@ -168,7 +177,8 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                removeItem(viewHolder.getLayoutPosition());
+                ItemHolder holder = (ItemHolder) viewHolder;
+                removeItem(holder.getItemName(), holder.getItemPrice());
             }
         };
 
@@ -199,7 +209,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     @Override
     public void clearList() {
         mAccountant.clearList();
-        mAdapter.swapCursor(mAccountant.queryItems(null, null));
+        mAdapter.swapCursor(mAccountant.querySOrtedItems(null, null));
         updateMoney();
     }
 
