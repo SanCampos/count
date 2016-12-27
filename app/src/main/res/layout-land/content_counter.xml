@@ -16,6 +16,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:background="@drawable/rounded_rectangle"
+        android:stateListAnimator="@null"
         android:elevation="4dp"
         android:textSize="23sp"
         tools:text="10000"/>
@@ -23,7 +24,8 @@
     <LinearLayout
         android:id="@+id/wrapper"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="137dp"
+        android:layout_marginTop="20dp"
         android:layout_below="@id/wallet_totalMoney">
 
         <android.support.v7.widget.RecyclerView
@@ -39,12 +41,13 @@
 
     <Button
         android:id="@+id/wallet_totalChange"
-        android:layout_width="190dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="13dp"
-        android:layout_alignParentTop="true"
+        android:layout_width="175dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="13dp"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:background="@drawable/rounded_rectangle"
+        android:stateListAnimator="@null"
         android:elevation="4dp"
         android:textSize="23sp"
         tools:text="10000"/>
