@@ -83,8 +83,8 @@ public class AddItemDialog extends AppCompatDialogFragment {
         if (savedInstanceState != null) {
             mItemNameEditText.setText(savedInstanceState.getString(ITEM_NAME, ""));
             mItemPriceEditText.setText(savedInstanceState.getString(ITEM_PRICE, ""));
-            mItemCountTextView.setText(savedInstanceState.getInt(ITEM_COUNT, MIN_ITEM_COUNT));
-        }
+            mItemCountTextView.setText(String.valueOf(savedInstanceState.getInt(ITEM_COUNT, MIN_ITEM_COUNT)));
+        } else mItemCountTextView.setText(String.valueOf(MIN_ITEM_COUNT));
 
         mDecreaseCount = (ImageButton) v.findViewById(R.id.btn_decrease_count);
         mDecreaseCount.setOnClickListener(new View.OnClickListener() {
@@ -93,8 +93,6 @@ public class AddItemDialog extends AppCompatDialogFragment {
                 changeCount(-1);
             }
         });
-
-        mItemCountTextView.setText(String.valueOf(MIN_ITEM_COUNT));
 
         mIncreaseCount = (ImageButton) v.findViewById(R.id.btn_increase_count);
         mIncreaseCount.setOnClickListener(new View.OnClickListener() {
@@ -110,9 +108,10 @@ public class AddItemDialog extends AppCompatDialogFragment {
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
-        savedInstanceState.putInt(ITEM_COUNT, Integer.parseInt(mItemCountTextView.getText().toString()));
-        savedInstanceState.putString(ITEM_PRICE, mItemPriceEditText.getText().toString());
         savedInstanceState.putString(ITEM_NAME, mItemNameEditText.getText().toString());
+        savedInstanceState.putString(ITEM_PRICE, mItemPriceEditText.getText().toString());
+        savedInstanceState.putInt(ITEM_COUNT, Integer.parseInt(mItemCountTextView.getText().toString()));
+
     }
 
     private void checkToHideButton() {
