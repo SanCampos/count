@@ -1,6 +1,8 @@
 package com.santinocampos.android.count.Controllers;
 
+import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.os.Bundle;
@@ -38,6 +40,10 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     private static final String DIALOG_EXPORT_LOG = "DialogExportLog";
     private static final String DIALOG_CLEAR_LIST = "DialogClearList";
 
+    private static final String TOTAL_MONEY = "totalMoney";
+
+    SharedPreferences mPreferences;
+
     private Button mWalletButton;
     private Button mChangeButton;
 
@@ -61,6 +67,10 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        mAccountant.addMoney(Double.longBitsToDouble(mPreferences.getLong(TOTAL_MONEY, 0)), true);
+
         startUI();
         startItemHelper();
 
@@ -71,6 +81,15 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
                 startDialog(new AddItemDialog());
             }
         });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putLong(TOTAL_MONEY, Double.doubleToRawLongBits(mAccountant.getTotalMoney()));
+        editor.apply();
     }
 
     private class ItemHolder extends RecyclerView.ViewHolder {
@@ -164,6 +183,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         if (mAdapter == null) {
             mAdapter = new ItemAdapter();
             mRecyclerView.setAdapter(mAdapter);
+            mAdapter.swapCursor(mAccountant.querySortedItems(null, null));
         }
     }
 
@@ -227,7 +247,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     }
 
     private void updateMoney() {
-        mWalletButton.setText(mAccountant.getTotalMoney());
+        mWalletButton.setText(mAccountant.getTotalMoneyInformation());
         mChangeButton.setText(mAccountant.getChange());
     }
 }

@@ -36,6 +36,7 @@ public class Accountant {
         mContext = context.getApplicationContext();
         mDatabase = new ItemBaseHelper(mContext).getWritableDatabase();
         mItemList = new ArrayList<>();
+        updateItemList();
     }
 
     private static ContentValues getContentValues(Item i) {
@@ -85,7 +86,11 @@ public class Accountant {
         mTotalMoney += isSet ? money - mTotalMoney : money;
     }
 
-    public String getTotalMoney() {
+    public double getTotalMoney() {
+        return mTotalMoney;
+    }
+
+    public String getTotalMoneyInformation() {
         return MoneyUtils.prep(mTotalMoney);
     }
 

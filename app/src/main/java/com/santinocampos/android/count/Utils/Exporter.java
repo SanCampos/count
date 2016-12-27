@@ -22,17 +22,17 @@ public class Exporter {
 
     @NonNull
     private static String createItemList(List<Item> list, Accountant accountant) {
-        StringBuilder output = new StringBuilder("Total money" + accountant.getTotalMoney() + "\n\n");
+        StringBuilder output = new StringBuilder("Total money" + accountant.getTotalMoneyInformation() + "\n\n");
 
         for (Item i : list)
             output.append(i.getName())
                     .append(" - ")                             //
                     .append("(")
-                    .append(accountant.countOf(i))
+                    .append(Accountant.countOf(i))
                     .append("x) ")
-                    .append(accountant.individualPriceOf(i))
+                    .append(Accountant.individualPriceOf(i))
                     .append("\n")
-                    .append(accountant.totalPriceOf(i))
+                    .append(Accountant.totalPriceOf(i))
                     .append("\n\n");
 
         return output.append("Change left: ").append(accountant.getChange()).toString();
