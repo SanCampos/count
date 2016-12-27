@@ -6,7 +6,6 @@ import android.telephony.SmsManager;
 
 import com.santinocampos.android.count.Models.Accountant;
 import com.santinocampos.android.count.Models.Item;
-import com.santinocampos.android.count.Models.SMSDetails;
 
 import java.util.List;
 
@@ -17,7 +16,7 @@ public class Exporter {
 
     public static void exportItemList(List<Item> list, Context context) {
         SmsManager.getDefault()
-                  .sendTextMessage(SMSDetails.RECIPIENT_NUMBER, null, createItemList(list, Accountant.get(context)), null, null);
+                  .sendTextMessage("<INSERT CELLPHONE NUMBER HERE>", null, createItemList(list, Accountant.get(context)), null, null);
     }
 
     @NonNull
