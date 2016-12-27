@@ -17,7 +17,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.santinocampos.android.count.Adapter.CursorRecyclerAdapter;
+import com.santinocampos.android.count.Adapter.RecyclerViewCursorAdapter;
 import com.santinocampos.android.count.Database.ItemCursorWrapper;
 import com.santinocampos.android.count.Dialogs.ConfirmClearDialog;
 import com.santinocampos.android.count.Dialogs.ConfirmExportDialog;
@@ -107,10 +107,10 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         }
     }
 
-    private class ItemAdapter extends CursorRecyclerAdapter<ItemHolder> {
+    private class ItemAdapter extends RecyclerViewCursorAdapter<ItemHolder> {
 
-        public ItemAdapter(Cursor c) {
-            super(c);
+        public ItemAdapter() {
+            super();
         }
 
         public ItemHolder onCreateViewHolder(ViewGroup parent, int ViewType) {
@@ -119,8 +119,8 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         }
 
         @Override
-        public void onBindViewHolderCursor(ItemHolder holder, Cursor c) {
-            ItemCursorWrapper cw = (ItemCursorWrapper) c;
+        public void onBindViewHolder(ItemHolder holder, Cursor cursor) {
+            ItemCursorWrapper cw = (ItemCursorWrapper) cursor;
             holder.bindItem(cw.getItem());
         }
     }
@@ -162,7 +162,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     private void startUI() {
         updateMoney();
         if (mAdapter == null) {
-            mAdapter = new ItemAdapter(mAccountant.querySortedItems(null, null));
+            mAdapter = new ItemAdapter();
             mRecyclerView.setAdapter(mAdapter);
         }
     }
