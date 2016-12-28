@@ -23,4 +23,5 @@
     <string name="title_confirm_clear">Confirm clearing list</string>
     <string name="message_confirm_clear">Are you sure you want to clear your item list?</string>
     <string name="desc_increase_count">Increase the item count</string>
+    <string name="balance">Balance:</string>
 </resources>

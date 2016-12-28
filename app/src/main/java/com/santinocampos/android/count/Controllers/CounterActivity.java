@@ -42,9 +42,10 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
 
     private static final String TOTAL_MONEY = "totalMoney";
 
-    SharedPreferences mPreferences;
+    private static SharedPreferences mPreferences;
 
     private LinearLayout mWallet;
+    private TextView mChangeTextView;
 
     private Accountant mAccountant;
 
@@ -67,6 +68,8 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
                 startDialog(new AddMoneyDialog());
             }
         });
+
+        mChangeTextView = (TextView) findViewById(R.id.text_view_change);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -252,6 +255,6 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
 
     private void updateMoney() {
        // mWallet.setText(mAccountant.getTotalMoneyInformation());
-       // mChange.setText(mAccountant.getChange());
+       mChangeTextView.setText(mAccountant.getChange());
     }
 }
