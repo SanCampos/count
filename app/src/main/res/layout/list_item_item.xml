@@ -30,17 +30,6 @@
         android:textSize="20sp"
         tools:text="Speech Training Lesson"/>
 
-    <ImageButton
-        android:id="@+id/btn_increase_currentCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toStartOf="@id/item_totalPrice_textView"
-        android:layout_toLeftOf="@id/item_totalPrice_textView"
-        android:layout_alignTop="@id/item_totalPrice_textView"
-        android:layout_alignBottom="@id/item_totalPrice_textView"
-        android:background="@android:color/transparent"
-        android:src="@drawable/ic_pluss"/>
-
     <TextView
         android:id="@+id/item_count_textView"
         android:layout_width="wrap_content"
@@ -62,16 +51,5 @@
         android:layout_toStartOf="@id/item_count_textView"
         android:textSize="13sp"
         tools:text="38P"/>
-
-    <ImageButton
-        android:id="@+id/btn_decrease_currentCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/btn_increase_currentCount"
-        android:layout_toStartOf="@id/item_totalPrice_textView"
-        android:layout_toLeftOf="@id/item_totalPrice_textView"
-        android:layout_alignBottom="@id/item_initialPrice_textView"
-        android:background="@android:color/transparent"
-        android:src="@drawable/ic_minus"/>
 
 </RelativeLayout>
