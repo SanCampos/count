@@ -45,6 +45,8 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     private static SharedPreferences mPreferences;
 
     private LinearLayout mWallet;
+
+    private TextView mAllowanceTextView;
     private TextView mChangeTextView;
 
     private Accountant mAccountant;
@@ -69,6 +71,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
             }
         });
 
+        mAllowanceTextView = (TextView) findViewById(R.id.text_view_allowance);
         mChangeTextView = (TextView) findViewById(R.id.text_view_change);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
@@ -170,13 +173,13 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     public void addItem(Item item) {
         mAccountant.addItem(item);
         mAdapter.swapCursor(mAccountant.querySortedItems(null, null));
-        //mChange.setText(mAccountant.getChange());
+        updateChange();
     }
 
     public void removeItem(String itemName, String itemPrice) {
         mAccountant.removeItem(itemName, itemPrice);
         mAdapter.swapCursor(mAccountant.querySortedItems(null, null));
-        //mChange.setText(mAccountant.getChange());
+        updateChange();
     }
 
     @Override
@@ -236,7 +239,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     public void clearList() {
         mAccountant.clearList();
         mAdapter.swapCursor(mAccountant.querySortedItems(null, null));
-        updateMoney();
+        updateChange();
     }
 
     private void checkIfListIsEmptyToStart(DialogFragment df) {
@@ -254,7 +257,11 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     }
 
     private void updateMoney() {
-       // mWallet.setText(mAccountant.getTotalMoneyInformation());
-       mChangeTextView.setText(mAccountant.getChange());
+       mAllowanceTextView.setText(mAccountant.getTotalMoneyInformation());
+       updateChange();
+    }
+
+    private void updateChange() {
+        mChangeTextView.setText(mAccountant.getChange());
     }
 }
