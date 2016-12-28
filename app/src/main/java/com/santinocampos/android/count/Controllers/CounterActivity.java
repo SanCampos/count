@@ -15,7 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,8 +44,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
 
     SharedPreferences mPreferences;
 
-    private Button mWalletButton;
-    private Button mChangeButton;
+    private LinearLayout mWallet;
 
     private Accountant mAccountant;
 
@@ -61,14 +60,13 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
 
         mAccountant = Accountant.get(this);
 
-        mWalletButton =  (Button) findViewById(R.id.wallet_totalMoney);
-        mWalletButton.setOnClickListener(new View.OnClickListener() {
+        mWallet =  (LinearLayout) findViewById(R.id.wallet_totalMoney);
+        mWallet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startDialog(new AddMoneyDialog());
             }
         });
-        mChangeButton =  (Button) findViewById(R.id.wallet_totalChange);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -169,13 +167,13 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     public void addItem(Item item) {
         mAccountant.addItem(item);
         mAdapter.swapCursor(mAccountant.querySortedItems(null, null));
-        mChangeButton.setText(mAccountant.getChange());
+        //mChange.setText(mAccountant.getChange());
     }
 
     public void removeItem(String itemName, String itemPrice) {
         mAccountant.removeItem(itemName, itemPrice);
         mAdapter.swapCursor(mAccountant.querySortedItems(null, null));
-        mChangeButton.setText(mAccountant.getChange());
+        //mChange.setText(mAccountant.getChange());
     }
 
     @Override
@@ -253,7 +251,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     }
 
     private void updateMoney() {
-        mWalletButton.setText(mAccountant.getTotalMoneyInformation());
-        mChangeButton.setText(mAccountant.getChange());
+       // mWallet.setText(mAccountant.getTotalMoneyInformation());
+       // mChange.setText(mAccountant.getChange());
     }
 }

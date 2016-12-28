@@ -8,8 +8,9 @@
     tools:context=".Controllers.CounterActivity">
 
 
-    <Button
+    <LinearLayout
         android:id="@+id/wallet_totalMoney"
+        android:orientation="horizontal"
         android:layout_width="190dp"
         android:layout_height="60dp"
         android:layout_marginTop="13dp"
@@ -37,8 +38,9 @@
 
     </LinearLayout>
 
-    <Button
+    <LinearLayout
         android:id="@+id/wallet_totalChange"
+        android:orientation="horizontal"
         android:layout_width="175dp"
         android:layout_height="45dp"
         android:layout_marginTop="20dp"
