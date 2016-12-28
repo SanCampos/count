@@ -36,6 +36,7 @@ public class Accountant {
         mContext = context.getApplicationContext();
         mDatabase = new ItemBaseHelper(mContext).getWritableDatabase();
         mItemList = new ArrayList<>();
+        updateItemList();
     }
 
     private static ContentValues getContentValues(Item i) {
