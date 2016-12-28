@@ -12,13 +12,23 @@
         android:id="@+id/wallet_totalMoney"
         android:orientation="horizontal"
         android:layout_width="190dp"
-        android:layout_height="60dp"
+        android:layout_height="45dp"
         android:layout_marginTop="13dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/rounded_rectangle"
-        android:textSize="23sp"
-        tools:text="10000"/>
+        android:background="@drawable/rounded_rectangle">
+
+        <TextView
+            style="@style/Header"
+            android:text="@string/allowance"/>
+
+        <TextView
+            style="@style/MoneyText"
+            android:id="@+id/text_view_allowance"
+            android:text="60000P"/>
+
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/wrapper"
@@ -50,29 +60,13 @@
         android:layout_centerHorizontal="true">
 
         <TextView
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:gravity="center_vertical"
-            android:textSize="15sp"
-            android:textStyle="bold"
+            style="@style/Header"
             android:text="@string/balance"/>
 
         <TextView
+            style="@style/MoneyText"
             android:id="@+id/text_view_change"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center|end"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:textSize="15sp"
-            android:textStyle="bold"
             tools:text="10000P"/>
-
-
     </LinearLayout>
 
 </RelativeLayout>
