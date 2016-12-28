@@ -62,6 +62,12 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         mAccountant = Accountant.get(this);
 
         mWalletButton =  (Button) findViewById(R.id.wallet_totalMoney);
+        mWalletButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startDialog(new AddMoneyDialog());
+            }
+        });
         mChangeButton =  (Button) findViewById(R.id.wallet_totalChange);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
