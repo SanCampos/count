@@ -30,14 +30,25 @@
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="@string/balance"/>
+                android:text="@string/allowance"
+                style="@style/InfoText"/>
+
+            <TextView
+                android:id="@+id/text_view_allowance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginRight="16dp"
+                android:layout_marginEnd="16dp"
+                style="@style/InfoText"/>
+
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
 
     <include
         android:layout_marginTop="100dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_width="match_parent"
         layout="@layout/content_counter"/>
 
