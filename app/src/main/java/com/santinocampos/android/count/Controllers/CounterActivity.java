@@ -60,7 +60,6 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         setContentView(R.layout.activity_counter);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         mAccountant = Accountant.get(this);
 

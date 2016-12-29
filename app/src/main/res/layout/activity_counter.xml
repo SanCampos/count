@@ -16,26 +16,27 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="52dp"
             android:minHeight="?attr/actionBarSize"
-            android:background="@color/colorTitleBar"
+            android:background="@color/colorToolBar"
+            app:theme="@style/AppTheme.PopupOverlay"/>
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:background="@color/colorToolBar"
             app:theme="@style/AppTheme.PopupOverlay">
 
             <TextView
-                android:id="@+id/title"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="top|center_vertical"
-                android:gravity="center"
-                android:text="@string/app_name"
-                style="@style/Toolbar.TitleText"/>
-
+                android:layout_width="wrap_content"
+                android:text="@string/balance"/>
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
 
     <include
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="100dp"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         layout="@layout/content_counter"/>
@@ -46,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:layout_gravity="bottom|right"
-        app:backgroundTint="@color/colorTitleBar"
+        app:backgroundTint="@color/colorToolBar"
         android:src="@drawable/ic_fab_additem"/>
 
 </android.support.design.widget.CoordinatorLayout>
