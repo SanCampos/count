@@ -16,14 +16,26 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
+            android:minHeight="?attr/actionBarSize"
             android:background="@color/colorTitleBar"
-            app:theme="@style/AppTheme.PopupOverlay"/>
+            app:theme="@style/AppTheme.PopupOverlay">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|center_vertical"
+                android:gravity="center"
+                android:text="@string/app_name"
+                style="@style/Toolbar.TitleText"/>
+
+        </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
 
     <include
-        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_marginTop="128dp"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         layout="@layout/content_counter"/>
