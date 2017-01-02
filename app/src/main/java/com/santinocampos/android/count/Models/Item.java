@@ -10,11 +10,13 @@ public class Item {
     private String mName;
     private double mPrice;
     private int mCount;
+    private ItemType mItemType;
 
-    public Item(String mName, double mPrice, int count) {
+    public Item(String mName, double mPrice, int count, ItemType itemType) {
         this.mName = mName;
         this.mPrice = mPrice;
         this.mCount = count;
+        this.mItemType = itemType;
     }
 
     public String getName() {
@@ -33,6 +35,9 @@ public class Item {
         return mCount;
     }
 
+    public ItemType getItemType() {
+        return mItemType;
+    }
 
     @Override
     public boolean equals(Object object) {
