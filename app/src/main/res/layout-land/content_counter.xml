@@ -40,7 +40,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/wallet_totalChange"
+        android:id="@+id/wallet_totalBalance"
         android:layout_width="175dp"
         android:layout_height="45dp"
         android:layout_marginBottom="13dp"
