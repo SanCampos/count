@@ -15,7 +15,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,7 +43,6 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
 
     private static SharedPreferences mPreferences;
 
-    private LinearLayout mWallet;
 
     private TextView mAllowanceTextView;
     private TextView mChangeTextView;
