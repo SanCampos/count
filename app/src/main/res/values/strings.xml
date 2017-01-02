@@ -25,4 +25,11 @@
     <string name="desc_increase_count">Increase the item count</string>
     <string name="balance">Balance:</string>
     <string name="allowance">Allowance:</string>
+    
+    <string name="Gadgets">Gadgets</string>
+    <string name="Food_Drink">Food &amp; Drink</string>
+    <string name="Misc_Payment">Misc.</string>
+    <string name="Entertainment">Entertainment</string>
+    <string name="No_Type">No Type</string>
+    <string name="School_Supplies">School Supplies</string>
 </resources>
