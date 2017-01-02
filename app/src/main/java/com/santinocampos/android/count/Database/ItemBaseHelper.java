@@ -25,7 +25,7 @@ public class ItemBaseHelper extends SQLiteOpenHelper {
                    " _id integer primary key autoincrement, " +
                    ItemTable.cols.NAME + " TEXT(255), " +
                    ItemTable.cols.PRICE + " REAL(255), " +
-                   ItemTable.cols.ITEM_TYPE + "STRING(255), " +
+                   ItemTable.cols.ITEM_TYPE + " TEXT(255), " +
                    ItemTable.cols.COUNT + " INTEGER(255), " +
                    ItemTable.cols.TOTAL_PRICE + " REAL(255));");
     }
@@ -33,19 +33,19 @@ public class ItemBaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (oldVersion == 1) {
-             String tableColumns = " (" +
+             String tableColumns =
                     ItemTable.cols.NAME + ", " +
                     ItemTable.cols.PRICE + ", " +
                     ItemTable.cols.COUNT + ", " +
-                    ItemTable.cols.TOTAL_PRICE + ")";
+                    ItemTable.cols.TOTAL_PRICE;
             if (newVersion == 2) {
                 db.execSQL("ALTER TABLE " + ItemTable.NAME + " RENAME TO tempOldTable");
 
                 onCreate(db);
-                db.execSQL("INSERT INTO " + ItemTable.NAME + tableColumns + " VALUES " +
-                           "SELECT " + tableColumns + " FROM tempOldTable " + ";" );
-                db.execSQL("UPDATE " + ItemTable.NAME + "SET " + ItemTable.cols.ITEM_TYPE +
-                           " = " + ItemType.NO_TYPE.getTypeName() + " WHERE " + ItemTable.cols.ITEM_TYPE +
+                db.execSQL("INSERT INTO " + ItemTable.NAME + "(" + tableColumns + ") SELECT " +
+                           tableColumns + " FROM tempOldTable " + ";" );
+                db.execSQL("UPDATE " + ItemTable.NAME + " SET " + ItemTable.cols.ITEM_TYPE +
+                           " = '" + ItemType.NO_TYPE.getTypeName() + "' WHERE " + ItemTable.cols.ITEM_TYPE +
                            " = NULL;");
                 db.execSQL("DROP TABLE tempOldTable");
             }
