@@ -26,7 +26,7 @@ public enum ItemType {
         return mImageID;
     }
 
-    public int getTypeName() {
+    public int getItemType() {
         return mTypeName;
     }
 }
