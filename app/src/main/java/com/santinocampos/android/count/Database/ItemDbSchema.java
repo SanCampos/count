@@ -12,6 +12,7 @@ public class ItemDbSchema {
              public static final String PRICE = "price";
              public static final String COUNT = "count";
              public static final String TOTAL_PRICE = "totalPrice";
+             public static final String ITEM_TYPE = "itemType";
          }
      }
 }
