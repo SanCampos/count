@@ -19,6 +19,10 @@ public class Item {
         this.mItemType = itemType;
     }
 
+    public Item(String mName, double mPrice, int count) {
+        this(mName, mPrice, count, ItemType.NO_TYPE);
+    }
+
     public String getName() {
         return mName;
     }

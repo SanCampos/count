@@ -45,17 +45,18 @@ public class Accountant {
         values.put(ItemTable.cols.PRICE, i.getPrice());
         values.put(ItemTable.cols.COUNT, i.getCount());
         values.put(ItemTable.cols.TOTAL_PRICE, i.getPrice() * i.getCount());
+        values.put(ItemTable.cols.ITEM_TYPE, i.getItemType().getItemTypeNameID());
         return values;
     }
 
     public void addItem(Item latestItem) {
-        String sql;
+        //String sql;
         if (mItemList.contains(latestItem)) {
             Item origItem = mItemList.get(mItemList.indexOf(latestItem));
             latestItem.increaseCountBy(origItem.getCount());
 
             /**sql = "UPDATE " + ItemTable.NAME +
-                              " SET " + ItemTable.cols.COUNT + " = " +String.valueOf(latestItem.getCount()) +
+                              " SET " + ItemTable.cols.COUNT + " = " + String.valueOf(latestItem.getCount()) +
                               " WHERE " + ItemTable.cols.NAME + " = '" + String.valueOf(latestItem.getItemName()) +
                               "' AND " + ItemTable.cols.PRICE + " = '" + String.valueOf(latestItem.getItemPrice()) +
                               "';"; **/

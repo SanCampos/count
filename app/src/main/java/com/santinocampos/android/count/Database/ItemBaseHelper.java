@@ -24,9 +24,9 @@ public class ItemBaseHelper extends SQLiteOpenHelper {
                    " _id integer primary key autoincrement, " +
                    ItemTable.cols.NAME + " TEXT(255), " +
                    ItemTable.cols.PRICE + " REAL(255), " +
-                   ItemTable.cols.ITEM_TYPE + " INTEGER(255), " +
                    ItemTable.cols.COUNT + " INTEGER(255), " +
-                   ItemTable.cols.TOTAL_PRICE + " REAL(255));");
+                   ItemTable.cols.TOTAL_PRICE + " REAL(255)), " +
+                   ItemTable.cols.ITEM_TYPE + " INTEGER(255));");
     }
 
     @Override
@@ -44,7 +44,7 @@ public class ItemBaseHelper extends SQLiteOpenHelper {
                 db.execSQL("INSERT INTO " + ItemTable.NAME + "(" + tableColumns + ") SELECT " +
                            tableColumns + " FROM tempOldTable " + ";" );
                 db.execSQL("UPDATE " + ItemTable.NAME + " SET " + ItemTable.cols.ITEM_TYPE +
-                           " = '" + ItemType.NO_TYPE.getItemType() + "' WHERE " + ItemTable.cols.ITEM_TYPE +
+                           " = '" + ItemType.NO_TYPE.getItemTypeNameID() + "' WHERE " + ItemTable.cols.ITEM_TYPE +
                            " = NULL;");
                 db.execSQL("DROP TABLE tempOldTable");
             }

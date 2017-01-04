@@ -5,6 +5,7 @@ import android.database.CursorWrapper;
 
 import com.santinocampos.android.count.Database.ItemDbSchema.ItemTable;
 import com.santinocampos.android.count.Models.Item;
+import com.santinocampos.android.count.Models.ItemType;
 
 /**
  * Created by thedr on 12/25/2016.
@@ -24,6 +25,7 @@ public class ItemCursorWrapper extends CursorWrapper {
         String itemName = getString(getColumnIndex(ItemTable.cols.NAME));
         double itemPrice = getDouble(getColumnIndex(ItemTable.cols.PRICE));
         int itemCount = getInt(getColumnIndex(ItemTable.cols.COUNT));
-        return new Item(itemName, itemPrice, itemCount);
+        int itemTypeNameID = getInt(getColumnIndex(ItemTable.cols.ITEM_TYPE));
+        return new Item(itemName, itemPrice, itemCount, ItemType.typeNamed(itemTypeNameID));
     }
 }

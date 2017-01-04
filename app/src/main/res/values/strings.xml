@@ -26,10 +26,10 @@
     <string name="balance">Balance:</string>
     <string name="allowance">Allowance:</string>
     
-    <string name="Gadgets">Gadgets</string>
-    <string name="Food_Drink">Food &amp; Drink</string>
-    <string name="Misc_Payment">Misc.</string>
-    <string name="Entertainment">Entertainment</string>
-    <string name="No_Type">No Type</string>
-    <string name="School_Supplies">School Supplies</string>
+    <string name="itemType_gadgets">Gadgets</string>
+    <string name="itemType_food_drink">Food &amp; Drink</string>
+    <string name="itemType_misc_payment">Misc.</string>
+    <string name="itemType_entertainment">Entertainment</string>
+    <string name="no_type">No Type</string>
+    <string name="itemType_school_supplies">School Supplies</string>
 </resources>
