@@ -25,11 +25,14 @@
     <string name="desc_increase_count">Increase the item count</string>
     <string name="balance">Balance:</string>
     <string name="allowance">Allowance:</string>
-    
-    <string name="itemType_gadgets">Gadgets</string>
-    <string name="itemType_food_drink">Food &amp; Drink</string>
-    <string name="itemType_misc_payment">Misc.</string>
-    <string name="itemType_entertainment">Entertainment</string>
-    <string name="no_type">No Type</string>
-    <string name="itemType_school_supplies">School Supplies</string>
+
+    <string-array name="itemTypes">
+        <item name="itemType_gadgets">Gadgets</item>
+        <item name="itemType_food_drink">Food &amp; Drink</item>
+        <item name="itemType_misc_payment">Misc.</item>
+        <item name="itemType_entertainment">Entertainment</item>
+        <item name="no_type">No Type</item>
+        <item name="itemType_school_supplies">School Supplies</item>
+    </string-array>
+
 </resources>
