@@ -23,9 +23,9 @@ public class ItemBaseHelper extends SQLiteOpenHelper {
         db.execSQL("create table " + ItemTable.NAME + "(" +
                    " _id integer primary key autoincrement, " +
                    ItemTable.cols.NAME + " TEXT(255), " +
-                   ItemTable.cols.PRICE + " REAL(255), " +
+                   ItemTable.cols.PRICE + " TEXT(255), " +
                    ItemTable.cols.COUNT + " INTEGER(255), " +
-                   ItemTable.cols.TOTAL_PRICE + " REAL(255)), " +
+                   ItemTable.cols.TOTAL_PRICE + " REAL(255), " +
                    ItemTable.cols.ITEM_TYPE + " INTEGER(255));");
     }
 

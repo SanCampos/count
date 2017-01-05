@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.santinocampos.android.count.Database.ItemBaseHelper;
 import com.santinocampos.android.count.Database.ItemCursorWrapper;
 import com.santinocampos.android.count.Database.ItemDbSchema.ItemTable;
+import com.santinocampos.android.count.Utils.DecUtils;
 import com.santinocampos.android.count.Utils.MoneyUtils;
 
 import java.util.ArrayList;
@@ -42,7 +43,7 @@ public class Accountant {
     private static ContentValues getContentValues(Item i) {
         ContentValues values = new ContentValues();
         values.put(ItemTable.cols.NAME, i.getName());
-        values.put(ItemTable.cols.PRICE, i.getPrice());
+        values.put(ItemTable.cols.PRICE, DecUtils.clean(i.getPrice()));
         values.put(ItemTable.cols.COUNT, i.getCount());
         values.put(ItemTable.cols.TOTAL_PRICE, i.getPrice() * i.getCount());
         values.put(ItemTable.cols.ITEM_TYPE, i.getItemType().getItemTypeNameID());
