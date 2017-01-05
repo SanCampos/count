@@ -34,7 +34,7 @@ public class AddMoneyDialog extends AppCompatDialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
        return new AlertDialog.Builder(getActivity())
                         .setView(createView(savedInstanceState))
-                        .setTitle(R.string.title_add_money)
+                        .setTitle(R.string.string_add_money)
                         .setPositiveButton(R.string.btn_addMoney_positive, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

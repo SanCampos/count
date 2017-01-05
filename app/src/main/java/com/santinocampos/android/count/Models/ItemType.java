@@ -7,6 +7,7 @@ import com.santinocampos.android.count.R;
  */
 
 public enum ItemType {
+
     GADGETS(R.drawable.ic_gadget, R.string.itemType_gadgets),
     FOOD_DRINK(R.drawable.ic_food_drink, R.string.itemType_food_drink),
     ENTERTAINMENT(R.drawable.ic_entertainment, R.string.itemType_entertainment),
