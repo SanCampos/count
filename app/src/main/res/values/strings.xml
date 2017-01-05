@@ -1,38 +1,50 @@
 <resources>
     <string name="app_name">Count</string>
-    <string name="label_change">Change:</string>
-    <string name="label_add_item_title">Add an item</string>
+
+
+    <!-- ADDING ITEM DIALOG BOX STRINGS -->
+    <string name="title_add_item">Add an item</string>
+    <string name="label_add_item_name_text_view">Item name</string>
     <string name="button_add_item">ADD ITEM</string>
     <string name="hint_add_item_name">Enter item name</string>
-    <string name="label_add_item_name_text_view">Item name</string>
     <string name="hint_add_item_price">Enter item price</string>
     <string name="label_add_item_price_text_view">Item price</string>
     <string name="label_add_item_amount">Item amount</string>
     <string name="toast_error_adding_item">Your item name or price is invalid!</string>
+
+    <!-- ADDING MONEY DIALOG BOX STRINGS -->
+    <string name="title_add_money">Add money</string>
+    <string name="action_add_money">Add money</string>
     <string name="hint_addMoney">Add money</string>
-    <string name="label_dialog_addMoney">Add money</string>
     <string name="btn_addMoney_positive">ADD</string>
-    <string name="add_money_label">Add money</string>
-    <string name="action_export">Export record</string>
     <string name="dialog_addOrSet">Reset money</string>
-    <string name="toast_error_empty_list">Your list is empty!</string>
-    <string name="toast_success_export">Successfully exported log!</string>
+
+    <!-- Exporting list strings -->
+    <string name="action_export">Export record</string>
     <string name="title_confirm_export">Confirm export</string>
     <string name="message_confirm_export">Are you sure you want to export your item list?</string>
+    <string name="toast_success_export">Successfully exported log!</string>
+
+    <!-- Clearing list strings -->
     <string name="action_clear">Clear list</string>
     <string name="title_confirm_clear">Confirm clearing list</string>
     <string name="message_confirm_clear">Are you sure you want to clear your item list?</string>
+
     <string name="desc_increase_count">Increase the item count</string>
+
+    <string name="toast_error_empty_list">Your list is empty!</string>
+
+    <!-- HEADERS -->
     <string name="balance">Balance:</string>
     <string name="allowance">Allowance:</string>
 
-    <string-array name="itemTypes">
-        <item name="itemType_gadgets">Gadgets</item>
-        <item name="itemType_food_drink">Food &amp; Drink</item>
-        <item name="itemType_misc_payment">Misc.</item>
-        <item name="itemType_entertainment">Entertainment</item>
-        <item name="no_type">No Type</item>
-        <item name="itemType_school_supplies">School Supplies</item>
-    </string-array>
+    <!-- Item Type Names -->
+    <string name="itemType_gadgets">Gadgets</string>
+    <string name="itemType_food_drink">Food &amp; Drink</string>
+    <string name="itemType_misc_payment">Misc.</string>
+    <string name="itemType_entertainment">Entertainment</string>
+    <string name="no_type">No Type</string>
+    <string name="itemType_school_supplies">School Supplies</string>
+
 
 </resources>

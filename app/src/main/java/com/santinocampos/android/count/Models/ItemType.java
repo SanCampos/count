@@ -14,12 +14,12 @@ public enum ItemType {
     NO_TYPE(R.drawable.ic_no_type, R.string.no_type),
     SCHOOL_SUPPLIES(R.drawable.ic_school_supplies, R.string.itemType_school_supplies);
 
-    private int mTypeName;
+    private int mTypeNameID;
     private int mImageID;
 
     ItemType(int imageID, int itemTypeName) {
         this.mImageID = imageID;
-        this.mTypeName = itemTypeName;
+        this.mTypeNameID = itemTypeName;
     }
 
     public static ItemType typeNamed(int typeNameID) {
@@ -34,6 +34,6 @@ public enum ItemType {
     }
 
     public int getItemTypeNameID() {
-        return mTypeName;
+        return mTypeNameID;
     }
 }
