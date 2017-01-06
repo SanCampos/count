@@ -20,6 +20,8 @@ public class AddItemDialog extends AbstractDialog {
     private static final String ITEM_NAME = "itemName";
     private static final String ITEM_PRICE = "itemPrice";
 
+    private static final String TAG = "AddItemDialog";
+
     private EditText mItemNameEditText;
     private EditText mItemPriceEditText;
 
@@ -29,6 +31,10 @@ public class AddItemDialog extends AbstractDialog {
 
     private static final int MIN_ITEM_COUNT = 1;
     private static final int MAX_ITEM_COUNT = 9;
+
+    public AddItemDialog() {
+        super(TAG);
+    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

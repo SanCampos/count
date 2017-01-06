@@ -1,9 +1,7 @@
 package com.santinocampos.android.count.Dialogs;
 
 import android.app.Activity;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatDialogFragment;
-import android.view.View;
 
 import com.santinocampos.android.count.Listeners.DialogListener;
 
@@ -14,6 +12,21 @@ import com.santinocampos.android.count.Listeners.DialogListener;
 public abstract class AbstractDialog extends AppCompatDialogFragment {
 
     protected DialogListener mDialogListener;
+
+    private String TAG;
+
+
+    public AbstractDialog(String s) {
+        setTagString(s);
+    }
+
+    protected void setTagString(String s) {
+        TAG = s;
+    }
+
+    public String getTagString() {
+        return TAG;
+    }
 
     @Override
     public void onAttach(Activity activity) {

@@ -12,6 +12,12 @@ import com.santinocampos.android.count.R;
  */
 public class ConfirmExportDialog extends AbstractDialog {
 
+    private static final String TAG = "ConfirmExportDialog";
+
+    public ConfirmExportDialog() {
+        super(TAG);
+    }
+
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         return new AlertDialog.Builder(getContext())
                               .setTitle(R.string.title_confirm_export)

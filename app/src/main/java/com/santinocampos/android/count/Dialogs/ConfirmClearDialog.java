@@ -12,6 +12,12 @@ import com.santinocampos.android.count.R;
  */
 public class ConfirmClearDialog extends AbstractDialog {
 
+    private static final String TAG = "ConfirmClearDialog";
+
+    public ConfirmClearDialog() {
+        super(TAG);
+    }
+
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         return new AlertDialog.Builder(getActivity())
                               .setTitle(R.string.title_confirm_clear)
