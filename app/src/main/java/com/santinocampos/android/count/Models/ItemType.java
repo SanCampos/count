@@ -1,6 +1,11 @@
 package com.santinocampos.android.count.Models;
 
+import android.content.Context;
+
 import com.santinocampos.android.count.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by thedr on 1/2/2017.
@@ -36,5 +41,14 @@ public enum ItemType {
 
     public int getItemTypeNameID() {
         return mTypeNameID;
+    }
+
+    public static List<String> getItemNameList(Context c) {
+        List<String> nameList = new ArrayList<>();
+
+        for (ItemType i : values())
+            nameList.add(c.getString(i.getItemTypeNameID()));
+
+        return nameList;
     }
 }
