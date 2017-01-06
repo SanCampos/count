@@ -89,12 +89,13 @@
         android:text="@string/label_add_item_amount"/>
 
     <Spinner
+        android:id="@+id/spinner_types"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@id/input_add_item_price"
         android:layout_alignStart="@id/input_add_item_price"
         android:layout_below="@id/input_add_item_price"
-        ></Spinner>
+        />
 
 
 </RelativeLayout>

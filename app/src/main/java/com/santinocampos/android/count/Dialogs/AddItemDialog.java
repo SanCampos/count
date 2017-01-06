@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +22,8 @@ public class AddItemDialog extends AbstractDialog {
     private static final String ITEM_PRICE = "itemPrice";
 
     private static final String TAG = "AddItemDialog";
+
+    private Spinner mSpinner;
 
     private EditText mItemNameEditText;
     private EditText mItemPriceEditText;
@@ -96,6 +99,8 @@ public class AddItemDialog extends AbstractDialog {
                 changeCount(1);
             }
         });
+
+        mSpinner = ((Spinner) v.findViewById(R.id.spinner_types));
 
         checkToHideButton();
         return v;
