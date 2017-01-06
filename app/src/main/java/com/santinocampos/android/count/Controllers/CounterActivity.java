@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.santinocampos.android.count.Adapter.RecyclerViewCursorAdapter;
 import com.santinocampos.android.count.Database.ItemCursorWrapper;
+import com.santinocampos.android.count.Dialogs.AbstractDialog;
 import com.santinocampos.android.count.Dialogs.ConfirmClearDialog;
 import com.santinocampos.android.count.Dialogs.ConfirmExportDialog;
 import com.santinocampos.android.count.Utils.Exporter;
@@ -34,15 +35,9 @@ import java.util.List;
 
 public class CounterActivity extends AppCompatActivity implements DialogListener {
 
-    private final static String DIALOG_ADD_ITEM = "DialogAddItem";
-    private final static String DIALOG_ADD_MONEY = "DialogAddMoney";
-    private static final String DIALOG_EXPORT_LOG = "DialogExportLog";
-    private static final String DIALOG_CLEAR_LIST = "DialogClearList";
-
     private static final String TOTAL_MONEY = "totalMoney";
 
     private static SharedPreferences mPreferences;
-
 
     private TextView mAllowanceTextView;
     private TextView mChangeTextView;
@@ -144,19 +139,11 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         }
     }
 
-    private void startDialog(DialogFragment df) {
-        String tag;
-
-        if (df.getClass() == AddItemDialog.class)
-            tag = DIALOG_ADD_ITEM;
-        else if (df.getClass() == AddMoneyDialog.class)
-            tag = DIALOG_ADD_MONEY;
-        else if (df.getClass() == ConfirmExportDialog.class)
-            tag = DIALOG_EXPORT_LOG;
-        else
-            tag = DIALOG_CLEAR_LIST;
-
-        getSupportFragmentManager().beginTransaction().add(df, tag).commit();
+    private void startDialog(AbstractDialog abstractDialog) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(abstractDialog, abstractDialog.getTagString())
+                .commit();
     }
 
     @Override
@@ -232,11 +219,11 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         updateChange();
     }
 
-    private void checkIfListIsEmptyToStart(DialogFragment df) {
+    private void checkIfListIsEmptyToStart(AbstractDialog abstractDialog) {
         List<Item> list = mAccountant.getItemList();
 
         if (list.size() != 0) {
-            startDialog(df);
+            startDialog(abstractDialog);
         } else Toast.makeText(CounterActivity.this, R.string.toast_error_empty_list, Toast.LENGTH_SHORT).show();
     }
 

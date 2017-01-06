@@ -20,7 +20,7 @@ public abstract class AbstractDialog extends AppCompatDialogFragment {
         setTagString(s);
     }
 
-    protected void setTagString(String s) {
+    private void setTagString(String s) {
         TAG = s;
     }
 
