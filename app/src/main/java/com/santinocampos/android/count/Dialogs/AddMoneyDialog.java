@@ -1,39 +1,28 @@
 package com.santinocampos.android.count.Dialogs;
 
-import android.app.Activity;
 import android.support.v7.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatDialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
-import com.santinocampos.android.count.Listeners.DialogListener;
 import com.santinocampos.android.count.R;
 
 /**
  * Created by thedr on 11/16/2016.
  */
-public class AddMoneyDialog extends AppCompatDialogFragment {
+public class AddMoneyDialog extends AbstractDialog {
 
-    private DialogListener mDialogListener;
     private EditText mAddMoneyEditText;
     private CheckBox mCheckBox;
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        mDialogListener = (DialogListener) activity;
-    }
-
-
-    @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
        return new AlertDialog.Builder(getActivity())
-                        .setView(createView(savedInstanceState))
+                        .setView(onCreateView(savedInstanceState))
                         .setTitle(R.string.string_add_money)
                         .setPositiveButton(R.string.btn_addMoney_positive, new DialogInterface.OnClickListener() {
                             @Override
@@ -50,7 +39,7 @@ public class AddMoneyDialog extends AppCompatDialogFragment {
                         .create();
     }
 
-    private View createView(Bundle savedInstanceState) {
+    private View onCreateView(Bundle savedInstanceState) {
         View v = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_add_money, null);
         mAddMoneyEditText = (EditText) v.findViewById(R.id.editText_addMoney);
         mCheckBox = (CheckBox) v.findViewById(R.id.checkBox_AddMoney);

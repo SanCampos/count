@@ -1,11 +1,9 @@
 package com.santinocampos.android.count.Dialogs;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatDialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -14,11 +12,10 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.santinocampos.android.count.Listeners.DialogListener;
 import com.santinocampos.android.count.Models.Item;
 import com.santinocampos.android.count.R;
 
-public class AddItemDialog extends AppCompatDialogFragment {
+public class AddItemDialog extends AbstractDialog {
     private static final String ITEM_COUNT = "itemCount";
     private static final String ITEM_NAME = "itemName";
     private static final String ITEM_PRICE = "itemPrice";
@@ -33,18 +30,10 @@ public class AddItemDialog extends AppCompatDialogFragment {
     private static final int MIN_ITEM_COUNT = 1;
     private static final int MAX_ITEM_COUNT = 9;
 
-    DialogListener mDialogListener;
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        mDialogListener = (DialogListener) activity;
-    }
-
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         final AlertDialog dialog = new AlertDialog.Builder(getActivity())
-                            .setView(createView(savedInstanceState))
+                            .setView(onCreateView(savedInstanceState))
                             .setTitle(R.string.title_add_item)
                             .setNegativeButton(android.R.string.cancel, null)
                             .setPositiveButton(R.string.button_add_item, null)
@@ -73,7 +62,7 @@ public class AddItemDialog extends AppCompatDialogFragment {
         return dialog;
     }
 
-    private View createView(Bundle savedInstanceState) {
+    private View onCreateView(Bundle savedInstanceState) {
         View v = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_add_item, null);
 
         mItemNameEditText = (EditText) v.findViewById(R.id.input_add_item_name);
