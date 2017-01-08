@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.santinocampos.android.count.Models.Item;
+import com.santinocampos.android.count.Models.ItemType;
 import com.santinocampos.android.count.R;
 
 public class AddItemDialog extends AbstractDialog {
@@ -101,6 +103,12 @@ public class AddItemDialog extends AbstractDialog {
         });
 
         mSpinner = ((Spinner) v.findViewById(R.id.spinner_types));
+
+        ArrayAdapter<String> stringAdapter = new ArrayAdapter<>(getContext(),
+                R.layout.support_simple_spinner_dropdown_item, ItemType.getItemNameList(getContext()));
+        stringAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+
+        mSpinner.setAdapter(stringAdapter);
 
         checkToHideButton();
         return v;
