@@ -42,6 +42,14 @@
         android:textSize="12sp"
         tools:text="x2"/>
 
+    <ImageView
+        android:id="@+id/itemType_imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/item_name_textView"
+        android:layout_alignBottom="@id/item_count_textView"
+        tools:src="@drawable/ic_arrow_left"/>
+
     <TextView
         android:id="@+id/item_initialPrice_textView"
         android:layout_width="wrap_content"

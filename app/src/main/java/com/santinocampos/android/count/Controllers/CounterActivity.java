@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -92,6 +93,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         private TextView mItemInitialPriceTextView;
         private TextView mItemTotalPriceTextView;
         private TextView mItemCountTextView;
+        private ImageView mItemTypeImageView;
 
         /**
          * HACKY V1 OF NEW ITEM VIEW, NOT FOR PRODUCTION
@@ -102,6 +104,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
             mItemCountTextView = (TextView) itemView.findViewById(R.id.item_count_textView);
             mItemInitialPriceTextView = (TextView) itemView.findViewById(R.id.item_initialPrice_textView);
             mItemTotalPriceTextView = (TextView) itemView.findViewById(R.id.item_totalPrice_textView);
+            mItemTypeImageView = (ImageView) itemView.findViewById(R.id.itemType_imageView);
         }
 
         public void bindItem(Item item) {
@@ -109,6 +112,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
             mItemCountTextView.setText("x" + Accountant.countOf(item));
             mItemInitialPriceTextView.setText(Accountant.individualPriceOf(item));
             mItemTotalPriceTextView.setText(Accountant.totalPriceOf(item));
+            mItemTypeImageView.setImageDrawable(getDrawable(item.getItemType().getImageID()));
         }
 
         public String getItemName()  {
