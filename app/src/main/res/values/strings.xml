@@ -10,6 +10,7 @@
     <string name="hint_add_item_price">Enter item price</string>
     <string name="label_add_item_price_text_view">Item price</string>
     <string name="label_add_item_amount">Item amount</string>
+    <string name="label_add_itemType">Item type</string>
     <string name="toast_error_adding_item">Your item name or price is invalid!</string>
 
     <!-- ADDING MONEY DIALOG BOX STRINGS -->
@@ -43,6 +44,5 @@
     <string name="itemType_entertainment">Entertainment</string>
     <string name="no_type">No Type</string>
     <string name="itemType_school_supplies">School Supplies</string>
-
 
 </resources>
