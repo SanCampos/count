@@ -14,8 +14,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.santinocampos.android.count.ItemType.ItemTypeAdapter;
 import com.santinocampos.android.count.Models.Item;
-import com.santinocampos.android.count.Models.ItemType;
+import com.santinocampos.android.count.ItemType.ItemType;
 import com.santinocampos.android.count.R;
 
 public class AddItemDialog extends AbstractDialog {
@@ -65,8 +66,7 @@ public class AddItemDialog extends AbstractDialog {
                         else {
                             mDialogListener.addItem(new Item(itemName,
                                                     Double.parseDouble(itemPrice),
-                                                    itemCount, ItemType.typeNamed(getResources()
-                                                                       .getIdentifier(mSpinner.getSelectedItem().toString(), "string", getContext().getPackageName()))));
+                                                    itemCount, (ItemType) mSpinner.getSelectedItem()));
                             dismiss();
                         }
                     }
@@ -107,11 +107,11 @@ public class AddItemDialog extends AbstractDialog {
 
         mSpinner = ((Spinner) v.findViewById(R.id.spinner_types));
 
-        ArrayAdapter<String> stringAdapter = new ArrayAdapter<>(getContext(),
-                R.layout.support_simple_spinner_dropdown_item, ItemType.getItemNameList(getContext()));
-        stringAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        ItemTypeAdapter itemTypeAdapter = new ItemTypeAdapter(getContext(),
+                R.layout.support_simple_spinner_dropdown_item, ItemType.values());
+        itemTypeAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
 
-        mSpinner.setAdapter(stringAdapter);
+        mSpinner.setAdapter(itemTypeAdapter);
 
         checkToHideButton();
         return v;

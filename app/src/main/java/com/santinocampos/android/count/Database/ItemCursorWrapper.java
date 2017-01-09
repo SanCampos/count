@@ -5,7 +5,7 @@ import android.database.CursorWrapper;
 
 import com.santinocampos.android.count.Database.ItemDbSchema.ItemTable;
 import com.santinocampos.android.count.Models.Item;
-import com.santinocampos.android.count.Models.ItemType;
+import com.santinocampos.android.count.ItemType.ItemType;
 
 /**
  * Created by thedr on 12/25/2016.

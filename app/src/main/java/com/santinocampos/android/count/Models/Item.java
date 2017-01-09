@@ -1,7 +1,7 @@
 package com.santinocampos.android.count.Models;
 
 
-import java.util.UUID;
+import com.santinocampos.android.count.ItemType.ItemType;
 
 /**
  * Created by thedr on 11/1/2016.
