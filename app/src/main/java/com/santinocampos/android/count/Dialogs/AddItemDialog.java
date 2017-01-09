@@ -63,7 +63,10 @@ public class AddItemDialog extends AbstractDialog {
                         if (itemCount == 0 || itemName.length() == 0 || itemPrice.length() == 0)
                             Toast.makeText(getActivity(), R.string.toast_error_adding_item, Toast.LENGTH_SHORT).show();
                         else {
-                            mDialogListener.addItem(new Item(itemName, Double.parseDouble(itemPrice), itemCount));
+                            mDialogListener.addItem(new Item(itemName,
+                                                    Double.parseDouble(itemPrice),
+                                                    itemCount, ItemType.typeNamed(getResources()
+                                                                       .getIdentifier(mSpinner.getSelectedItem().toString(), "string", getContext().getPackageName()))));
                             dismiss();
                         }
                     }
