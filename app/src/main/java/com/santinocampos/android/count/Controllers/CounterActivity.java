@@ -1,5 +1,6 @@
 package com.santinocampos.android.count.Controllers;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.preference.PreferenceManager;
@@ -212,8 +213,16 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
             case R.id.action_export : checkIfListIsEmptyToStart(new ConfirmExportDialog());
                 break;
             case R.id.action_clear : checkIfListIsEmptyToStart(new ConfirmClearDialog());
+                break;
+            case R.id.action_settings : //sendSettingsIntent()
+                break;
         }
         return true;
+    }
+
+    public void sendSettingsIntent() {
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
     }
 
     @Override
