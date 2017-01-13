@@ -1,6 +1,14 @@
 <resources>
     <string name="app_name">Count</string>
 
+    <!-- HEADERS -->
+    <string name="balance">Balance:</string>
+    <string name="allowance">Allowance:</string>
+
+    <!-- Overflow menu actions -->
+    <string name="action_clear">Clear list</string>
+    <string name="action_export">Export record</string>
+    <string name="action_settings">Settings</string>
 
     <!-- ADDING ITEM DIALOG BOX STRINGS -->
     <string name="title_add_item">Add an item</string>
@@ -18,26 +26,19 @@
     <string name="btn_addMoney_positive">ADD</string>
     <string name="dialog_addOrSet">Reset money</string>
 
-    <!-- Exporting list strings -->
-    <string name="action_export">Export record</string>
+    <!-- Exporting LIST DIALOG strings -->
     <string name="title_confirm_export">Confirm export</string>
     <string name="message_confirm_export">Are you sure you want to export your item list?</string>
     <string name="toast_success_export">Successfully exported log!</string>
 
-    <!-- Clearing list strings -->
-    <string name="action_clear">Clear list</string>
+    <!-- Clearing LIST DIALOG strings -->
     <string name="title_confirm_clear">Confirm clearing list</string>
     <string name="message_confirm_clear">Are you sure you want to clear your item list?</string>
 
-    <string name="desc_increase_count">Increase the item count</string>
-
+    <!-- Toasts -->
     <string name="toast_error_empty_list">Your list is empty!</string>
 
-    <!-- HEADERS -->
-    <string name="balance">Balance:</string>
-    <string name="allowance">Allowance:</string>
-
-    <!-- Item Type Names -->
+    <!-- Item Type Enum Names -->
     <string name="itemType_gadgets">Gadgets</string>
     <string name="itemType_food_drink">Food &amp; Drink</string>
     <string name="itemType_misc_payment">Misc.</string>
