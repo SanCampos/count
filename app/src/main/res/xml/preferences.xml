@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <CheckBoxPreference
-        android:title="@string/preference_phoneNumber"
+    <com.santinocampos.android.count.Settings.OptionDialogPreference
+        android:key="@string/preference_phoneNo"
+        android:dialogIcon="@android:drawable/ic_dialog_alert"
+        android:title="Reset Quests"
+        android:summary="Reset all quest-progress."
+        android:dialogMessage="Are you sure you wish to reset your quest progress? This action cannot be undone!"
+        android:positiveButtonText="Clear Quests"
+        android:negativeButtonText="Cancel"
         />
 
 </PreferenceScreen>

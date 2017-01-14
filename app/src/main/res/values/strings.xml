@@ -49,4 +49,6 @@
     <string name="string_add_phone_number">Add phone number</string>
     <string name="settings_title">Settings</string>
 
+    <!-- Preference Keys -->
+    <string name="preference_phoneNo">key_change_phoneNo</string>
 </resources>

@@ -13,6 +13,8 @@ import com.santinocampos.android.count.R;
 
 public class SettingsActivity extends AppCompatActivity {
 
+    public static final String PHONE_NUMBER_KEY = "PHONE_NUMBER";
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
