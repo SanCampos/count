@@ -45,5 +45,8 @@
     <string name="itemType_entertainment">Entertainment</string>
     <string name="no_type">No Type</string>
     <string name="itemType_school_supplies">School Supplies</string>
+    <string name="preference_phoneNumber">Phone number</string>
+    <string name="string_add_phone_number">Add phone number</string>
+    <string name="settings_title">Settings</string>
 
 </resources>

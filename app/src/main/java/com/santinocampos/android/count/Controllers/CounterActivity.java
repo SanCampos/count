@@ -5,8 +5,8 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.DialogFragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,6 +25,8 @@ import com.santinocampos.android.count.Database.ItemCursorWrapper;
 import com.santinocampos.android.count.Dialogs.AbstractDialog;
 import com.santinocampos.android.count.Dialogs.ConfirmClearDialog;
 import com.santinocampos.android.count.Dialogs.ConfirmExportDialog;
+import com.santinocampos.android.count.Settings.SettingsActivity;
+import com.santinocampos.android.count.Settings.SettingsFragment;
 import com.santinocampos.android.count.Utils.Exporter;
 import com.santinocampos.android.count.Listeners.DialogListener;
 import com.santinocampos.android.count.Models.Accountant;
@@ -144,13 +146,6 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         }
     }
 
-    private void startDialog(AbstractDialog abstractDialog) {
-        getSupportFragmentManager()
-                .beginTransaction()
-                .add(abstractDialog, abstractDialog.getTagString())
-                .commit();
-    }
-
     @Override
     public void addItem(Item item) {
         mAccountant.addItem(item);
@@ -214,15 +209,22 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
                 break;
             case R.id.action_clear : checkIfListIsEmptyToStart(new ConfirmClearDialog());
                 break;
-            case R.id.action_settings : //sendSettingsIntent()
+            case R.id.action_settings : startSettings();
                 break;
         }
         return true;
     }
 
-    public void sendSettingsIntent() {
+    public void startSettings() {
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
+    }
+
+    private void startDialog(AbstractDialog abstractDialog) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(abstractDialog, abstractDialog.getTagString())
+                .commit();
     }
 
     @Override
