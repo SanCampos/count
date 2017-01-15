@@ -25,8 +25,6 @@ import com.santinocampos.android.count.Database.ItemCursorWrapper;
 import com.santinocampos.android.count.Dialogs.AbstractDialog;
 import com.santinocampos.android.count.Dialogs.ConfirmClearDialog;
 import com.santinocampos.android.count.Dialogs.ConfirmExportDialog;
-import com.santinocampos.android.count.Settings.SettingsActivity;
-import com.santinocampos.android.count.Settings.SettingsFragment;
 import com.santinocampos.android.count.Utils.Exporter;
 import com.santinocampos.android.count.Listeners.DialogListener;
 import com.santinocampos.android.count.Models.Accountant;
@@ -209,16 +207,17 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
                 break;
             case R.id.action_clear : checkIfListIsEmptyToStart(new ConfirmClearDialog());
                 break;
-            case R.id.action_settings : startSettings();
+            case R.id.action_settings : //startSettings();
                 break;
         }
         return true;
     }
 
+    /**
     public void startSettings() {
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
-    }
+    } **/
 
     private void startDialog(AbstractDialog abstractDialog) {
         getSupportFragmentManager()
