@@ -1,11 +1,13 @@
 package com.santinocampos.android.count.Utils;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.telephony.SmsManager;
 
 import com.santinocampos.android.count.Models.Accountant;
 import com.santinocampos.android.count.Models.Item;
+import com.santinocampos.android.count.Settings.SettingsActivity;
 
 import java.util.List;
 
@@ -15,8 +17,10 @@ import java.util.List;
 public class Exporter {
 
     public static void exportItemList(List<Item> list, Context context) {
+        SharedPreferences preferences = context.getSharedPreferences("prefsKey", 0);
+        String phoneNo = preferences.getString(SettingsActivity.KEY_PHONE_NO, "");
         SmsManager.getDefault()
-                  .sendTextMessage("<INSERT CELLPHONE NUMBER HERE>", null, createItemList(list, Accountant.get(context)), null, null);
+                  .sendTextMessage(phoneNo, null, createItemList(list, Accountant.get(context)), null, null);
     }
 
     @NonNull
