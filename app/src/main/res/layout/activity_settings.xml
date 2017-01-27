@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorToolBar"
+        android:title="@string/settings_title"
         android:elevation="4dp"
         app:theme="@style/AppTheme.PopupOverlay"/>
 

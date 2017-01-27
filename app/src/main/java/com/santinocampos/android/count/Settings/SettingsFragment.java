@@ -14,14 +14,31 @@ import com.santinocampos.android.count.R;
 public class SettingsFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     @Override
+    public void onResume() {
+        super.onResume();
+        getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onResume();
+        getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
     public void onCreatePreferences(Bundle bundle, String s) {
         addPreferencesFromResource(R.xml.preferences);
+    }
+
+    private void updateSummaries() {
+        EditTextPreference pref = ((EditTextPreference) findPreference(getString(R.string.key_phoneNo)));
+        pref.setSummary(getPreferenceManager().getSharedPreferences().getString(SettingsActivity.KEY_PHONE_NO, ""));
     }
 
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if (key.equals(R.string.key_phoneNo)) {
+        if (key.equals(getContext().getString(R.string.key_phoneNo))) {
             EditTextPreference phoneNoPref = (EditTextPreference) findPreference(key);
             String phoneNo = phoneNoPref.getText();
             phoneNoPref.setSummary(phoneNo);

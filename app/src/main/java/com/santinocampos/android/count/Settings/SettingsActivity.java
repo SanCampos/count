@@ -6,21 +6,19 @@ import android.support.v7.widget.Toolbar;
 
 import com.santinocampos.android.count.R;
 
-
 /**
- * Created by thedr on 1/14/2017.
+ * Created by thedr on 1/15/2017.
  */
 
 public class SettingsActivity extends AppCompatActivity {
 
-    public static final String PHONE_NUMBER_KEY = "PHONE_NUMBER";
+    public static final String KEY_PHONE_NO = "KEY_PHONE_NO";
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        Toolbar toolbar = ((Toolbar) findViewById(R.id.toolbar_settings));
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_settings);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(R.string.settings_title);
     }
 }

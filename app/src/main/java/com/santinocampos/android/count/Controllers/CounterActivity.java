@@ -25,6 +25,7 @@ import com.santinocampos.android.count.Database.ItemCursorWrapper;
 import com.santinocampos.android.count.Dialogs.AbstractDialog;
 import com.santinocampos.android.count.Dialogs.ConfirmClearDialog;
 import com.santinocampos.android.count.Dialogs.ConfirmExportDialog;
+import com.santinocampos.android.count.Settings.SettingsActivity;
 import com.santinocampos.android.count.Utils.Exporter;
 import com.santinocampos.android.count.Listeners.DialogListener;
 import com.santinocampos.android.count.Models.Accountant;
@@ -38,6 +39,7 @@ import java.util.List;
 public class CounterActivity extends AppCompatActivity implements DialogListener {
 
     private static final String TOTAL_MONEY = "totalMoney";
+    private static final String PREFS_KEY = "prefsKey";
 
     private static SharedPreferences mPreferences;
 
@@ -64,7 +66,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mPreferences = getSharedPreferences(PREFS_KEY, 0);
 
         addMoney(Double.longBitsToDouble(mPreferences.getLong(TOTAL_MONEY, 0)), true);
 
@@ -84,9 +86,9 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     protected void onPause() {
         super.onPause();
 
-        SharedPreferences.Editor editor = mPreferences.edit();
-        editor.putLong(TOTAL_MONEY, Double.doubleToRawLongBits(mAccountant.getTotalMoney()));
-        editor.apply();
+        mPreferences.edit()
+                    .putLong(TOTAL_MONEY, Double.doubleToLongBits(mAccountant.getTotalMoney()))
+                    .apply();
     }
 
     private class ItemHolder extends RecyclerView.ViewHolder {
@@ -207,17 +209,17 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
                 break;
             case R.id.action_clear : checkIfListIsEmptyToStart(new ConfirmClearDialog());
                 break;
-            case R.id.action_settings : //startSettings();
+            case R.id.action_settings : startSettings();
                 break;
         }
         return true;
     }
 
-    /**
+
     public void startSettings() {
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
-    } **/
+    }
 
     private void startDialog(AbstractDialog abstractDialog) {
         getSupportFragmentManager()
