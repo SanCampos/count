@@ -49,6 +49,9 @@
     <string name="string_add_phone_number">Add phone number</string>
     <string name="settings_title">Settings</string>
 
+    <!-- Preference Category Titles-->
+    <string name="prefCategory1_title">Texting</string>
+
     <!-- Preference Titles -->
     <string name="prefTitle_phoneNo">Phone Number</string>
 

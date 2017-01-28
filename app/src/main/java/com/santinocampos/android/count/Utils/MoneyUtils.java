@@ -5,10 +5,10 @@ package com.santinocampos.android.count.Utils;
  */
 public class MoneyUtils {
 
-    public static char PESO = 'P';
-    public static char DOLLAR = '$';
+    private static char PESO = 'P';
+    private static char DOLLAR = '$';
 
-    public static char CURRENT_CURRENCY = PESO;
+    private static char CURRENT_CURRENCY = PESO;
 
     public static String prep(double money) {
         return DecUtils.clean(money) + CURRENT_CURRENCY;
