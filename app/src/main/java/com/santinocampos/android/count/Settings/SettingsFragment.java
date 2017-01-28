@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.preference.EditTextPreference;
 import android.support.v7.preference.PreferenceFragmentCompat;
+import android.support.v7.preference.PreferenceManager;
 
 import com.santinocampos.android.count.R;
 
@@ -16,7 +17,6 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     @Override
     public void onResume() {
         super.onResume();
-        updateSummaries();
         getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
     }
 
@@ -34,7 +34,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
 
     private void updateSummaries() {
         EditTextPreference pref = ((EditTextPreference) findPreference(getString(R.string.key_phoneNo)));
-        pref.setSummary(getContext().getSharedPreferences("keyPrefs", 0).getString(SettingsActivity.KEY_PHONE_NO, ""));
+        pref.setSummary(PreferenceManager.getDefaultSharedPreferences(getContext()).getString(getString(R.string.keyValue_phoneNo), ""));
     }
 
 
@@ -44,7 +44,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
             EditTextPreference phoneNoPref = (EditTextPreference) findPreference(key);
             String phoneNo = phoneNoPref.getText();
             phoneNoPref.setSummary(phoneNo);
-            sharedPreferences.edit().putString(phoneNo, SettingsActivity.KEY_PHONE_NO).apply();
+            sharedPreferences.edit().putString(getString(R.string.keyValue_phoneNo), phoneNo).apply();
         }
     }
 }

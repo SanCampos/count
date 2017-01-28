@@ -2,11 +2,13 @@ package com.santinocampos.android.count.Utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.telephony.SmsManager;
 
 import com.santinocampos.android.count.Models.Accountant;
 import com.santinocampos.android.count.Models.Item;
+import com.santinocampos.android.count.R;
 import com.santinocampos.android.count.Settings.SettingsActivity;
 
 import java.util.List;
@@ -17,8 +19,8 @@ import java.util.List;
 public class Exporter {
 
     public static void exportItemList(List<Item> list, Context context) {
-        SharedPreferences preferences = context.getSharedPreferences("prefsKey", 0);
-        String phoneNo = preferences.getString(SettingsActivity.KEY_PHONE_NO, "");
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        String phoneNo = preferences.getString(context.getString(R.string.keyValue_phoneNo), "");
         SmsManager.getDefault()
                   .sendTextMessage(phoneNo, null, createItemList(list, Accountant.get(context)), null, null);
     }
@@ -38,6 +40,7 @@ public class Exporter {
                     .append(Accountant.totalPriceOf(i))
                     .append("\n\n");
 
-        return output.append("Change left: ").append(accountant.getChange()).toString();
+        output.append(R.string.text_change_left).append(accountant.getChange());
+        return output.toString();
     }
 }

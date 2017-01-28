@@ -39,7 +39,6 @@ import java.util.List;
 public class CounterActivity extends AppCompatActivity implements DialogListener {
 
     private static final String TOTAL_MONEY = "totalMoney";
-    private static final String PREFS_KEY = "prefsKey";
 
     private static SharedPreferences mPreferences;
 
@@ -66,7 +65,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        mPreferences = getSharedPreferences(PREFS_KEY, 0);
+        mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         addMoney(Double.longBitsToDouble(mPreferences.getLong(TOTAL_MONEY, 0)), true);
 
@@ -85,10 +84,9 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     @Override
     protected void onPause() {
         super.onPause();
-
         mPreferences.edit()
                     .putLong(TOTAL_MONEY, Double.doubleToLongBits(mAccountant.getTotalMoney()))
-                .apply();
+                    .apply();
     }
 
     private class ItemHolder extends RecyclerView.ViewHolder {
