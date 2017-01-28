@@ -16,6 +16,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     @Override
     public void onResume() {
         super.onResume();
+        updateSummaries();
         getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
     }
 
@@ -28,11 +29,12 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     @Override
     public void onCreatePreferences(Bundle bundle, String s) {
         addPreferencesFromResource(R.xml.preferences);
+        updateSummaries();
     }
 
     private void updateSummaries() {
         EditTextPreference pref = ((EditTextPreference) findPreference(getString(R.string.key_phoneNo)));
-        pref.setSummary(getPreferenceManager().getSharedPreferences().getString(SettingsActivity.KEY_PHONE_NO, ""));
+        pref.setSummary(getContext().getSharedPreferences("keyPrefs", 0).getString(SettingsActivity.KEY_PHONE_NO, ""));
     }
 
 

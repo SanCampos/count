@@ -54,4 +54,7 @@
 
     <!-- Preference Keys -->
     <string name="key_phoneNo">key_change_phoneNo</string>
+
+    <!-- Shared Preferences Key -->
+    <string name="SHARED_PREFERENCE_MAIN">keyPrefs</string>
 </resources>

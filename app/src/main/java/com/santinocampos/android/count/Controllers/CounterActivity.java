@@ -88,7 +88,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
 
         mPreferences.edit()
                     .putLong(TOTAL_MONEY, Double.doubleToLongBits(mAccountant.getTotalMoney()))
-                    .apply();
+                .apply();
     }
 
     private class ItemHolder extends RecyclerView.ViewHolder {
