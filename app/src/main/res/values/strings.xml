@@ -51,6 +51,7 @@
 
     <!-- Preference Category Titles-->
     <string name="prefCategory1_title">Texting</string>
+    <string name="prefCategory2_title">Currency</string>
 
     <!-- Preference Titles -->
     <string name="prefTitle_phoneNo">Phone Number</string>
