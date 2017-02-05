@@ -25,6 +25,24 @@ public enum Currency {
         return symbol;
     }
 
+    public static String[] currencyEntries() {
+        String[] entries = new String[values().length];
+
+        for (int i = 0; i < values().length; i++)
+            entries[i] = values()[i].toString();
+
+        return entries;
+    }
+
+    public static String[] currencyValues() {
+        String[] entryValues = new String[values().length];
+
+        for (int i = 0; i < values().length; i++)
+            entryValues[i] = String.valueOf(i);
+
+        return entryValues;
+    }
+
     public String toString() {
         return name + " (" + symbol + ")";
     }

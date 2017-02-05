@@ -15,7 +15,9 @@
         android:title="@string/prefCategory2_title">
 
         <android.support.v7.preference.ListPreference
-            />
+            android:key="@string/key_currency"
+            android:title="Current Currency"/>
+
     </android.support.v7.preference.PreferenceCategory>
 
 </android.support.v7.preference.PreferenceScreen>
