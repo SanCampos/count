@@ -33,7 +33,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     }
 
     private void updateSummaries() {
-        EditTextPreference pref = ((EditTextPreference) findPreference(getString(R.string.key_phoneNo)));
+        EditTextPreference pref = ((EditTextPreference) findPreference(getContext().getString(R.string.key_phoneNo)));
         pref.setSummary(PreferenceManager.getDefaultSharedPreferences(getContext()).getString(getString(R.string.keyValue_phoneNo), ""));
     }
 
@@ -44,7 +44,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
             EditTextPreference phoneNoPref = (EditTextPreference) findPreference(key);
             String phoneNo = phoneNoPref.getText();
             phoneNoPref.setSummary(phoneNo);
-            sharedPreferences.edit().putString(getString(R.string.keyValue_phoneNo), phoneNo).apply();
+            sharedPreferences.edit().putString(getContext().getString(R.string.keyValue_phoneNo), phoneNo).apply();
         }
     }
 }

@@ -40,15 +40,15 @@ public class ItemTypeAdapter extends ArrayAdapter<ItemType> {
     }
 
     private View initView(int position, View convertView, ViewGroup parent) {
-        View row = convertView;
-        if (row == null) {
+        View view = convertView;
+        if (view == null)  {
             LayoutInflater inflater = LayoutInflater.from(mContext);
-            row = inflater.inflate(R.layout.support_simple_spinner_dropdown_item, parent, false);
+            view = inflater.inflate(R.layout.support_simple_spinner_dropdown_item, parent, false);
         }
-        ItemType it = mItemTypes[position];
-        String name = mContext.getString(it.getItemTypeNameID());
-        TextView itemTypeName = (TextView) row.findViewById(android.R.id.text1);
-        itemTypeName.setText(name);
-        return row;
+        ItemType itemType = mItemTypes[position];
+        String typeName = mContext.getString(itemType.getItemTypeNameID());
+        TextView textView = (TextView) view.findViewById(android.R.id.text1);
+        textView.setText(typeName);
+        return view;
     }
 }

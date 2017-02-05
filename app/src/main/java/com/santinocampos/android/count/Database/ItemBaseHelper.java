@@ -31,23 +31,6 @@ public class ItemBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if (oldVersion == 1) {
-             String tableColumns =
-                    ItemTable.cols.NAME + ", " +
-                    ItemTable.cols.PRICE + ", " +
-                    ItemTable.cols.COUNT + ", " +
-                    ItemTable.cols.TOTAL_PRICE;
-            if (newVersion == 2) {
-                db.execSQL("ALTER TABLE " + ItemTable.NAME + " RENAME TO tempOldTable");
 
-                onCreate(db);
-                db.execSQL("INSERT INTO " + ItemTable.NAME + "(" + tableColumns + ") SELECT " +
-                           tableColumns + " FROM tempOldTable " + ";" );
-                db.execSQL("UPDATE " + ItemTable.NAME + " SET " + ItemTable.cols.ITEM_TYPE +
-                           " = '" + ItemType.NO_TYPE.getItemTypeNameID() + "' WHERE " + ItemTable.cols.ITEM_TYPE +
-                           " = NULL;");
-                db.execSQL("DROP TABLE tempOldTable");
-            }
-        }
     }
 }
