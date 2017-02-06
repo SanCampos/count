@@ -33,11 +33,11 @@ public class Exporter {
             output.append(i.getName())
                     .append(" - ")                             //
                     .append("(")
-                    .append(Accountant.countOf(i))
+                    .append(accountant.countOf(i))
                     .append("x) ")
-                    .append(Accountant.individualPriceOf(i))
+                    .append(accountant.individualPriceOf(i))
                     .append("\n")
-                    .append(Accountant.totalPriceOf(i))
+                    .append(accountant.totalPriceOf(i))
                     .append("\n\n");
 
         output.append(R.string.text_change_left).append(accountant.getChange());

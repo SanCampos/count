@@ -93,7 +93,7 @@ public class Accountant {
     }
 
     public String getTotalMoneyInformation() {
-        return MoneyUtils.prep(mTotalMoney);
+        return MoneyUtils.prep(mTotalMoney, mContext);
     }
 
     public List<Item> getItemList() {
@@ -106,7 +106,7 @@ public class Accountant {
         for (Item item : mItemList)
             cost += item.getPrice() * item.getCount();
 
-        return MoneyUtils.prep(mTotalMoney - cost);
+        return MoneyUtils.prep(mTotalMoney - cost, mContext);
     }
 
      private void updateItemList() {
@@ -129,15 +129,15 @@ public class Accountant {
         return new ItemCursorWrapper(cursor);
     }
 
-    public static String individualPriceOf(Item i) {
-        return MoneyUtils.prep(i.getPrice());
+    public String individualPriceOf(Item i) {
+        return MoneyUtils.prep(i.getPrice(), mContext);
     }
 
-    public static String totalPriceOf(Item i) {
-       return MoneyUtils.prep(i.getCount() * i.getPrice());
+    public String totalPriceOf(Item i) {
+       return MoneyUtils.prep(i.getCount() * i.getPrice(), mContext);
     }
 
-    public static String countOf(Item i) {
+    public String countOf(Item i) {
        return String.valueOf(i.getCount());
     }
 

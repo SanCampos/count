@@ -110,9 +110,9 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
 
         public void bindItem(Item item) {
             mItemNameTextView.setText(item.getName());
-            mItemCountTextView.setText("x" + Accountant.countOf(item));
-            mItemInitialPriceTextView.setText(Accountant.individualPriceOf(item));
-            mItemTotalPriceTextView.setText(Accountant.totalPriceOf(item));
+            mItemCountTextView.setText("x" + mAccountant.countOf(item));
+            mItemInitialPriceTextView.setText(mAccountant.individualPriceOf(item));
+            mItemTotalPriceTextView.setText(mAccountant.totalPriceOf(item));
             mItemTypeImageView.setImageDrawable(getDrawable(item.getItemType().getImageID()));
         }
 
