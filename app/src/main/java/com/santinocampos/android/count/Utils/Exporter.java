@@ -20,7 +20,7 @@ public class Exporter {
 
     public static void exportItemList(List<Item> list, Context context) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        String phoneNo = preferences.getString(context.getString(R.string.keyValue_phoneNo), "");
+        String phoneNo = preferences.getString("KEY_PHONE_NO", "");
         SmsManager.getDefault()
                   .sendTextMessage(phoneNo, null, createItemList(list, Accountant.get(context)), null, null);
     }
