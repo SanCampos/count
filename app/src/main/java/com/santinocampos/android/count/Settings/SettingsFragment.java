@@ -60,11 +60,11 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
             EditTextPreference phoneNoPref = (EditTextPreference) findPreference(key);
             String phoneNo = phoneNoPref.getText();
             phoneNoPref.setSummary(phoneNo);
-            sharedPreferences.edit().putString(getContext().getString(R.string.keyValue_phoneNo), phoneNo).apply();
+            sharedPreferences.edit().putString("KEY_PHONE_NO", phoneNo).apply();
         } else if (key.equals("key_change_currency")) {
             ListPreference listPreference =  (ListPreference) findPreference(key);
             listPreference.setSummary(Currency.values()[Integer.parseInt(listPreference.getValue())].getName());
-            sharedPreferences.edit().putInt(listPreference.getValue(), R.string.keyValue_currency).apply();
+            sharedPreferences.edit().putInt("KEY_CURRENCY", Integer.parseInt(listPreference.getValue())).apply();
         }
     }
 }
