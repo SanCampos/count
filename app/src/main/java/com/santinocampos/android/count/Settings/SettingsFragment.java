@@ -38,7 +38,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     }
 
     private void initListPreference() {
-        ListPreference listPreference = ((ListPreference) findPreference(getContext().getString(R.string.key_currency)));
+        ListPreference listPreference = ((ListPreference) findPreference("key_change_currency"));
         listPreference.setEntries(Currency.currencyEntries());
         listPreference.setEntryValues(Currency.currencyValues());
 
@@ -47,18 +47,21 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     }
 
     private void updateSummaries() {
-        EditTextPreference pref = ((EditTextPreference) findPreference(getContext().getString(R.string.key_phoneNo)));
-        pref.setSummary(PreferenceManager.getDefaultSharedPreferences(getContext()).getString(getString(R.string.keyValue_phoneNo), ""));
+        EditTextPreference pref = ((EditTextPreference) findPreference("key_change_phoneNo"));
+        pref.setSummary(pref.getText());
+
+        ListPreference listPreference = ((ListPreference) findPreference("key_change_currency"));
+        listPreference.setSummary(Currency.values()[Integer.parseInt(listPreference.getValue())].getName());
     }
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if (key.equals(getContext().getString(R.string.key_phoneNo))) {
+        if (key.equals("key_change_phoneNo")) {
             EditTextPreference phoneNoPref = (EditTextPreference) findPreference(key);
             String phoneNo = phoneNoPref.getText();
             phoneNoPref.setSummary(phoneNo);
             sharedPreferences.edit().putString(getContext().getString(R.string.keyValue_phoneNo), phoneNo).apply();
-        } else if (key.equals(getContext().getString(R.string.key_currency))) {
+        } else if (key.equals("key_change_currency")) {
             ListPreference listPreference =  (ListPreference) findPreference(key);
             listPreference.setSummary(Currency.values()[Integer.parseInt(listPreference.getValue())].getName());
             sharedPreferences.edit().putInt(listPreference.getValue(), R.string.keyValue_currency).apply();

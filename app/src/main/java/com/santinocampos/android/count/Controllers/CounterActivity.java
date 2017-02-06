@@ -122,7 +122,8 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
 
         public String getItemPrice() {
             String price = mItemInitialPriceTextView.getText().toString();
-            return price.substring(0, price.length() - 1);
+            price = price.substring(0, price.length() - 1);
+            return String.valueOf(Double.parseDouble(price)); //That is how you fix bugs, highest layer of abstraction first.
         }
     }
 
