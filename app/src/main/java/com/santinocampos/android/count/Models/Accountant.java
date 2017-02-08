@@ -88,6 +88,10 @@ public class Accountant {
         mTotalMoney += isSet ? money - mTotalMoney : money;
     }
 
+    public void clearMoney() {
+         addMoney(0, true);
+    }
+
     public double getTotalMoney() {
         return mTotalMoney;
     }

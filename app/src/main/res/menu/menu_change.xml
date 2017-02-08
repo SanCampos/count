@@ -17,7 +17,12 @@
        <!-- android:icon="@drawable/ic_action_export"-->
 
     <item
-        android:id="@+id/action_clear"
+        android:id="@+id/action_clear_money"
+        android:title="@string/action_clear_money"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_clear_items"
         android:title="@string/action_clear"
         app:showAsAction="never"/>
 

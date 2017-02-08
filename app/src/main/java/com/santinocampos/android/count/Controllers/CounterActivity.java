@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,6 +23,7 @@ import com.santinocampos.android.count.Adapter.RecyclerViewCursorAdapter;
 import com.santinocampos.android.count.Database.ItemCursorWrapper;
 import com.santinocampos.android.count.Dialogs.AbstractDialog;
 import com.santinocampos.android.count.Dialogs.ConfirmClearDialog;
+import com.santinocampos.android.count.Dialogs.ConfirmClearMoneyDialog;
 import com.santinocampos.android.count.Dialogs.ConfirmExportDialog;
 import com.santinocampos.android.count.Settings.SettingsActivity;
 import com.santinocampos.android.count.Utils.Exporter;
@@ -161,11 +161,11 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     @Override
     public void addMoney(double money, boolean isSet) {
         mAccountant.addMoney(money, isSet);
-        updateMoney();
+        updateMoneyDetails();
     }
 
     private void startUI() {
-        updateMoney();
+        updateMoneyDetails();
         if (mAdapter == null) {
             mAdapter = new ItemAdapter();
             mRecyclerView.setAdapter(mAdapter);
@@ -206,7 +206,9 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
                 break;
             case R.id.action_export : checkIfListIsEmptyToStart(new ConfirmExportDialog());
                 break;
-            case R.id.action_clear : checkIfListIsEmptyToStart(new ConfirmClearDialog());
+            case R.id.action_clear_money : checkIfNoMoneyToStart(new ConfirmClearMoneyDialog());
+                break;
+            case R.id.action_clear_items: checkIfListIsEmptyToStart(new ConfirmClearDialog());
                 break;
             case R.id.action_settings : startSettings();
                 break;
@@ -214,6 +216,16 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         return true;
     }
 
+    private void checkIfNoMoneyToStart(ConfirmClearMoneyDialog confirmClearMoneyDialog) {
+        if (mAccountant.getTotalMoney() != 0) {
+            startDialog(confirmClearMoneyDialog);
+        } else Toast.makeText(this, R.string.toast_no_money, Toast.LENGTH_SHORT).show();
+    }
+
+    public void clearMoney() {
+        mAccountant.clearMoney();
+        updateMoneyDetails();
+    }
 
     public void startSettings() {
         Intent intent = new Intent(this, SettingsActivity.class);
@@ -248,7 +260,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         Toast.makeText(CounterActivity.this, R.string.toast_success_export, Toast.LENGTH_LONG).show();
     }
 
-    private void updateMoney() {
+    private void updateMoneyDetails() {
        mAllowanceTextView.setText(mAccountant.getTotalMoneyInformation());
        updateChange();
     }

@@ -10,4 +10,5 @@ public interface DialogListener {
     void addItem(Item item);
     void exportList();
     void clearList();
+    void clearMoney();
 }

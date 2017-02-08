@@ -9,6 +9,7 @@
     <string name="action_clear">Clear list</string>
     <string name="action_export">Export record</string>
     <string name="action_settings">Settings</string>
+    <string name="action_clear_money">Clear money</string>
 
     <!-- ADDING ITEM DIALOG BOX STRINGS -->
     <string name="title_add_item">Add an item</string>
@@ -31,11 +32,16 @@
     <string name="message_confirm_export">Are you sure you want to export your item list?</string>
     <string name="toast_success_export">Successfully exported log!</string>
 
+    <!-- Clearing money DIALOG strings -->
+    <string name="title_confirm_clear_money">Confirm clearing money</string>
+    <string name="messsage_confirm_clear_money">Are you sure you want to clear your money</string>
+
     <!-- Clearing LIST DIALOG strings -->
     <string name="title_confirm_clear">Confirm clearing list</string>
     <string name="message_confirm_clear">Are you sure you want to clear your item list?</string>
 
     <!-- Toasts -->
+    <string name="toast_no_money">You have no money!</string>
     <string name="toast_error_empty_list">Your list is empty!</string>
 
     <!-- Item Type Enum Names -->

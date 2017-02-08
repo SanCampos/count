@@ -44,7 +44,7 @@ public class AddItemDialog extends AbstractDialog {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        final AlertDialog dialog = new AlertDialog.Builder(getActivity())
+        final AlertDialog dialog = new AlertDialog.Builder(getContext())
                             .setView(onCreateView(savedInstanceState))
                             .setTitle(R.string.title_add_item)
                             .setNegativeButton(android.R.string.cancel, null)
