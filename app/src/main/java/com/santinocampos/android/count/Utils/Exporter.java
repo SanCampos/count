@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.telephony.SmsManager;
+import android.util.Log;
 
 import com.santinocampos.android.count.Models.Accountant;
 import com.santinocampos.android.count.Models.Item;
@@ -22,12 +23,12 @@ public class Exporter {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         String phoneNo = preferences.getString("KEY_PHONE_NO", "");
         SmsManager.getDefault()
-                  .sendTextMessage(phoneNo, null, createItemList(list, Accountant.get(context)), null, null);
+                  .sendTextMessage(phoneNo, null, createItemList(list, Accountant.get(context), context), null, null);
     }
 
     @NonNull
-    private static String createItemList(List<Item> list, Accountant accountant) {
-        StringBuilder output = new StringBuilder("Total money: " + accountant.getTotalMoneyInformation() + "\n\n");
+    private static String createItemList(List<Item> list, Accountant accountant, Context context) {
+        StringBuilder output = new StringBuilder(context.getString(R.string.text_total_money) + " " + accountant.getTotalMoneyInformation() + "\n\n");
 
         for (Item i : list)
             output.append(i.getName())
@@ -40,7 +41,7 @@ public class Exporter {
                     .append(accountant.totalPriceOf(i))
                     .append("\n\n");
 
-        output.append(R.string.text_change_left).append(accountant.getChange());
+        output.append(context.getString(R.string.text_change_left)).append(" ").append(accountant.getChange());
         return output.toString();
     }
 }
