@@ -52,7 +52,7 @@ public class Item {
 
         if (!item.getName().equals(this.getName())) return false;
         else if (item.getPrice() != this.getPrice()) return false;
-        else if (item.getItemType().equals(this.getItemType())) return false;
+        else if (!item.getItemType().equals(this.getItemType())) return false;
 
         return true;
     }
