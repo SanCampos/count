@@ -48,7 +48,22 @@ public class AddItemDialog extends AbstractDialog {
                             .setView(onCreateView(savedInstanceState))
                             .setTitle(R.string.title_add_item)
                             .setNegativeButton(android.R.string.cancel, null)
-                            .setPositiveButton(R.string.button_add_item, null)
+                            .setPositiveButton(R.string.button_add_item, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    int itemCount = Integer.parseInt(mItemCountTextView.getText().toString());
+                                    String itemPrice = mItemPriceEditText.getText().toString();
+                                    String itemName = mItemNameEditText.getText().toString();
+                                    if (itemCount == 0 || itemName.length() == 0 || itemPrice.length() == 0)
+                                        Toast.makeText(getActivity(), R.string.toast_error_adding_item, Toast.LENGTH_SHORT).show();
+                                    else {
+                                        mDialogListener.addItem(new Item(itemName,
+                                                Double.parseDouble(itemPrice),
+                                                itemCount, (ItemType) mSpinner.getSelectedItem()));
+                                        dismiss();
+                                    }
+                                }
+                            })
                             .create();
 
         dialog.setOnShowListener(new DialogInterface.OnShowListener() {

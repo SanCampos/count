@@ -6,8 +6,10 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.santinocampos.android.count.R;
 
@@ -27,7 +29,7 @@ public class AddMoneyDialog extends AbstractDialog {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-       return new AlertDialog.Builder(getActivity())
+       AlertDialog dialog = new AlertDialog.Builder(getActivity())
                         .setView(onCreateView(savedInstanceState))
                         .setTitle(R.string.string_add_money)
                         .setPositiveButton(R.string.btn_addMoney_positive, new DialogInterface.OnClickListener() {
@@ -43,6 +45,28 @@ public class AddMoneyDialog extends AbstractDialog {
                             }
                         })
                         .create();
+
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button addMoneyButton = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                addMoneyButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String money = mAddMoneyEditText.getText().toString();
+
+                        if (money.length() == 0)
+                            Toast.makeText(getContext(), R.string.toast_error_adding_money, Toast.LENGTH_LONG).show();
+                        else {
+                            mDialogListener.addMoney(Double.parseDouble(money), mCheckBox.isChecked());
+                            dismiss();
+                        }
+                    }
+                });
+            }
+        });
+
+        return dialog;
     }
 
     private View onCreateView(Bundle savedInstanceState) {
