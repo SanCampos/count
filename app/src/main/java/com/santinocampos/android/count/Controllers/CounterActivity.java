@@ -122,8 +122,8 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
 
         public String getItemPrice() {
             String price = mItemInitialPriceTextView.getText().toString();
-            price = price.substring(0, price.length() - 1);
-            return String.valueOf(Double.parseDouble(price)); //That is how you fix bugs, highest layer of abstraction first.
+            price = price.replaceAll("[^0-9]", ""); //REGEX MAKES YOUR PROBLEMS EASIER TO SOLVE, USE THIS
+            return String.valueOf(Double.parseDouble(price)); //This is how you fix bugs, highest layer of abstraction first.
         }
     }
 
