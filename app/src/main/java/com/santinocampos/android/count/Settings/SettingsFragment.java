@@ -36,7 +36,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     @Override
     public void onCreatePreferences(Bundle bundle, String s) {
         addPreferencesFromResource(R.xml.preferences);
-    //    initListPreference();
+        initListPreference();
         updateSummaries();
     }
 
@@ -51,7 +51,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
 
     private void updateSummaries() {
         updatePhoneNoPref();
-        //updateCurrencyListPref();
+        updateCurrencyListPref();
     }
 
     private void updateCurrencyListPref() {
