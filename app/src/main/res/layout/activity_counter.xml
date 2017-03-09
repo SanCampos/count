@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.santinocampos.android.count.Controllers.CounterActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:minHeight="?attr/actionBarSize"
+            android:background="@color/colorToolBar"
+            app:theme="@style/AppTheme.PopupOverlay"/>
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:background="@color/colorToolBar"
+            app:theme="@style/AppTheme.PopupOverlay">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="@string/allowance"
+                style="@style/InfoText"/>
+
+            <TextView
+                android:id="@+id/text_view_allowance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginRight="16dp"
+                android:layout_marginEnd="16dp"
+                style="@style/InfoText"/>
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <include
+        android:layout_marginTop="100dp"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        layout="@layout/content_counter"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_addItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_gravity="bottom|end"
+        app:backgroundTint="@color/colorToolBar"
+        android:src="@drawable/ic_fab_additem"/>
+
+</android.support.design.widget.CoordinatorLayout>

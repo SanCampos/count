@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/label_add_item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginStart="22dp"
+        android:text="@string/label_add_item_name_text_view"/>
+
+    <EditText
+        android:id="@+id/input_add_item_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="22dp"
+        android:layout_marginRight="22dp"
+        android:layout_below="@+id/label_add_item_name"
+        android:layout_alignLeft="@+id/label_add_item_name"
+        android:layout_alignStart="@+id/label_add_item_name"
+        android:hint="@string/hint_add_item_name"
+        android:textSize="15sp"
+        android:maxLength="30"/>
+
+
+    <TextView
+        android:id="@+id/label_add_item_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/label_add_item_name"
+        android:layout_alignStart="@+id/label_add_item_name"
+        android:layout_below="@+id/input_add_item_name"
+        android:text="@string/label_add_item_price_text_view"/>
+
+    <EditText
+        android:id="@+id/input_add_item_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/label_add_item_price"
+        android:layout_alignLeft="@+id/label_add_item_price"
+        android:layout_alignStart="@+id/label_add_item_price"
+        android:inputType="numberDecimal"
+        android:maxLength="7"
+        android:textSize="15sp"
+        android:hint="@string/hint_add_item_price"/>
+
+    <ImageButton
+        android:id="@+id/btn_increase_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@id/input_add_item_name"
+        android:layout_alignEnd="@id/input_add_item_name"
+        android:layout_below="@id/label_add_item_price"
+        android:layout_alignBottom="@+id/item_count"
+        android:src="@drawable/ic_arrow_right"/>
+
+    <ImageButton
+        android:id="@+id/btn_decrease_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@id/item_count"
+        android:layout_toLeftOf="@id/item_count"
+        android:layout_alignBottom="@+id/input_add_item_price"
+        android:layout_alignTop="@+id/input_add_item_price"
+        android:src="@drawable/ic_arrow_left"/>
+
+    <TextView
+        android:id="@+id/item_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/btn_decrease_count"
+        android:layout_toStartOf="@id/btn_increase_count"
+        android:layout_toLeftOf="@id/btn_increase_count"
+        android:textSize="30sp"
+        tools:text="0"/>
+
+    <TextView
+        android:id="@+id/label_add_item_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/item_count"
+        android:layout_alignLeft="@+id/btn_decrease_count"
+        android:layout_alignStart="@+id/btn_decrease_count"
+        android:text="@string/label_add_item_amount"/>
+
+    <TextView
+        android:id="@+id/label_add_itemType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/label_add_item_name"
+        android:layout_alignStart="@id/label_add_item_name"
+        android:layout_below="@id/input_add_item_price"
+        android:text="@string/label_add_itemType"/>
+
+    <Spinner
+        android:id="@+id/spinner_types"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/input_add_item_price"
+        android:layout_alignStart="@id/input_add_item_price"
+        android:layout_below="@id/label_add_itemType"/>
+
+
+</RelativeLayout>

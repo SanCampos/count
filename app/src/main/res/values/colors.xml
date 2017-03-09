@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorToolBar">#43a047</color>
+    <color name="colorVerticalDivider">#000000</color>
+    <color name="colorStatusBar">#388E3C</color>
+    <color name="colorWallet">#81C784</color>
+    <color name="colorItemList">#C8E6C9</color>
+</resources>
