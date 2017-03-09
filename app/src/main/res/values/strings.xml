@@ -57,15 +57,21 @@
     <string name="settings_title">Settings</string>
 
     <!-- Preference Category Titles-->
-    <string name="prefCategoryItemList_title">List settings</string>
-    <string name="prefCategoryCurrency_title">Currency</string>
+    <string name="prefCategoryTitle_itemList">List settings</string>
+    <string name="prefCategoryTitle_Currency">Currency</string>
 
     <!-- Preference Titles -->
     <string name="prefTitle_phoneNo">Phone Number</string>
+    <string name="prefTitle_currency">Currency</string>
+    <string name="prefTitle_clearList">Enable list  clearing</string>
 
     <!-- Preference Keys -->
-    <string name="key_phoneNo">key_change_phoneNo</string>
-    <string name="key_currency">key_change_currency</string>
+    <string name="prefKey_phoneNo">key_change_phoneNo</string>
+    <string name="prefKey_currency">key_change_currency</string>
+    <string name="prefKey_clearList">key_change_clearList</string>
+
+    <!-- Preference Summaries -->
+    <string name="prefSummary_clearList">Enable item list clearing every 12:00 AM</string>
 
     <!-- Shared Preferences Value Key -->
     <string name="keyValue_phoneNo">KEY_PHONE_NO</string>

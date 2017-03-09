@@ -2,22 +2,24 @@
 <android.support.v7.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <android.support.v7.preference.PreferenceCategory
-        android:title="@string/prefCategory1_title">
+        android:title="@string/prefCategoryItemList_title">
 
         <android.support.v7.preference.EditTextPreference
             android:key="@string/key_phoneNo"
-            android:title="Phone Number"
+            android:title="@string/prefTitle_phoneNo"
             android:defaultValue=""/>
+
+
 
     </android.support.v7.preference.PreferenceCategory>
 
 
     <android.support.v7.preference.PreferenceCategory
-        android:title="@string/prefCategory2_title">
+        android:title="@string/prefCategoryCurrency_title">
 
         <android.support.v7.preference.ListPreference
             android:key="@string/key_currency"
-            android:title="Current Currency"/>
+            android:title="@string/prefTitle_currency"/>
 
     </android.support.v7.preference.PreferenceCategory>  -->
 
