@@ -57,8 +57,8 @@
     <string name="settings_title">Settings</string>
 
     <!-- Preference Category Titles-->
-    <string name="prefCategory1_title">Texting</string>
-    <string name="prefCategory2_title">Currency</string>
+    <string name="prefCategoryItemList_title">List settings</string>
+    <string name="prefCategoryCurrency_title">Currency</string>
 
     <!-- Preference Titles -->
     <string name="prefTitle_phoneNo">Phone Number</string>
