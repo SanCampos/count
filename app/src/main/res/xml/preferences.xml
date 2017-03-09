@@ -2,23 +2,27 @@
 <android.support.v7.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <android.support.v7.preference.PreferenceCategory
-        android:title="@string/prefCategoryItemList_title">
+        android:title="@string/prefCategoryTitle_itemList">
 
         <android.support.v7.preference.EditTextPreference
-            android:key="@string/key_phoneNo"
+            android:key="@string/prefKey_phoneNo"
             android:title="@string/prefTitle_phoneNo"
             android:defaultValue=""/>
 
-
+        <android.support.v7.preference.CheckBoxPreference
+            android:key="@string/prefKey_clearList"
+            android:title="@string/prefTitle_clearList"
+            android:summary="@string/prefSummary_clearList"
+            android:defaultValue="false"/>
 
     </android.support.v7.preference.PreferenceCategory>
 
 
     <android.support.v7.preference.PreferenceCategory
-        android:title="@string/prefCategoryCurrency_title">
+        android:title="@string/prefCategoryTitle_currency">
 
         <android.support.v7.preference.ListPreference
-            android:key="@string/key_currency"
+            android:key="@string/prefKey_currency"
             android:title="@string/prefTitle_currency"/>
 
     </android.support.v7.preference.PreferenceCategory>  -->

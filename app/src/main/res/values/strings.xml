@@ -58,7 +58,7 @@
 
     <!-- Preference Category Titles-->
     <string name="prefCategoryTitle_itemList">List settings</string>
-    <string name="prefCategoryTitle_Currency">Currency</string>
+    <string name="prefCategoryTitle_currency">Currency</string>
 
     <!-- Preference Titles -->
     <string name="prefTitle_phoneNo">Phone Number</string>
