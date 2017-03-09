@@ -2,12 +2,15 @@ package com.santinocampos.android.count.Settings;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.preference.CheckBoxPreference;
 import android.support.v7.preference.EditTextPreference;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.preference.PreferenceManager;
 import android.util.Log;
+import android.widget.CheckBox;
 
+import com.santinocampos.android.count.Dialogs.ConfirmClearDialog;
 import com.santinocampos.android.count.Models.Currency;
 import com.santinocampos.android.count.R;
 
@@ -20,6 +23,7 @@ import java.util.List;
 public class SettingsFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     private static String LOG_CURRENT_CURRENCY = "CURRENT_CURRENCY";
+    private static String LOG_ISCLEARLIST_CHECKED = "IS_CHECKED";
 
     @Override
     public void onResume() {
@@ -52,6 +56,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     private void updateSummaries() {
         updatePhoneNoPref();
         updateCurrencyListPref();
+        updateClearListPreference();
     }
 
     private void updateCurrencyListPref() {
@@ -62,6 +67,12 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     private void updatePhoneNoPref() {
         EditTextPreference pref = ((EditTextPreference) findPreference("key_change_phoneNo"));
         pref.setSummary(pref.getText());
+    }
+
+    private void updateClearListPreference() {
+        CheckBoxPreference listClearPreference = ((CheckBoxPreference) findPreference("key_change_clearList"));
+        boolean isChecked = PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("KEY_CLEARLIST", false);
+        listClearPreference.setChecked(isChecked);
     }
 
     @Override
@@ -80,6 +91,10 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
             String value = listPreference.getValue();
             currentCurrency = sharedPreferences.getInt("KEY_CURRENCY", 0);
             Log.i(LOG_CURRENT_CURRENCY, String.valueOf(currentCurrency));
+        } else if (key.equals("key_change_clearList")) {
+            CheckBoxPreference clearListPreference = ((CheckBoxPreference) findPreference(key));
+            boolean isChecked = clearListPreference.isChecked();
+            sharedPreferences.edit().putBoolean("KEY_CLEARLIST", isChecked).apply();
         }
     }
 }
