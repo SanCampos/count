@@ -3,10 +3,12 @@ package com.santinocampos.android.count.Models;
 
 import com.santinocampos.android.count.ItemType.ItemType;
 
+import io.realm.RealmObject;
+
 /**
  * Created by thedr on 11/1/2016.
  */
-public class Item {
+public class Item extends RealmObject{
     private String mName;
     private double mPrice;
     private int mCount;
