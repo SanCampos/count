@@ -1,5 +1,6 @@
 package com.santinocampos.android.count.Settings;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.preference.CheckBoxPreference;
@@ -9,8 +10,10 @@ import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.CheckBox;
+import android.widget.Toast;
 
 import com.santinocampos.android.count.Dialogs.ConfirmClearDialog;
+import com.santinocampos.android.count.ListManipulation.ListClearingAlarm;
 import com.santinocampos.android.count.Models.Currency;
 import com.santinocampos.android.count.R;
 
@@ -95,11 +98,12 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
             CheckBoxPreference clearListPreference = ((CheckBoxPreference) findPreference(key));
             boolean isChecked = clearListPreference.isChecked();
             sharedPreferences.edit().putBoolean("KEY_CLEARLIST", isChecked).apply();
-            checkToStartClearService();
+            checkToStartClearService(getActivity());
         }
     }
 
-    private void checkToStartClearService() {
-
+    private void checkToStartClearService(Context context) {
+        Toast.makeText(context, "FIRING AWAY", Toast.LENGTH_SHORT).show();
+        ListClearingAlarm.initAlarm(context);
     }
 }
