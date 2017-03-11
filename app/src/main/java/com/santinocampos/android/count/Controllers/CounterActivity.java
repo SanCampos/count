@@ -20,7 +20,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.santinocampos.android.count.Adapter.RecyclerViewCursorAdapter;
-import com.santinocampos.android.count.Database.ItemCursorWrapper;
 import com.santinocampos.android.count.Dialogs.AbstractDialog;
 import com.santinocampos.android.count.Dialogs.ConfirmClearDialog;
 import com.santinocampos.android.count.Dialogs.ConfirmClearMoneyDialog;

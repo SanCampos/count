@@ -2,13 +2,8 @@ package com.santinocampos.android.count.Models;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 
-import com.santinocampos.android.count.Database.ItemBaseHelper;
-import com.santinocampos.android.count.Database.ItemCursorWrapper;
 import com.santinocampos.android.count.Database.ItemDbSchema.ItemTable;
-import com.santinocampos.android.count.Utils.DecUtils;
 import com.santinocampos.android.count.Utils.MoneyUtils;
 
 import java.util.ArrayList;
@@ -23,7 +18,6 @@ public class Accountant {
 
     private double mTotalMoney;
     private Context mContext;
-    private SQLiteDatabase mDatabase;
 
     private List<Item> mItemList;
 
@@ -35,7 +29,6 @@ public class Accountant {
     private Accountant(Context context) {
         mTotalMoney = 0;
         mContext = context.getApplicationContext();
-        mDatabase = new ItemBaseHelper(mContext).getWritableDatabase();
         mItemList = new ArrayList<>();
         updateItemList();
     }
@@ -51,36 +44,10 @@ public class Accountant {
     }
 
     public void addItem(Item latestItem) {
-        //String sql;
-        if (mItemList.contains(latestItem)) {
-            Item origItem = mItemList.get(mItemList.indexOf(latestItem));
-            latestItem.increaseCountBy(origItem.getCount());
-
-            /**sql = "UPDATE " + ItemTable.NAME +
-                              " SET " + ItemTable.cols.COUNT + " = " + String.valueOf(latestItem.getCount()) +
-                              " WHERE " + ItemTable.cols.NAME + " = '" + String.valueOf(latestItem.getItemName()) +
-                              "' AND " + ItemTable.cols.PRICE + " = '" + String.valueOf(latestItem.getItemPrice()) +
-                              "';"; **/
-
-            mDatabase.update(ItemTable.NAME, getContentValues(latestItem),
-                             ItemTable.cols.NAME + " = ? AND " +
-                             ItemTable.cols.PRICE + " = ?", new String[] {latestItem.getName(),
-                             String.valueOf(latestItem.getPrice())});
-         } else {
-           /** sql = "INSERT INTO " + ItemTable.NAME + " (" + ItemTable.cols.NAME + ", " +
-                         ItemTable.cols.PRICE + ", " + ItemTable.cols.COUNT + ") " +
-                         "VALUES ('" + latestItem.getItemName() + "', '" + latestItem.getItemPrice() + "', '" +
-                         latestItem.getCount() + "');";**/
-
-            mDatabase.insert(ItemTable.NAME, null, getContentValues(latestItem));
-        }
-        //mDatabase.execSQL(sql);
         updateItemList();
     }
 
     public void removeItem(String itemName, String itemPrice) {
-        mDatabase.delete(ItemTable.NAME, ItemTable.cols.NAME + " = ? AND " +
-                                         ItemTable.cols.PRICE + " = ?" , new String[] {itemName, itemPrice});
         updateItemList();
     }
 
@@ -115,23 +82,7 @@ public class Accountant {
 
      private void updateItemList() {
          mItemList.clear();
-
-         ItemCursorWrapper cursor = querySortedItems(null, null);
-         try {
-             cursor.moveToFirst();
-             while (!cursor.isAfterLast()) {
-                 mItemList.add(cursor.getItem());
-                 cursor.moveToNext();
-             }
-         } finally {
-             cursor.close();
-         }
      }
-
-    public ItemCursorWrapper querySortedItems(String whereClause, String[] whereArgs) {
-        Cursor cursor = mDatabase.query(ItemTable.NAME, null, whereClause, whereArgs, null, null, ItemTable.cols.TOTAL_PRICE + " DESC");
-        return new ItemCursorWrapper(cursor);
-    }
 
     public String individualPriceOf(Item i) {
         return MoneyUtils.prep(i.getPrice(), mContext);
@@ -146,7 +97,6 @@ public class Accountant {
     }
 
     public void clearList() {
-        mDatabase.delete(ItemTable.NAME, null, null);
         updateItemList();
     }
 }
