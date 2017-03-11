@@ -12,19 +12,20 @@ public class Item extends RealmObject{
     private String mName;
     private double mPrice;
     private int mCount;
-    private ItemType mItemType;
 
-    public Item(String mName, double mPrice, int count, ItemType itemType) {
+    public Item(String mName, double mPrice, int count) {
         this.mName = mName;
         this.mPrice = mPrice;
         this.mCount = count;
-        this.mItemType = itemType;
     }
 
-    public Item(String mName, double mPrice, int count) {
+     /**public Item(String mName, double mPrice, int count) {
         this(mName, mPrice, count, ItemType.NO_TYPE);
-    }
+    } **/
 
+    public Item() {
+
+    }
     public String getName() {
         return mName;
     }
@@ -41,9 +42,9 @@ public class Item extends RealmObject{
         return mCount;
     }
 
-    public ItemType getItemType() {
+    /** public ItemType getItemType() {
         return mItemType;
-    }
+    }  **/
 
     @Override
     public boolean equals(Object object) {
@@ -54,7 +55,7 @@ public class Item extends RealmObject{
 
         if (!item.getName().equals(this.getName())) return false;
         else if (item.getPrice() != this.getPrice()) return false;
-        else if (!item.getItemType().equals(this.getItemType())) return false;
+        //else if (!item.getItemType().equals(this.getItemType())) return false;
 
         return true;
     }
