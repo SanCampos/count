@@ -11,6 +11,7 @@ import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import io.realm.Sort;
 
 /**
  * Created by thedr on 11/1/2016.
@@ -23,6 +24,7 @@ public class Accountant {
     private List<Item> mItemList;
 
     public Accountant(Context context) {
+        Realm.init(context);
         RealmConfiguration mRealmConfiguration = new RealmConfiguration.Builder().build();
         Realm.setDefaultConfiguration(mRealmConfiguration);
         mRealm = Realm.getDefaultInstance();
@@ -34,7 +36,7 @@ public class Accountant {
     }
     public void addItem(Item latestItem) {
         mRealm.beginTransaction();
-        mRealm.copyFromRealm(latestItem);
+        mRealm.copyToRealm(latestItem);
         mRealm.commitTransaction();
         updateItemList();
     }
@@ -73,7 +75,7 @@ public class Accountant {
     }
 
      private void updateItemList() {
-         mItemList.clear();
+         mItemList = mRealm.where(Item.class).findAllSorted("mPrice", Sort.DESCENDING);
      }
 
     public String individualPriceOf(Item i) {

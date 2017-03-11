@@ -12,8 +12,9 @@ public class Item extends RealmObject{
     private String mName;
     private double mPrice;
     private int mCount;
+    private int itemType;
 
-    public Item(String mName, double mPrice, int count) {
+    public Item(String mName, double mPrice, int count, int itemType) {
         this.mName = mName;
         this.mPrice = mPrice;
         this.mCount = count;

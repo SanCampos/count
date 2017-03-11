@@ -19,11 +19,11 @@ import java.util.List;
  */
 public class ListSender {
 
-    public static void exportItemList(List<Item> list, Context context) {
+    public static void exportItemList(List<Item> list, Context context, Accountant accountant) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         String phoneNo = preferences.getString("KEY_PHONE_NO", "");
         SmsManager.getDefault()
-                  .sendTextMessage(phoneNo, null, createItemList(list, Accountant.get(context), context), null, null);
+                  .sendTextMessage(phoneNo, null, createItemList(list, accountant, context), null, null);
     }
 
     @NonNull

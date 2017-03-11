@@ -56,7 +56,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mAccountant = Accountant.get(this);
+        mAccountant = new Accountant(this);
 
         mAllowanceTextView = (TextView) findViewById(R.id.text_view_allowance);
         mChangeTextView = (TextView) findViewById(R.id.text_view_change);
@@ -112,7 +112,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
             mItemCountTextView.setText("x" + mAccountant.countOf(item));
             mItemInitialPriceTextView.setText(mAccountant.individualPriceOf(item));
             mItemTotalPriceTextView.setText(mAccountant.totalPriceOf(item));
-            mItemTypeImageView.setImageDrawable(getDrawable(item.getItemType().getImageID()));
+           // mItemTypeImageView.setImageDrawable(getDrawable(item.getItemType().getImageID()));
         }
 
         public String getItemName()  {
@@ -126,7 +126,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         }
     }
 
-    private class ItemAdapter extends RecyclerViewCursorAdapter<ItemHolder> {
+    private class ItemAdapter extends RecyclerView.Adapter<ItemHolder> {
 
         public ItemAdapter() {
             super();
@@ -138,22 +138,25 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         }
 
         @Override
-        public void onBindViewHolder(ItemHolder holder, Cursor cursor) {
-            ItemCursorWrapper cw = (ItemCursorWrapper) cursor;
-            holder.bindItem(cw.getItem());
+        public void onBindViewHolder(ItemHolder holder, int position) {
+            holder.bindItem(mAccountant.getItemList().get(position));
+        }
+
+        @Override
+        public int getItemCount() {
+            return mAccountant.getItemList().size();
         }
     }
 
     @Override
     public void addItem(Item item) {
         mAccountant.addItem(item);
-        updateCursor();
+        mAdapter.notifyDataSetChanged();
         updateChange();
     }
 
     public void removeItem(String itemName, String itemPrice) {
         mAccountant.removeItem(itemName, itemPrice);
-        updateCursor();
         updateChange();
     }
 
@@ -168,7 +171,6 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         if (mAdapter == null) {
             mAdapter = new ItemAdapter();
             mRecyclerView.setAdapter(mAdapter);
-            updateCursor();
         }
     }
 
@@ -241,7 +243,6 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     @Override
     public void clearList() {
         mAccountant.clearList();
-        updateCursor();
         updateChange();
     }
 
@@ -255,7 +256,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
 
     @Override
     public void exportList()  {
-        ListSender.exportItemList(mAccountant.getItemList(), this);
+        ListSender.exportItemList(mAccountant.getItemList(), this, mAccountant);
         Toast.makeText(CounterActivity.this, R.string.toast_success_export, Toast.LENGTH_LONG).show();
     }
 
@@ -266,9 +267,5 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
 
     private void updateChange() {
         mChangeTextView.setText(mAccountant.getChange());
-    }
-
-    private void updateCursor() {
-        mAdapter.swapCursor(mAccountant.querySortedItems(null, null));
     }
 }
