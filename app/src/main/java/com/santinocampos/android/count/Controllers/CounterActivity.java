@@ -1,6 +1,5 @@
 package com.santinocampos.android.count.Controllers;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -12,7 +11,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.support.v4.app.Fragment;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,7 +26,7 @@ import com.santinocampos.android.count.Dialogs.ConfirmClearDialog;
 import com.santinocampos.android.count.Dialogs.ConfirmClearMoneyDialog;
 import com.santinocampos.android.count.Dialogs.ConfirmExportDialog;
 import com.santinocampos.android.count.Settings.SettingsActivity;
-import com.santinocampos.android.count.Utils.Exporter;
+import com.santinocampos.android.count.ListManipulation.ListSender;
 import com.santinocampos.android.count.Listeners.DialogListener;
 import com.santinocampos.android.count.Models.Accountant;
 import com.santinocampos.android.count.Models.Item;
@@ -258,7 +256,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
 
     @Override
     public void exportList()  {
-        Exporter.exportItemList(mAccountant.getItemList(), this);
+        ListSender.exportItemList(mAccountant.getItemList(), this);
         Toast.makeText(CounterActivity.this, R.string.toast_success_export, Toast.LENGTH_LONG).show();
     }
 

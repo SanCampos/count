@@ -75,7 +75,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
         listClearPreference.setChecked(isChecked);
     }
 
-    @Override
+        @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         if (key.equals("key_change_phoneNo")) {
             EditTextPreference phoneNoPref = (EditTextPreference) findPreference(key);
@@ -95,6 +95,11 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
             CheckBoxPreference clearListPreference = ((CheckBoxPreference) findPreference(key));
             boolean isChecked = clearListPreference.isChecked();
             sharedPreferences.edit().putBoolean("KEY_CLEARLIST", isChecked).apply();
+            checkToStartClearService();
         }
+    }
+
+    private void checkToStartClearService() {
+
     }
 }
