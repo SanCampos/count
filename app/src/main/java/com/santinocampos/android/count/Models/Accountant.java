@@ -9,6 +9,9 @@ import com.santinocampos.android.count.Utils.MoneyUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+
 /**
  * Created by thedr on 11/1/2016.
  */
@@ -21,9 +24,9 @@ public class Accountant {
 
     private List<Item> mItemList;
 
-    public static Accountant get(Context context) {
-        sAccountant = sAccountant == null ? new Accountant(context) : sAccountant;
-        return sAccountant;
+    public Accountant get(Context context) {
+        RealmConfiguration mRealmConfiguration = new RealmConfiguration.Builder().build();
+        Realm.setDefaultConfiguration(mRealmConfiguration);
     }
 
     private Accountant(Context context) {
