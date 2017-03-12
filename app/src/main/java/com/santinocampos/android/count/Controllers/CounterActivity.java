@@ -155,8 +155,9 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         updateChange();
     }
 
-    public void removeItem(String itemName, String itemPrice) {
+    public void removeItem(String itemName, double itemPrice) {
         mAccountant.removeItem(itemName, itemPrice);
+        mAdapter.notifyDataSetChanged();
         updateChange();
     }
 
@@ -184,7 +185,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                 ItemHolder holder = (ItemHolder) viewHolder;
-                removeItem(holder.getItemName(), holder.getItemPrice());
+                removeItem(holder.getItemName(), Double.parseDouble(holder.getItemPrice()));
             }
         };
 
@@ -243,6 +244,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     @Override
     public void clearList() {
         mAccountant.clearList();
+        mAdapter.notifyDataSetChanged();
         updateChange();
     }
 

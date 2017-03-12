@@ -1,16 +1,17 @@
 package com.santinocampos.android.count.Models;
 
-import android.content.ContentValues;
 import android.content.Context;
 
-import com.santinocampos.android.count.Database.ItemDbSchema.ItemTable;
+import com.santinocampos.android.count.Database.ItemDbSchema;
 import com.santinocampos.android.count.Utils.MoneyUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import io.realm.ItemRealmProxy;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import io.realm.RealmResults;
 import io.realm.Sort;
 
 /**
@@ -25,7 +26,9 @@ public class Accountant {
 
     public Accountant(Context context) {
         Realm.init(context);
-        RealmConfiguration mRealmConfiguration = new RealmConfiguration.Builder().build();
+        RealmConfiguration mRealmConfiguration = new RealmConfiguration.Builder()
+                                                                       .deleteRealmIfMigrationNeeded()
+                                                                       .name(ItemDbSchema.NAME).build();
         Realm.setDefaultConfiguration(mRealmConfiguration);
         mRealm = Realm.getDefaultInstance();
 
@@ -34,15 +37,34 @@ public class Accountant {
         mItemList = new ArrayList<>();
         updateItemList();
     }
-    public void addItem(Item latestItem) {
+
+    public void addItem(final Item latestItem) {
         mRealm.beginTransaction();
-        mRealm.copyToRealm(latestItem);
+        Item firstItem = mRealm.where(Item.class)
+                               .equalTo("mName", latestItem.getName())
+                               .equalTo("mPrice", latestItem.getPrice())
+                               .findFirst();
+        Number maxId = mRealm.where(Item.class).max("ID");
+        int nextId =  maxId == null ? 0 : maxId.intValue() + 1;
+        if (firstItem == null) {
+            latestItem.setID(nextId);
+            mRealm.copyToRealm(latestItem);
+        } else {
+            firstItem.setCount(firstItem.getCount() + latestItem.getCount());
+        }
         mRealm.commitTransaction();
         updateItemList();
     }
 
-    public void removeItem(String itemName, String itemPrice) {
+    public void removeItem(String itemName, double itemPrice) {
+        mRealm.beginTransaction();
+        RealmResults<Item> items = mRealm.where(Item.class)
+                                       .equalTo("mName", itemName)
+                                       .equalTo("mPrice", itemPrice)
+                                       .findAll();
+        items.deleteAllFromRealm();
         updateItemList();
+        mRealm.commitTransaction();
     }
 
     public void addMoney(double money, boolean isSet) {
@@ -91,6 +113,9 @@ public class Accountant {
     }
 
     public void clearList() {
+        mRealm.beginTransaction();
+        mRealm.deleteAll();
+        mRealm.commitTransaction();
         updateItemList();
     }
 }

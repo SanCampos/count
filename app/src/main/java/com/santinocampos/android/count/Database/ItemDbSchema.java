@@ -4,15 +4,14 @@ package com.santinocampos.android.count.Database;
  * Created by thedr on 12/21/2016.
  */
 public class ItemDbSchema {
-     public static final class ItemTable  {
-         public static final String NAME = "items";
 
-         public static final class cols {
-             public static final String NAME = "name";
-             public static final String PRICE = "price";
-             public static final String COUNT = "count";
-             public static final String TOTAL_PRICE = "totalPrice";
-             public static final String ITEM_TYPE = "itemType";
-         }
-     }
+    public static final String NAME = "itemDB";
+
+    public static final class itemTable {
+        public static final String TABLE_NAME = "";
+
+        public static final class cols {
+
+        }
+    }
 }
