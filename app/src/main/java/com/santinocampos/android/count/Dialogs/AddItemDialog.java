@@ -81,7 +81,7 @@ public class AddItemDialog extends AbstractDialog {
                         else {
                             mDialogListener.addItem(new Item(itemName,
                                                     Double.parseDouble(itemPrice),
-                                                    itemCount,0));
+                                                    itemCount, mSpinner.getSelectedItemPosition()));
                             dismiss();
                         }
                     }

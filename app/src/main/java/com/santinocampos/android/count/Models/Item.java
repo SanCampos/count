@@ -1,10 +1,6 @@
 package com.santinocampos.android.count.Models;
 
 
-import com.santinocampos.android.count.ItemType.ItemType;
-
-import java.util.UUID;
-
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -18,7 +14,7 @@ public class Item extends RealmObject{
     private String mName;
     private double mPrice;
     private int mCount;
-    private int itemType;
+    private int mItemType;
 
     public Item() {/** Required due to Realm **/ }
 
@@ -26,7 +22,7 @@ public class Item extends RealmObject{
         this.mName = mName;
         this.mPrice = mPrice;
         this.mCount = count;
-        this.itemType = itemType;
+        this.mItemType = itemType;
         this.ID = 0;
     }
 
@@ -52,6 +48,10 @@ public class Item extends RealmObject{
 
     public void setCount(int count) {
         mCount = count;
+    }
+
+    public int getItemType() {
+        return mItemType;
     }
 
     public int getID() {

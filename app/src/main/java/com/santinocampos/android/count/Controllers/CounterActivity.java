@@ -24,6 +24,7 @@ import com.santinocampos.android.count.Dialogs.AbstractDialog;
 import com.santinocampos.android.count.Dialogs.ConfirmClearDialog;
 import com.santinocampos.android.count.Dialogs.ConfirmClearMoneyDialog;
 import com.santinocampos.android.count.Dialogs.ConfirmExportDialog;
+import com.santinocampos.android.count.ItemType.ItemType;
 import com.santinocampos.android.count.Settings.SettingsActivity;
 import com.santinocampos.android.count.ListManipulation.ListSender;
 import com.santinocampos.android.count.Listeners.DialogListener;
@@ -112,7 +113,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
             mItemCountTextView.setText("x" + mAccountant.countOf(item));
             mItemInitialPriceTextView.setText(mAccountant.individualPriceOf(item));
             mItemTotalPriceTextView.setText(mAccountant.totalPriceOf(item));
-           // mItemTypeImageView.setImageDrawable(getDrawable(item.getItemType().getImageID()));
+            mItemTypeImageView.setImageDrawable(getDrawable(ItemType.getImageIdOf(item.getItemType())));
         }
 
         public String getItemName()  {

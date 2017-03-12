@@ -23,17 +23,13 @@ public enum ItemType {
         this.mTypeNameID = itemTypeName;
     }
 
-    public static ItemType typeNamed(int typeNameID) {
-        for (ItemType i : values()) {
-            if (typeNameID == i.getItemTypeNameID()) return i;
-        }
-        return NO_TYPE;
-    }
-
     public int getImageID() {
-        return mImageID;
+        return  mImageID;
     }
 
+    public static int getImageIdOf(int itemType) {
+        return values()[itemType].getImageID();
+    }
     public int getItemTypeNameID() {
         return mTypeNameID;
     }
