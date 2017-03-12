@@ -165,11 +165,10 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     @Override
     public void addMoney(double money, boolean isSet) {
         mAccountant.addMoney(money, isSet);
-        updateMoneyDetails();
+        //updateMoneyDetails();
     }
 
     private void startUI() {
-        updateMoneyDetails();
         if (mAdapter == null) {
             mAdapter = new ItemAdapter();
             mRecyclerView.setAdapter(mAdapter);
