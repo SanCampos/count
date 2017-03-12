@@ -1,5 +1,6 @@
 package com.santinocampos.android.count.Settings;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -28,6 +29,12 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     private static String LOG_CURRENT_CURRENCY = "CURRENT_CURRENCY";
     private static String LOG_ISCLEARLIST_CHECKED = "IS_CHECKED";
 
+    private Context triggerContext;
+
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        triggerContext = getActivity().getBaseContext();
+    }
     @Override
     public void onResume() {
         super.onResume();
@@ -98,7 +105,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
             CheckBoxPreference clearListPreference = ((CheckBoxPreference) findPreference(key));
             boolean isChecked = clearListPreference.isChecked();
             sharedPreferences.edit().putBoolean("KEY_CLEARLIST", isChecked).apply();
-            checkToStartClearService(getActivity());
+            checkToStartClearService(triggerContext);
         }
     }
 
