@@ -3,6 +3,7 @@ package com.santinocampos.android.count.Controllers;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.os.Bundle;
@@ -57,7 +58,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mAccountant = new Accountant();
+        mAccountant = new Accountant(this);
 
         mAllowanceTextView = (TextView) findViewById(R.id.text_view_allowance);
         mChangeTextView = (TextView) findViewById(R.id.text_view_change);
@@ -113,7 +114,11 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
             mItemCountTextView.setText("x" + mAccountant.countOf(item));
             mItemInitialPriceTextView.setText(mAccountant.individualPriceOf(item));
             mItemTotalPriceTextView.setText(mAccountant.totalPriceOf(item));
-            mItemTypeImageView.setImageDrawable(getDrawable(ItemType.getImageIdOf(item.getItemType())));
+            if (Build.VERSION.SDK_INT < 21) {
+                mItemTypeImageView.setImageDrawable(getResources().getDrawable(ItemType.getImageIdOf(item.getItemType()))); //Fix this shit
+            } else {
+                mItemTypeImageView.setImageDrawable(getResources().getDrawable(ItemType.getImageIdOf(item.getItemType()), getTheme()));
+            }
         }
 
         public String getItemName()  {
@@ -158,7 +163,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
 
     public void removeItem(String itemName, double itemPrice) {
         mAccountant.removeItem(itemName, itemPrice);
-        mAdapter.notifyItemInserted(mAdapter.getItemCount());
+        mAdapter.notifyDataSetChanged();
         updateChange();
     }
 

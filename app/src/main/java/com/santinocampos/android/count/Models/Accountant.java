@@ -21,18 +21,19 @@ public class Accountant {
     private double mTotalMoney;
     private Context mContext;
     private Realm mRealm;
+    private static RealmConfiguration mRealmConfiguration;
 
     private List<Item> mItemList;
 
-    public Accountant() {
+    public Accountant(Context context) {
         mTotalMoney = 0;
-        mContext = ApplicationContext.get();
+        mContext = context.getApplicationContext();
         mItemList = new ArrayList<>();
 
         Realm.init(mContext);
-        RealmConfiguration mRealmConfiguration = new RealmConfiguration.Builder()
-                                                                       .deleteRealmIfMigrationNeeded()
-                                                                       .name(ItemDbSchema.NAME).build();
+        mRealmConfiguration = new RealmConfiguration.Builder()
+                                                    .deleteRealmIfMigrationNeeded()
+                                                    .name(ItemDbSchema.NAME).build();
         Realm.setDefaultConfiguration(mRealmConfiguration);
         mRealm = Realm.getDefaultInstance();
 
@@ -97,9 +98,19 @@ public class Accountant {
         return MoneyUtils.prep(mTotalMoney - cost, mContext);
     }
 
-     private void updateItemList() {
-         mItemList = mRealm.where(Item.class).findAllSorted("mPrice", Sort.DESCENDING);
-     }
+    private void updateItemList() {
+        mItemList = mRealm.where(Item.class).findAllSorted("mPrice", Sort.DESCENDING);
+    }
+
+    public static RealmConfiguration getRealmConfiguration() {
+        if (mRealmConfiguration == null) {
+            mRealmConfiguration = new RealmConfiguration.Builder()
+                                                        .deleteRealmIfMigrationNeeded()
+                                                        .name(ItemDbSchema.NAME)
+                                                        .build();
+        }
+        return mRealmConfiguration;
+    }
 
     public String individualPriceOf(Item i) {
         return MoneyUtils.prep(i.getPrice(), mContext);
