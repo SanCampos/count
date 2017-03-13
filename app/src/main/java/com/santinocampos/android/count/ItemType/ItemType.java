@@ -30,6 +30,7 @@ public enum ItemType {
     public static int getImageIdOf(int itemType) {
         return values()[itemType].getImageID();
     }
+
     public int getItemTypeNameID() {
         return mTypeNameID;
     }
