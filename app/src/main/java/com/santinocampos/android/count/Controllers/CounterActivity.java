@@ -57,7 +57,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mAccountant = new Accountant(this);
+        mAccountant = new Accountant();
 
         mAllowanceTextView = (TextView) findViewById(R.id.text_view_allowance);
         mChangeTextView = (TextView) findViewById(R.id.text_view_change);
@@ -158,7 +158,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
 
     public void removeItem(String itemName, double itemPrice) {
         mAccountant.removeItem(itemName, itemPrice);
-        mAdapter.notifyDataSetChanged();
+        mAdapter.notifyItemInserted(mAdapter.getItemCount());
         updateChange();
     }
 

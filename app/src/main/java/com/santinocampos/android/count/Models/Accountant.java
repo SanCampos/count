@@ -24,36 +24,37 @@ public class Accountant {
 
     private List<Item> mItemList;
 
-    public Accountant(Context context) {
-        Realm.init(context);
+    public Accountant() {
+        mTotalMoney = 0;
+        mContext = ApplicationContext.get();
+        mItemList = new ArrayList<>();
+
+        Realm.init(mContext);
         RealmConfiguration mRealmConfiguration = new RealmConfiguration.Builder()
                                                                        .deleteRealmIfMigrationNeeded()
                                                                        .name(ItemDbSchema.NAME).build();
         Realm.setDefaultConfiguration(mRealmConfiguration);
         mRealm = Realm.getDefaultInstance();
 
-        mTotalMoney = 0;
-        mContext = context.getApplicationContext();
-        mItemList = new ArrayList<>();
         updateItemList();
     }
 
     public void addItem(final Item latestItem) {
         mRealm.beginTransaction();
+        Number firstId = mRealm.where(Item.class).max("ID");
+        int nextId = firstId != null ? firstId.intValue() + 1 : 0;
         Item firstItem = mRealm.where(Item.class)
-                               .equalTo("mName", latestItem.getName())
-                               .equalTo("mPrice", latestItem.getPrice())
-                               .findFirst();
-        Number maxId = mRealm.where(Item.class).max("ID");
-        int nextId =  maxId == null ? 0 : maxId.intValue() + 1;
+                .equalTo("mName", latestItem.getName())
+                .equalTo("mPrice", latestItem.getPrice())
+                .findFirst();
+
         if (firstItem == null) {
             latestItem.setID(nextId);
             mRealm.copyToRealm(latestItem);
-        } else {
-            firstItem.setCount(firstItem.getCount() + latestItem.getCount());
+        } else  {
+            firstItem.setCount(firstItem.getCount() +  latestItem.getCount());
         }
         mRealm.commitTransaction();
-        updateItemList();
     }
 
     public void removeItem(String itemName, double itemPrice) {

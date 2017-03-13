@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
+import com.santinocampos.android.count.Models.ApplicationContext;
+
 import io.realm.Realm;
 
 /**
@@ -16,7 +18,8 @@ public class ListClearingReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Toast.makeText(context, "DELETING", Toast.LENGTH_SHORT).show();
-        Realm realm =  Realm.getDefaultInstance();
+        Realm.init(ApplicationContext.get());
+        Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
         realm.deleteAll();
         realm.commitTransaction();
