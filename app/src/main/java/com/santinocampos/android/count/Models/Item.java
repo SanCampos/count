@@ -50,7 +50,7 @@ public class Item extends RealmObject{
         mCount = count;
     }
 
-    public int getItemType() {
+    public int getItemTypeInt() {
         return mItemType;
     }
 
@@ -62,22 +62,16 @@ public class Item extends RealmObject{
         this.ID = ID;
     }
 
-    /** public ItemType getItemType() {
+    /** public ItemType getItemTypeInt() {
         return mItemType;
     }  **/
 
     @Override
     public boolean equals(Object object) {
-        if (object == null) return false;
-        else if (object.getClass() != this.getClass()) return false;
+        if (object == null || !(object instanceof Item)) return false;
+        Item item = ((Item) object);
 
-        Item item = (Item) object;
-
-        if (!item.getName().equals(this.getName())) return false;
-        else if (item.getPrice() != this.getPrice()) return false;
-        //else if (!item.getItemType().equals(this.getItemType())) return false;
-
-        return true;
+        return item.getID() == ID;
     }
 
     @Override

@@ -2,7 +2,6 @@ package com.santinocampos.android.count.Controllers;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
@@ -20,7 +19,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.santinocampos.android.count.Adapter.RecyclerViewCursorAdapter;
 import com.santinocampos.android.count.Dialogs.AbstractDialog;
 import com.santinocampos.android.count.Dialogs.ConfirmClearDialog;
 import com.santinocampos.android.count.Dialogs.ConfirmClearMoneyDialog;
@@ -95,6 +93,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         private TextView mItemInitialPriceTextView;
         private TextView mItemTotalPriceTextView;
         private TextView mItemCountTextView;
+        private TextView mItemTypeIntTextViewNOTVISIBLE;
         private ImageView mItemTypeImageView;
 
         /**
@@ -107,6 +106,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
             mItemInitialPriceTextView = (TextView) itemView.findViewById(R.id.item_initialPrice_textView);
             mItemTotalPriceTextView = (TextView) itemView.findViewById(R.id.item_totalPrice_textView);
             mItemTypeImageView = (ImageView) itemView.findViewById(R.id.itemType_imageView);
+            mItemTypeIntTextViewNOTVISIBLE = (TextView) itemView.findViewById(R.id.item_typeInt_textView_INVISIBLE);
         }
 
         public void bindItem(Item item) {
@@ -114,15 +114,24 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
             mItemCountTextView.setText("x" + mAccountant.countOf(item));
             mItemInitialPriceTextView.setText(mAccountant.individualPriceOf(item));
             mItemTotalPriceTextView.setText(mAccountant.totalPriceOf(item));
+            mItemTypeIntTextViewNOTVISIBLE.setText(String.valueOf(item.getItemTypeInt()));
             if (Build.VERSION.SDK_INT < 21) {
-                mItemTypeImageView.setImageDrawable(getResources().getDrawable(ItemType.getImageIdOf(item.getItemType()))); //Fix this shit
+                mItemTypeImageView.setImageDrawable(getResources().getDrawable(ItemType.getImageIdOf(item.getItemTypeInt()))); //Fix this shit
             } else {
-                mItemTypeImageView.setImageDrawable(getResources().getDrawable(ItemType.getImageIdOf(item.getItemType()), getTheme()));
+                mItemTypeImageView.setImageDrawable(getResources().getDrawable(ItemType.getImageIdOf(item.getItemTypeInt()), getTheme()));
             }
+        }
+
+        public int getItemTypeInt() {
+            return Integer.parseInt(mItemTypeIntTextViewNOTVISIBLE.getText().toString());
         }
 
         public String getItemName()  {
             return mItemNameTextView.getText().toString();
+        }
+
+        public int getItemCount() {
+            return Integer.parseInt(mItemCountTextView.getText().toString().replace("x", ""));
         }
 
         public String getItemPrice() {
@@ -130,6 +139,11 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
             price = price.replaceAll("[^0-9]", ""); //REGEX MAKES YOUR PROBLEMS EASIER TO SOLVE, USE THIS
             return String.valueOf(Double.parseDouble(price)); //This is how you fix bugs, highest layer of abstraction first.
         }
+
+        public Item getItem() {
+            return new Item(getItemName(),  Double.parseDouble(getItemPrice()), getItemCount(), getItemTypeInt());
+        }
+
     }
 
     private class ItemAdapter extends RecyclerView.Adapter<ItemHolder> {
@@ -146,6 +160,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         @Override
         public void onBindViewHolder(ItemHolder holder, int position) {
             holder.bindItem(mAccountant.getItemList().get(position));
+            int test = 0;
         }
 
         @Override
@@ -156,14 +171,13 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
 
     @Override
     public void addItem(Item item) {
-        mAccountant.addItem(item);
-        mAdapter.notifyDataSetChanged();
+        mAdapter.notifyItemInserted(mAccountant.addItem(item));
         updateChange();
     }
 
-    public void removeItem(String itemName, double itemPrice) {
-        mAccountant.removeItem(itemName, itemPrice);
-        mAdapter.notifyDataSetChanged();
+    public void removeItem(Item removedItem, int position) {
+        mAccountant.removeItem(removedItem);
+        mAdapter.notifyItemRemoved(position);
         updateChange();
     }
 
@@ -190,7 +204,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                 ItemHolder holder = (ItemHolder) viewHolder;
-                removeItem(holder.getItemName(), Double.parseDouble(holder.getItemPrice()));
+                removeItem(holder.getItem(), viewHolder.getAdapterPosition());
             }
         };
 
