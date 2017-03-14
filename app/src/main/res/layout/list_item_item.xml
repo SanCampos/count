@@ -60,4 +60,11 @@
         android:textSize="13sp"
         tools:text="38P"/>
 
+    <TextView
+        android:id="@+id/item_typeInt_textView_INVISIBLE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="0.0"
+        tools:text="fksjd;lfajdlkdaf"/>
+
 </RelativeLayout>

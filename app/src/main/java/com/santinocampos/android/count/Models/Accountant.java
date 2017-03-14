@@ -1,6 +1,7 @@
 package com.santinocampos.android.count.Models;
 
 import android.content.Context;
+import android.support.v7.util.SortedList;
 
 import com.santinocampos.android.count.Database.ItemDbSchema;
 import com.santinocampos.android.count.Utils.MoneyUtils;
@@ -40,7 +41,7 @@ public class Accountant {
         updateItemList();
     }
 
-    public void addItem(final Item latestItem) {
+    public int addItem(final Item latestItem) {
         mRealm.beginTransaction();
         Number firstId = mRealm.where(Item.class).max("ID");
         int nextId = firstId != null ? firstId.intValue() + 1 : 0;
@@ -56,17 +57,25 @@ public class Accountant {
             firstItem.setCount(firstItem.getCount() +  latestItem.getCount());
         }
         mRealm.commitTransaction();
+        updateItemList();
+
+        int index = mItemList.indexOf(latestItem);
+        return index;
     }
 
-    public void removeItem(String itemName, double itemPrice) {
+    public int removeItem(Item item) {
+        int indexOfItem = mItemList.indexOf(item);
+
         mRealm.beginTransaction();
         RealmResults<Item> items = mRealm.where(Item.class)
-                                       .equalTo("mName", itemName)
-                                       .equalTo("mPrice", itemPrice)
+                                       .equalTo("mName", item.getName())
+                                       .equalTo("mPrice", item.getPrice())
                                        .findAll();
         items.deleteAllFromRealm();
-        updateItemList();
         mRealm.commitTransaction();
+        updateItemList();
+
+        return indexOfItem;
     }
 
     public void addMoney(double money, boolean isSet) {
