@@ -2,6 +2,8 @@ package com.santinocampos.android.count.Models;
 
 import android.content.Context;
 import android.support.v7.util.SortedList;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.santinocampos.android.count.Database.ItemDbSchema;
 import com.santinocampos.android.count.Utils.MoneyUtils;

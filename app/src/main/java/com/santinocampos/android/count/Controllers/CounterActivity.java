@@ -160,6 +160,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         @Override
         public void onBindViewHolder(ItemHolder holder, int position) {
             holder.bindItem(mAccountant.getItemList().get(position));
+            int test = 0;
         }
 
         @Override
