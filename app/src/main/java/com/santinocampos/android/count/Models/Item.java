@@ -68,16 +68,10 @@ public class Item extends RealmObject{
 
     @Override
     public boolean equals(Object object) {
-        if (object == null) return false;
-        else if (object.getClass() != this.getClass()) return false;
+        if (object == null || !(object instanceof Item)) return false;
+        Item item = ((Item) object);
 
-        Item item = (Item) object;
-
-        if (!item.getName().equals(this.getName())) return false;
-        else if (item.getPrice() != this.getPrice()) return false;
-        //else if (!item.getItemTypeInt().equals(this.getItemTypeInt())) return false;
-
-        return true;
+        return item.getID() == ID;
     }
 
     @Override
