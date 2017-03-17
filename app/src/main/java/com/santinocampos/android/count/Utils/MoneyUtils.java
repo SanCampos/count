@@ -10,11 +10,6 @@ import com.santinocampos.android.count.Models.Currency;
  */
 public class MoneyUtils {
 
-    private static char PESO = 'P';
-    private static char DOLLAR = '$';
-
-    private static char CURRENT_CURRENCY = PESO;
-
     public static String prep(double money, Context context) {
         return DecUtils.clean(money) + getCurrentCurrencySymbol(context);
     }
