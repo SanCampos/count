@@ -29,12 +29,6 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     private static String LOG_CURRENT_CURRENCY = "CURRENT_CURRENCY";
     private static String LOG_ISCLEARLIST_CHECKED = "IS_CHECKED";
 
-    private Context triggerContext;
-
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        triggerContext = getActivity().getBaseContext();
-    }
     @Override
     public void onResume() {
         super.onResume();
@@ -57,9 +51,10 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     private void initListPreference() {
         ListPreference listPreference = ((ListPreference) findPreference("key_change_currency"));
         listPreference.setEntries(Currency.currencyEntries());
-        listPreference.setEntryValues(Currency.currencyValues());
+        listPreference.setEntryValues(Currency.currencyValues()); /** There's got to be a better way to do this **/
+                                                                  /** Anyway to instantiate an array as a sequence of integers? **/
 
-        int index = PreferenceManager.getDefaultSharedPreferences(getContext()).getInt(getContext().getString(R.string.keyValue_currency), 0);
+        int index = PreferenceManager.getDefaultSharedPreferences(getContext()).getInt("KEY_CURRENCY", 0);
         listPreference.setValueIndex(index);
     }
 
@@ -94,18 +89,14 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
             sharedPreferences.edit().putString("KEY_PHONE_NO", phoneNo).apply();
         } else if (key.equals("key_change_currency")) {
             ListPreference listPreference =  (ListPreference) findPreference(key);
-            listPreference.setSummary(Currency.values()[Integer.parseInt(listPreference.getValue())].getName());
-            int currentCurrency = sharedPreferences.getInt("KEY_CURRENCY", 0);
-            Log.i(LOG_CURRENT_CURRENCY, String.valueOf(currentCurrency));
-            sharedPreferences.edit().putInt("KEY_CURRENCY", Integer.parseInt(listPreference.getValue())).apply();
-            String value = listPreference.getValue();
-            currentCurrency = sharedPreferences.getInt("KEY_CURRENCY", 0);
-            Log.i(LOG_CURRENT_CURRENCY, String.valueOf(currentCurrency));
+            int chosenCurrency = Integer.parseInt(listPreference.getValue());
+            listPreference.setSummary(Currency.values()[chosenCurrency].getName());
+            sharedPreferences.edit().putInt("KEY_CURRENCY", chosenCurrency).apply();
         } else if (key.equals("key_change_clearList")) {
             CheckBoxPreference clearListPreference = ((CheckBoxPreference) findPreference(key));
             boolean isChecked = clearListPreference.isChecked();
             sharedPreferences.edit().putBoolean("KEY_CLEARLIST", isChecked).apply();
-            checkToStartClearService(triggerContext);
+            checkToStartClearService(getContext());
         }
     }
 

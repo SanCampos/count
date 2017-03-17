@@ -46,7 +46,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
 
     private Accountant mAccountant;
 
-    private RecyclerView mRecyclerView;
+    private RecyclerView       mRecyclerView;
     private ItemAdapter mAdapter;
 
     @Override
@@ -111,7 +111,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
 
         public void bindItem(Item item) {
             mItemNameTextView.setText(item.getName());
-            mItemCountTextView.setText("x" + mAccountant.countOf(item));
+            mItemCountTextView.setText(getString(R.string.text_item_count_string, mAccountant.countOf(item)));
             mItemInitialPriceTextView.setText(mAccountant.individualPriceOf(item));
             mItemTotalPriceTextView.setText(mAccountant.totalPriceOf(item));
             mItemTypeIntTextViewNOTVISIBLE.setText(String.valueOf(item.getItemTypeInt()));

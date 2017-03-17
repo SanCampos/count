@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <receiver android:name=".ListManipulation.ListClearingReceiver"/>
+        <receiver android:name=".ListManipulation.ListClearingAlarm$ListClearingReceiver"/>
 
         <activity
             android:name=".Controllers.CounterActivity"

@@ -81,4 +81,7 @@
     <string name="text_change_left">Change left:</string>
     <string name="text_total_money">Total money:</string>
 
+    <!-- Item List Display Strings -->
+    <string name="text_item_count_string">x%1$s</string>
+
 </resources>

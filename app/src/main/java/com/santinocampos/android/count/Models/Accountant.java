@@ -1,17 +1,13 @@
 package com.santinocampos.android.count.Models;
 
 import android.content.Context;
-import android.support.v7.util.SortedList;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.santinocampos.android.count.Database.ItemDbSchema;
-import com.santinocampos.android.count.Utils.MoneyUtils;
+import com.santinocampos.android.count.Utils.NumberUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import io.realm.ItemRealmProxy;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
@@ -70,8 +66,7 @@ public class Accountant {
 
         mRealm.beginTransaction();
         RealmResults<Item> items = mRealm.where(Item.class)
-                                       .equalTo("mName", item.getName())
-                                       .equalTo("mPrice", item.getPrice())
+                                       .equalTo("ID", item.getID())
                                        .findAll();
         items.deleteAllFromRealm();
         mRealm.commitTransaction();
@@ -93,7 +88,7 @@ public class Accountant {
     }
 
     public String getTotalMoneyInformation() {
-        return MoneyUtils.prep(mTotalMoney, mContext);
+        return NumberUtils.MONEY.prep(mTotalMoney, mContext);
     }
 
     public List<Item> getItemList() {
@@ -106,7 +101,7 @@ public class Accountant {
         for (Item item : mItemList)
             cost += item.getPrice() * item.getCount();
 
-        return MoneyUtils.prep(mTotalMoney - cost, mContext);
+        return NumberUtils.MONEY.prep(mTotalMoney - cost, mContext);
     }
 
     private void updateItemList() {
@@ -124,11 +119,11 @@ public class Accountant {
     }
 
     public String individualPriceOf(Item i) {
-        return MoneyUtils.prep(i.getPrice(), mContext);
+        return NumberUtils.MONEY.prep(i.getPrice(), mContext);
     }
 
     public String totalPriceOf(Item i) {
-       return MoneyUtils.prep(i.getCount() * i.getPrice(), mContext);
+       return NumberUtils.MONEY.prep(i.getCount() * i.getPrice(), mContext);
     }
 
     public String countOf(Item i) {
