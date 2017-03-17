@@ -18,7 +18,7 @@ import io.realm.Sort;
  */
 public class Accountant {
     private double mTotalMoney;
-    private Context mContext;
+    private static Context mContext;
     private Realm mRealm;
     private static RealmConfiguration mRealmConfiguration;
 
@@ -30,14 +30,12 @@ public class Accountant {
         mItemList = new ArrayList<>();
 
         Realm.init(mContext);
-        mRealmConfiguration = new RealmConfiguration.Builder()
-                                                    .deleteRealmIfMigrationNeeded()
-                                                    .name(ItemDbSchema.NAME).build();
+        mRealmConfiguration = getRealmConfiguration();
         Realm.setDefaultConfiguration(mRealmConfiguration);
         mRealm = Realm.getDefaultInstance();
 
         updateItemList();
-    }
+       }
 
     public int addItem(final Item latestItem) {
         mRealm.beginTransaction();
@@ -108,7 +106,7 @@ public class Accountant {
         mItemList = mRealm.where(Item.class).findAllSorted("mPrice", Sort.DESCENDING);
     }
 
-    public static RealmConfiguration getRealmConfiguration() {
+    public static RealmConfiguration  getRealmConfiguration() {
         if (mRealmConfiguration == null) {
             mRealmConfiguration = new RealmConfiguration.Builder()
                                                         .deleteRealmIfMigrationNeeded()
