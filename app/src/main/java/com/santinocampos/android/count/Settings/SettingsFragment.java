@@ -57,9 +57,10 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     private void initListPreference() {
         ListPreference listPreference = ((ListPreference) findPreference("key_change_currency"));
         listPreference.setEntries(Currency.currencyEntries());
-        listPreference.setEntryValues(Currency.currencyValues());
+        listPreference.setEntryValues(Currency.currencyValues()); /** There's got to be a better way to do this **/
+                                                                  /** Anyway to instantiate an array as a sequence of integers? **/
 
-        int index = PreferenceManager.getDefaultSharedPreferences(getContext()).getInt(getContext().getString(R.string.keyValue_currency), 0);
+        int index = PreferenceManager.getDefaultSharedPreferences(getContext()).getInt("KEY_CURRENCY", 0);
         listPreference.setValueIndex(index);
     }
 
