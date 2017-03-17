@@ -46,7 +46,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
 
     private Accountant mAccountant;
 
-    private RecyclerView mRecyclerView;
+    private RecyclerView       mRecyclerView;
     private ItemAdapter mAdapter;
 
     @Override
