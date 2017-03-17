@@ -44,6 +44,7 @@
     <string name="toast_no_money">You have no money!</string>
     <string name="toast_error_empty_list">Your list is empty!</string>
     <string name="toast_error_adding_money">You\'re not adding any money!</string>
+    <string name="toast_invalid_phoneNo">Your chosen phone number is invalid!</string>
 
     <!-- Item Type Enum Names -->
     <string name="itemType_gadgets">Gadgets</string>

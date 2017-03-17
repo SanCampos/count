@@ -160,7 +160,6 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         @Override
         public void onBindViewHolder(ItemHolder holder, int position) {
             holder.bindItem(mAccountant.getItemList().get(position));
-            int test = 0;
         }
 
         @Override
@@ -278,7 +277,6 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     @Override
     public void exportList()  {
         ListSender.exportItemList(mAccountant.getItemList(), this, mAccountant);
-        Toast.makeText(CounterActivity.this, R.string.toast_success_export, Toast.LENGTH_LONG).show();
     }
 
     private void updateMoneyDetails() {

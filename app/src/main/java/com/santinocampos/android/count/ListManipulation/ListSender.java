@@ -6,6 +6,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.telephony.SmsManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.santinocampos.android.count.Models.Accountant;
 import com.santinocampos.android.count.Models.Item;
@@ -22,8 +23,14 @@ public class ListSender {
     public static void exportItemList(List<Item> list, Context context, Accountant accountant) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         String phoneNo = preferences.getString("KEY_PHONE_NO", "");
-        SmsManager.getDefault()
-                  .sendTextMessage(phoneNo, null, createItemList(list, accountant, context), null, null);
+
+        if (phoneNo.length() < 11) {
+            Toast.makeText(context, R.string.toast_invalid_phoneNo, Toast.LENGTH_SHORT).show();
+        } else {
+            SmsManager.getDefault()
+                    .sendTextMessage(phoneNo, null, createItemList(list, accountant, context), null, null);
+            Toast.makeText(context, R.string.toast_success_export, Toast.LENGTH_SHORT).show();
+        }
     }
 
     @NonNull
