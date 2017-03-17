@@ -94,13 +94,9 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
             sharedPreferences.edit().putString("KEY_PHONE_NO", phoneNo).apply();
         } else if (key.equals("key_change_currency")) {
             ListPreference listPreference =  (ListPreference) findPreference(key);
-            listPreference.setSummary(Currency.values()[Integer.parseInt(listPreference.getValue())].getName());
-            int currentCurrency = sharedPreferences.getInt("KEY_CURRENCY", 0);
-            Log.i(LOG_CURRENT_CURRENCY, String.valueOf(currentCurrency));
-            sharedPreferences.edit().putInt("KEY_CURRENCY", Integer.parseInt(listPreference.getValue())).apply();
-            String value = listPreference.getValue();
-            currentCurrency = sharedPreferences.getInt("KEY_CURRENCY", 0);
-            Log.i(LOG_CURRENT_CURRENCY, String.valueOf(currentCurrency));
+            int chosenCurrency = Integer.parseInt(listPreference.getValue());
+            listPreference.setSummary(Currency.values()[chosenCurrency].getName());
+            sharedPreferences.edit().putInt("KEY_CURRENCY", chosenCurrency).apply();
         } else if (key.equals("key_change_clearList")) {
             CheckBoxPreference clearListPreference = ((CheckBoxPreference) findPreference(key));
             boolean isChecked = clearListPreference.isChecked();
