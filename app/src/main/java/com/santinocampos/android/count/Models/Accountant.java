@@ -41,8 +41,8 @@ public class Accountant {
 
     public int addItem(final Item latestItem) {
         mRealm.beginTransaction();
-        Number firstId = mRealm.where(Item.class).max("ID");
-        int nextId = firstId != null ? firstId.intValue() + 1 : 0;
+        Number latestID = mRealm.where(Item.class).max("ID");
+        int nextId = latestID != null ? latestID.intValue() + 1 : 0;
         Item firstItem = mRealm.where(Item.class)
                 .equalTo("mName", latestItem.getName())
                 .equalTo("mPrice", latestItem.getPrice())
