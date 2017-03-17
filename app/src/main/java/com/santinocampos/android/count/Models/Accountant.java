@@ -66,8 +66,7 @@ public class Accountant {
 
         mRealm.beginTransaction();
         RealmResults<Item> items = mRealm.where(Item.class)
-                                       .equalTo("mName", item.getName())
-                                       .equalTo("mPrice", item.getPrice())
+                                       .equalTo("ID", item.getID())
                                        .findAll();
         items.deleteAllFromRealm();
         mRealm.commitTransaction();
