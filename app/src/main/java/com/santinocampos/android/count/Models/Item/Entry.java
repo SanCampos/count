@@ -7,7 +7,7 @@ import io.realm.annotations.PrimaryKey;
 /**
  * Created by thedr on 11/1/2016.
  */
-public class Item extends RealmObject{
+public class Entry extends RealmObject{
     @PrimaryKey
     private int ID;
 
@@ -16,17 +16,17 @@ public class Item extends RealmObject{
     private int mCount;
     private int mItemType;
 
-    public Item() {/** Required due to Realm **/ }
+    public Entry() {/** Required due to Realm **/ }
 
-    public Item(String mName, double mPrice, int count, int itemType) {
+    public Entry(String mName, double mPrice, int count, int itemType) {
         this.mName = mName;
         this.mPrice = mPrice;
         this.mCount = count;
         this.mItemType = itemType;
     }
 
-     /**public Item(String mName, double mPrice, int count) {
-        this(mName, mPrice, count, ItemType.NO_TYPE);
+     /**public Entry(String mName, double mPrice, int count) {
+        this(mName, mPrice, count, EntryType.NO_TYPE);
     } **/
 
     public String getName() {
@@ -65,16 +65,16 @@ public class Item extends RealmObject{
         this.ID = ID;
     }
 
-    /** public ItemType getItemTypeInt() {
+    /** public EntryType getItemTypeInt() {
         return mItemType;
     }  **/
 
     @Override
     public boolean equals(Object object) {
-        if (object == null || !(object instanceof Item)) return false;
-        Item item = ((Item) object);
+        if (object == null || !(object instanceof Entry)) return false;
+        Entry mEntry = ((Entry) object);
 
-        return item.getID() == ID;
+        return mEntry.getID() == ID;
     }
 
     @Override

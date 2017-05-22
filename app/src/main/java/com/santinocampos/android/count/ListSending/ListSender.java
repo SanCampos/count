@@ -8,7 +8,7 @@ import android.telephony.SmsManager;
 import android.widget.Toast;
 
 import com.santinocampos.android.count.Models.Accountant;
-import com.santinocampos.android.count.Models.Item.Item;
+import com.santinocampos.android.count.Models.Item.Entry;
 import com.santinocampos.android.count.R;
 
 import java.util.List;
@@ -21,7 +21,7 @@ import static com.santinocampos.android.count.Utils.NumberUtils.MONEY.money;
 public class ListSender {
 
     public static void exportItemList(Accountant accountant, Context context) {
-        List<Item> list = accountant.getItemList();
+        List<Entry> list = accountant.getEntryList();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         String phoneNo = preferences.getString("KEY_PHONE_NO", "");
 
@@ -35,18 +35,18 @@ public class ListSender {
     }
 
     @NonNull
-    private static String createItemList(Accountant accountant, List<Item> list, Context context) {
-        StringBuilder output = new StringBuilder(context.getString(R.string.text_total_money) + " " + money(accountant.getTotalAllowance()) + "\n\n");
+    private static String createItemList(Accountant accountant, List<Entry> list, Context context) {
+        StringBuilder output = new StringBuilder(context.getString(R.string.text_total_money) + " " + money(accountant.getTotalMoney()) + "\n\n");
 
-        for (Item i : list)
-            output.append(i.getName())
+        for (Entry e : list)
+            output.append(e.getName())
                     .append(" - ")                             //
                     .append("(")
-                    .append(String.valueOf(i))
+                    .append(String.valueOf(e))
                     .append("x) ")
-                    .append(money(i.getPrice()))
+                    .append(money(e.getPrice()))
                     .append("\n")
-                    .append(money(i.getTotalPrice()))
+                    .append(money(e.getTotalPrice()))
                     .append("\n\n");
 
         output.append(context.getString(R.string.text_change_left)).append(" ").append(accountant.getChange());

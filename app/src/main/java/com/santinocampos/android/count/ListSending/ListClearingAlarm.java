@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import com.santinocampos.android.count.ListActivity.ListActivity;
 import com.santinocampos.android.count.Models.Accountant;
-import com.santinocampos.android.count.Models.Item.Item;
+import com.santinocampos.android.count.Models.Item.Entry;
 import com.santinocampos.android.count.R;
 
 import java.util.Calendar;
@@ -46,7 +46,7 @@ public class ListClearingAlarm {
             Realm.init(context);
             Realm realm = Realm.getInstance(Accountant.getRealmConfiguration());
 
-            if (!realm.where(Item.class).findAll().isEmpty()) {
+            if (!realm.where(Entry.class).findAll().isEmpty()) {
                 realm.beginTransaction();
                 realm.deleteAll();
                 realm.commitTransaction();

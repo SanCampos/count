@@ -22,12 +22,12 @@ import com.santinocampos.android.count.Dialogs.AbstractDialog;
 import com.santinocampos.android.count.Dialogs.ConfirmClearDialog;
 import com.santinocampos.android.count.Dialogs.ConfirmClearMoneyDialog;
 import com.santinocampos.android.count.Dialogs.ConfirmExportDialog;
-import com.santinocampos.android.count.Models.Item.ItemType;
+import com.santinocampos.android.count.Models.Item.Entry;
+import com.santinocampos.android.count.Models.Item.EntryType;
 import com.santinocampos.android.count.Settings.SettingsActivity;
 import com.santinocampos.android.count.ListSending.ListSender;
 import com.santinocampos.android.count.Listeners.DialogListener;
 import com.santinocampos.android.count.Models.Accountant;
-import com.santinocampos.android.count.Models.Item.Item;
 import com.santinocampos.android.count.R;
 import com.santinocampos.android.count.Dialogs.AddItemDialog;
 import com.santinocampos.android.count.Dialogs.AddMoneyDialog;
@@ -88,7 +88,7 @@ public class ListActivity extends AppCompatActivity implements DialogListener {
     protected void onPause() {
         super.onPause();
         mPreferences.edit()
-                    .putLong(TOTAL_MONEY, Double.doubleToLongBits(mAccountant.getTotalAllowance()))
+                    .putLong(TOTAL_MONEY, Double.doubleToLongBits(mAccountant.getTotalMoney()))
                     .apply();
     }
 
@@ -113,16 +113,16 @@ public class ListActivity extends AppCompatActivity implements DialogListener {
             mItemIdTextViewINVISIBLE = (TextView) itemView.findViewById(R.id.item_ID_textView_INVISIBLE);
         }
 
-        public void bindItem(Item item) {
-            mItemNameTextView.setText(item.getName());
-            mItemCountTextView.setText(getString(R.string.text_item_count_string, item.getCount()));
-            mItemInitialPriceTextView.setText(money(item.getPrice()));
-            mItemTotalPriceTextView.setText(money(item.getTotalPrice()));
-            mItemIdTextViewINVISIBLE.setText(String.valueOf(item.getID()));
+        public void bindItem(Entry entry) {
+            mItemNameTextView.setText(entry.getName());
+            mItemCountTextView.setText(getString(R.string.text_item_count_string, entry.getCount()));
+            mItemInitialPriceTextView.setText(money(entry.getPrice()));
+            mItemTotalPriceTextView.setText(money(entry.getTotalPrice()));
+            mItemIdTextViewINVISIBLE.setText(String.valueOf(entry.getID()));
             if (Build.VERSION.SDK_INT < 21) {
-                mItemTypeImageView.setImageDrawable(getResources().getDrawable(ItemType.getImageIdOf(item.getItemTypeInt()))); //Fix this shit
+                mItemTypeImageView.setImageDrawable(getResources().getDrawable(EntryType.getImageIdOf(entry.getItemTypeInt()))); //Fix this shit
             } else {
-                mItemTypeImageView.setImageDrawable(getResources().getDrawable(ItemType.getImageIdOf(item.getItemTypeInt()), getTheme()));
+                mItemTypeImageView.setImageDrawable(getResources().getDrawable(EntryType.getImageIdOf(entry.getItemTypeInt()), getTheme()));
             }
         }
 
@@ -144,23 +144,23 @@ public class ListActivity extends AppCompatActivity implements DialogListener {
 
         @Override
         public void onBindViewHolder(ItemHolder holder, int position) {
-            holder.bindItem(mAccountant.getItemList().get(position));
+            holder.bindItem(mAccountant.getEntryList().get(position));
         }
 
         @Override
         public int getItemCount() {
-            return mAccountant.getItemList().size();
+            return mAccountant.getEntryList().size();
         }
 
         @Override
         public long getItemId(int position) {
-            return mAccountant.getItemList().get(position).hashCode();
+            return mAccountant.getEntryList().get(position).hashCode();
         }
     }
 
     @Override
-    public void addItem(Item item) {
-        mAccountant.addItem(item);
+    public void addItem(Entry entry) {
+        mAccountant.addItem(entry);
         mAdapter.notifyDataSetChanged();
         updateChange();
     }
@@ -229,7 +229,7 @@ public class ListActivity extends AppCompatActivity implements DialogListener {
     }
 
     private void checkIfNoMoneyToStart(ConfirmClearMoneyDialog confirmClearMoneyDialog) {
-        if (mAccountant.getTotalAllowance() != 0) {
+        if (mAccountant.getTotalMoney() != 0) {
             startDialog(confirmClearMoneyDialog);
         } else Toast.makeText(this, R.string.toast_no_money, Toast.LENGTH_SHORT).show();
     }
@@ -259,7 +259,7 @@ public class ListActivity extends AppCompatActivity implements DialogListener {
     }
 
     private void checkIfListIsEmptyToStart(AbstractDialog abstractDialog) {
-        List<Item> list = mAccountant.getItemList();
+        List<Entry> list = mAccountant.getEntryList();
 
         if (list.size() != 0) {
             startDialog(abstractDialog);
@@ -273,7 +273,7 @@ public class ListActivity extends AppCompatActivity implements DialogListener {
     }
 
     private void updateMoneyDetails() {
-       mAllowanceTextView.setText(money(mAccountant.getTotalAllowance()));
+       mAllowanceTextView.setText(money(mAccountant.getTotalMoney()));
        updateChange();
     }
 

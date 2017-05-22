@@ -46,7 +46,7 @@
     <string name="toast_error_adding_money">You\'re not adding any money!</string>
     <string name="toast_invalid_phoneNo">Your chosen phone number is invalid!</string>
 
-    <!-- Item Type Enum Names -->
+    <!-- Entry Type Enum Names -->
     <string name="itemType_gadgets">Gadgets</string>
     <string name="itemType_food_drink">Food &amp; Drink</string>
     <string name="itemType_misc_payment">Misc.</string>
@@ -82,7 +82,7 @@
     <string name="text_change_left">Change left:</string>
     <string name="text_total_money">Total money:</string>
 
-    <!-- Item List Display Strings -->
+    <!-- Entry List Display Strings -->
     <string name="text_item_count_string">x%1$d</string> <!-- CARE TO EXPLAIN YOURSELF PAST SELF?!??!?!?!?-->
     <string name="notn_title_clear">Item list cleared!</string>
     <string name="notn_content_clear">Your item list has been cleared!</string>

@@ -2,8 +2,7 @@ package com.santinocampos.android.count.Models;
 
 import android.content.Context;
 
-import com.santinocampos.android.count.Database.ItemDbSchema;
-import com.santinocampos.android.count.Models.Item.Item;
+import com.santinocampos.android.count.Models.Item.Entry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,12 +23,12 @@ public class Accountant {
     private Realm mRealm;
     private static RealmConfiguration mRealmConfiguration;
 
-    private List<Item> mItemList;
+    private List<Entry> mEntryList;
 
     public Accountant(Context context) {
         mTotalMoney = 0;
         mContext = context.getApplicationContext();
-        mItemList = new ArrayList<>();
+        mEntryList = new ArrayList<>();
 
         Realm.init(mContext);
         mRealmConfiguration = getRealmConfiguration();
@@ -39,19 +38,19 @@ public class Accountant {
         updateItemList();
        }
 
-    public void addItem(final Item latestItem) {
+    public void addItem(final Entry latestEntry) {
         mRealm.beginTransaction();
-        Number latestID = mRealm.where(Item.class).max("ID");
+        Number latestID = mRealm.where(Entry.class).max("ID");
         int nextId = latestID != null ? latestID.intValue() + 1 : 0;
-        Item firstItem = mRealm.where(Item.class)
-                               .equalTo("mName", latestItem.getName())
-                               .equalTo("mPrice", latestItem.getPrice())
+        Entry mFirstEntry = mRealm.where(Entry.class)
+                               .equalTo("mName", latestEntry.getName())
+                               .equalTo("mPrice", latestEntry.getPrice())
                                .findFirst();
-        if (firstItem == null) {
-            latestItem.setID(nextId);
-            mRealm.copyToRealm(latestItem);
+        if (mFirstEntry == null) {
+            latestEntry.setID(nextId);
+            mRealm.copyToRealm(latestEntry);
         } else {
-            firstItem.setCount(firstItem.getCount() +  latestItem.getCount());
+            mFirstEntry.setCount(mFirstEntry.getCount() +  latestEntry.getCount());
         }
         mRealm.commitTransaction();
         updateItemList();
@@ -59,10 +58,10 @@ public class Accountant {
 
     public void removeItem(int ID) {
         mRealm.beginTransaction();
-        RealmResults<Item> items = mRealm.where(Item.class)
+        RealmResults<Entry> mEntries = mRealm.where(Entry.class)
                                        .equalTo("ID", ID)
                                        .findAll();
-        items.deleteAllFromRealm();
+        mEntries.deleteAllFromRealm();
         mRealm.commitTransaction();
         updateItemList();
     }
@@ -75,32 +74,32 @@ public class Accountant {
          addMoney(0, true);
     }
 
-    public double getTotalAllowance() {
+    public double getTotalMoney() {
         return mTotalMoney;
     }
 
-    public List<Item> getItemList() {
-        return mItemList;
+    public List<Entry> getEntryList() {
+        return mEntryList;
     }
 
     public String getChange() {
         double cost = 0;
 
-        for (Item item : mItemList)
-            cost += item.getPrice() * item.getCount();
+        for (Entry mEntry : mEntryList)
+            cost += mEntry.getPrice() * mEntry.getCount();
 
         return money(mTotalMoney - cost);
     }
 
     private void updateItemList() {
-        mItemList = mRealm.where(Item.class).findAllSorted("mPrice", Sort.DESCENDING);
+        mEntryList = mRealm.where(Entry.class).findAllSorted("mPrice", Sort.DESCENDING);
     }
 
     public static RealmConfiguration  getRealmConfiguration() {
         if (mRealmConfiguration == null) {
             mRealmConfiguration = new RealmConfiguration.Builder()
                                                         .deleteRealmIfMigrationNeeded()
-                                                        .name(ItemDbSchema.NAME)
+                                                        .name("itemDB")
                                                         .build();
         }
         return mRealmConfiguration;

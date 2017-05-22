@@ -14,16 +14,16 @@ import com.santinocampos.android.count.R;
  * Created by thedr on 1/9/2017.
  */
 
-public class ItemTypeAdapter extends ArrayAdapter<ItemType> {
+public class EntryTypeAdapter extends ArrayAdapter<EntryType> {
 
     private Context mContext;
-    private ItemType[] mItemTypes;
+    private EntryType[] mEntryTypes;
 
-    public ItemTypeAdapter(Context context, int resource, ItemType[] types) {
+    public EntryTypeAdapter(Context context, int resource, EntryType[] types) {
         super(context, resource, types);
 
         mContext = context;
-        mItemTypes = types;
+        mEntryTypes = types;
     }
 
     @Override
@@ -45,8 +45,8 @@ public class ItemTypeAdapter extends ArrayAdapter<ItemType> {
             LayoutInflater inflater = LayoutInflater.from(mContext);
             view = inflater.inflate(R.layout.support_simple_spinner_dropdown_item, parent, false);
         }
-        ItemType itemType = mItemTypes[position];
-        String typeName = mContext.getString(itemType.getItemTypeNameID());
+        EntryType mEntryType = mEntryTypes[position];
+        String typeName = mContext.getString(mEntryType.getItemTypeNameID());
         TextView textView = (TextView) view.findViewById(android.R.id.text1);
         textView.setText(typeName);
         return view;

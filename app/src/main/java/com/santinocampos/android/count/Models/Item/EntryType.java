@@ -6,7 +6,7 @@ import com.santinocampos.android.count.R;
  * Created by thedr on 1/2/2017.
  */
 
-public enum ItemType {
+public enum EntryType {
 
     FOOD_DRINK(R.drawable.ic_food_drink, R.string.itemType_food_drink),
     ENTERTAINMENT(R.drawable.ic_entertainment, R.string.itemType_entertainment),
@@ -18,7 +18,7 @@ public enum ItemType {
     private int mTypeNameID;
     private int mImageID;
 
-    ItemType(int imageID, int itemTypeName) {
+    EntryType(int imageID, int itemTypeName) {
         this.mImageID = imageID;
         this.mTypeNameID = itemTypeName;
     }
