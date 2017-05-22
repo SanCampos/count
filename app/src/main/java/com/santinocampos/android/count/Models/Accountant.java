@@ -50,7 +50,7 @@ public class Accountant {
             latestEntry.setID(nextId);
             mRealm.copyToRealm(latestEntry);
         } else {
-            mFirstEntry.setCount(mFirstEntry.getCount() +  latestEntry.getCount());
+            mFirstEntry.updateCount(latestEntry.getCount());
         }
         mRealm.commitTransaction();
         updateItemList();
@@ -86,13 +86,13 @@ public class Accountant {
         double cost = 0;
 
         for (Entry mEntry : mEntryList)
-            cost += mEntry.getPrice() * mEntry.getCount();
+            cost += mEntry.getTotalPrice();
 
         return money(mTotalMoney - cost);
     }
 
     private void updateItemList() {
-        mEntryList = mRealm.where(Entry.class).findAllSorted("mPrice", Sort.DESCENDING);
+        mEntryList = mRealm.where(Entry.class).findAllSorted("mTotalPrice", Sort.DESCENDING);
     }
 
     public static RealmConfiguration  getRealmConfiguration() {

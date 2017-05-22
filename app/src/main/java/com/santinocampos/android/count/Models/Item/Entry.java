@@ -14,6 +14,7 @@ public class Entry extends RealmObject{
     private String mName;
     private double mPrice;
     private int mCount;
+    private double mTotalPrice;
     private int mItemType;
 
     public Entry() {/** Required due to Realm **/ }
@@ -22,6 +23,7 @@ public class Entry extends RealmObject{
         this.mName = mName;
         this.mPrice = mPrice;
         this.mCount = count;
+        updateTotalPrice();
         this.mItemType = itemType;
     }
 
@@ -45,16 +47,20 @@ public class Entry extends RealmObject{
         return mCount;
     }
 
-    public void setCount(int count) {
-        mCount = count;
+    public void updateCount(int count) {
+        mCount += count;
+        updateTotalPrice();
     }
 
+    private void updateTotalPrice() {
+        mTotalPrice = mPrice * mCount;
+    }
     public int getItemTypeInt() {
         return mItemType;
     }
 
     public double getTotalPrice() {
-        return getPrice() * getCount();
+        return mTotalPrice;
     }
 
     public int getID() {
