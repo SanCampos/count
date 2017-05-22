@@ -53,6 +53,10 @@ public class Item extends RealmObject{
         return mItemType;
     }
 
+    public double getTotalPrice() {
+        return getPrice() * getCount();
+    }
+
     public int getID() {
         return ID;
     }

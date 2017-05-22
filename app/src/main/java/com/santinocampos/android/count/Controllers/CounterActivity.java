@@ -31,8 +31,11 @@ import com.santinocampos.android.count.Models.Item;
 import com.santinocampos.android.count.R;
 import com.santinocampos.android.count.Dialogs.AddItemDialog;
 import com.santinocampos.android.count.Dialogs.AddMoneyDialog;
+import static com.santinocampos.android.count.Utils.NumberUtils.MONEY.*;
 
 import java.util.List;
+
+
 
 public class CounterActivity extends AppCompatActivity implements DialogListener {
 
@@ -65,7 +68,9 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
 
         mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
+        // Update money and currency symbol
         addMoney(Double.longBitsToDouble(mPreferences.getLong(TOTAL_MONEY, 0)), true);
+        setCurrentCurrencySymbol(this);
 
         startUI();
         startItemHelper();
@@ -83,7 +88,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     protected void onPause() {
         super.onPause();
         mPreferences.edit()
-                    .putLong(TOTAL_MONEY, Double.doubleToLongBits(mAccountant.getTotalMoney()))
+                    .putLong(TOTAL_MONEY, Double.doubleToLongBits(mAccountant.getTotalAllowance()))
                     .apply();
     }
 
@@ -110,9 +115,9 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
 
         public void bindItem(Item item) {
             mItemNameTextView.setText(item.getName());
-            mItemCountTextView.setText(getString(R.string.text_item_count_string, mAccountant.countOf(item)));
-            mItemInitialPriceTextView.setText(mAccountant.individualPriceOf(item));
-            mItemTotalPriceTextView.setText(mAccountant.totalPriceOf(item));
+            mItemCountTextView.setText(getString(R.string.text_item_count_string, item.getCount()));
+            mItemInitialPriceTextView.setText(money(item.getPrice()));
+            mItemTotalPriceTextView.setText(money(item.getTotalPrice()));
             mItemIdTextViewINVISIBLE.setText(String.valueOf(item.getID()));
             if (Build.VERSION.SDK_INT < 21) {
                 mItemTypeImageView.setImageDrawable(getResources().getDrawable(ItemType.getImageIdOf(item.getItemTypeInt()))); //Fix this shit
@@ -224,7 +229,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     }
 
     private void checkIfNoMoneyToStart(ConfirmClearMoneyDialog confirmClearMoneyDialog) {
-        if (mAccountant.getTotalMoney() != 0) {
+        if (mAccountant.getTotalAllowance() != 0) {
             startDialog(confirmClearMoneyDialog);
         } else Toast.makeText(this, R.string.toast_no_money, Toast.LENGTH_SHORT).show();
     }
@@ -263,11 +268,12 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
 
     @Override
     public void exportList()  {
-        ListSender.exportItemList(mAccountant.getItemList(), this, mAccountant);
+        ListSender.exportItemList(mAccountant, this);
+        //bro you can optimize this shit
     }
 
     private void updateMoneyDetails() {
-       mAllowanceTextView.setText(mAccountant.getTotalMoneyInformation());
+       mAllowanceTextView.setText(money(mAccountant.getTotalAllowance()));
        updateChange();
     }
 

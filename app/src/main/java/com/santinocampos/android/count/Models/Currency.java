@@ -25,6 +25,7 @@ public enum Currency {
         return symbol;
     }
 
+    //For preferences box
     public static String[] currencyEntries() {
         String[] entries = new String[values().length];
 
@@ -34,6 +35,7 @@ public enum Currency {
         return entries;
     }
 
+    //For preferences box
     public static String[] currencyValues() {
         String[] entryValues = new String[values().length];
 

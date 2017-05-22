@@ -14,19 +14,21 @@ public class NumberUtils {
 
     public static class MONEY {
 
-        public static String prep(double money, Context context) {
-            return DECIMAL.clean(money) + getCurrentCurrencySymbol(context);
+        private static char cSymbol;
+        
+        public static String money(double money) {
+            return DECIMAL.clean(money) + cSymbol;
         }
 
-        private static char getCurrentCurrencySymbol(Context context) {
+        public static void setCurrentCurrencySymbol(Context context) {
             int currencyIndex = PreferenceManager.getDefaultSharedPreferences(context).getInt("KEY_CURRENCY", 0);
-            return Currency.values()[currencyIndex].getSymbol();
+            cSymbol = Currency.values()[currencyIndex].getSymbol();
         }
     }
 
-    public static class DECIMAL {
+    private static class DECIMAL {
 
-        public static String clean(double money) {
+        private static String clean(double money) {
             StringBuilder decimalFormat = new StringBuilder("#,###");
             if (money % 1 != 0) decimalFormat.append(".00");
 

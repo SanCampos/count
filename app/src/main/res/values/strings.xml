@@ -83,7 +83,7 @@
     <string name="text_total_money">Total money:</string>
 
     <!-- Item List Display Strings -->
-    <string name="text_item_count_string">x%1$s</string>
+    <string name="text_item_count_string">x%1$d</string> <!-- CARE TO EXPLAIN YOURSELF PAST SELF?!??!?!?!?-->
     <string name="notn_title_clear">Item list cleared!</string>
     <string name="notn_content_clear">Your item list has been cleared!</string>
 

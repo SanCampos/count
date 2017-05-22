@@ -11,4 +11,5 @@ public interface DialogListener {
     void exportList();
     void clearList();
     void clearMoney();
+    //THIS IS FISHY
 }

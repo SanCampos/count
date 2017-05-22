@@ -13,6 +13,8 @@ import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
 import io.realm.Sort;
 
+import static com.santinocampos.android.count.Utils.NumberUtils.MONEY.money;
+
 /**
  * Created by thedr on 11/1/2016.
  */
@@ -73,12 +75,8 @@ public class Accountant {
          addMoney(0, true);
     }
 
-    public double getTotalMoney() {
+    public double getTotalAllowance() {
         return mTotalMoney;
-    }
-
-    public String getTotalMoneyInformation() {
-        return NumberUtils.MONEY.prep(mTotalMoney, mContext);
     }
 
     public List<Item> getItemList() {
@@ -91,7 +89,7 @@ public class Accountant {
         for (Item item : mItemList)
             cost += item.getPrice() * item.getCount();
 
-        return NumberUtils.MONEY.prep(mTotalMoney - cost, mContext);
+        return money(mTotalMoney - cost);
     }
 
     private void updateItemList() {
@@ -106,18 +104,6 @@ public class Accountant {
                                                         .build();
         }
         return mRealmConfiguration;
-    }
-
-    public String individualPriceOf(Item i) {
-        return NumberUtils.MONEY.prep(i.getPrice(), mContext);
-    }
-
-    public String totalPriceOf(Item i) {
-       return NumberUtils.MONEY.prep(i.getCount() * i.getPrice(), mContext);
-    }
-
-    public String countOf(Item i) {
-       return String.valueOf(i.getCount());
     }
 
     public void clearList() {

@@ -15,12 +15,15 @@ import com.santinocampos.android.count.Settings.SettingsActivity;
 
 import java.util.List;
 
+import static com.santinocampos.android.count.Utils.NumberUtils.MONEY.money;
+
 /**
  * Created by thedr on 12/15/2016.
  */
 public class ListSender {
 
-    public static void exportItemList(List<Item> list, Context context, Accountant accountant) {
+    public static void exportItemList(Accountant accountant, Context context) {
+        List<Item> list = accountant.getItemList();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         String phoneNo = preferences.getString("KEY_PHONE_NO", "");
 
@@ -28,24 +31,24 @@ public class ListSender {
             Toast.makeText(context, R.string.toast_invalid_phoneNo, Toast.LENGTH_SHORT).show();
         } else {
             SmsManager.getDefault()
-                    .sendTextMessage(phoneNo, null, createItemList(list, accountant, context), null, null);
+                    .sendTextMessage(phoneNo, null, createItemList(accountant, list, context), null, null);
             Toast.makeText(context, R.string.toast_success_export, Toast.LENGTH_SHORT).show();
         }
     }
 
     @NonNull
-    private static String createItemList(List<Item> list, Accountant accountant, Context context) {
-        StringBuilder output = new StringBuilder(context.getString(R.string.text_total_money) + " " + accountant.getTotalMoneyInformation() + "\n\n");
+    private static String createItemList(Accountant accountant, List<Item> list, Context context) {
+        StringBuilder output = new StringBuilder(context.getString(R.string.text_total_money) + " " + money(accountant.getTotalAllowance()) + "\n\n");
 
         for (Item i : list)
             output.append(i.getName())
                     .append(" - ")                             //
                     .append("(")
-                    .append(accountant.countOf(i))
+                    .append(String.valueOf(i))
                     .append("x) ")
-                    .append(accountant.individualPriceOf(i))
+                    .append(money(i.getPrice()))
                     .append("\n")
-                    .append(accountant.totalPriceOf(i))
+                    .append(money(i.getTotalPrice()))
                     .append("\n\n");
 
         output.append(context.getString(R.string.text_change_left)).append(" ").append(accountant.getChange());
