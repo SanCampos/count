@@ -37,40 +37,32 @@ public class Accountant {
         updateItemList();
        }
 
-    public int addItem(final Item latestItem) {
+    public void addItem(final Item latestItem) {
         mRealm.beginTransaction();
         Number latestID = mRealm.where(Item.class).max("ID");
         int nextId = latestID != null ? latestID.intValue() + 1 : 0;
         Item firstItem = mRealm.where(Item.class)
-                .equalTo("mName", latestItem.getName())
-                .equalTo("mPrice", latestItem.getPrice())
-                .findFirst();
-
+                               .equalTo("mName", latestItem.getName())
+                               .equalTo("mPrice", latestItem.getPrice())
+                               .findFirst();
         if (firstItem == null) {
             latestItem.setID(nextId);
             mRealm.copyToRealm(latestItem);
-        } else  {
+        } else {
             firstItem.setCount(firstItem.getCount() +  latestItem.getCount());
         }
         mRealm.commitTransaction();
         updateItemList();
-
-        int index = mItemList.indexOf(latestItem);
-        return index;
     }
 
-    public int removeItem(Item item) {
-        int indexOfItem = mItemList.indexOf(item);
-
+    public void removeItem(int ID) {
         mRealm.beginTransaction();
         RealmResults<Item> items = mRealm.where(Item.class)
-                                       .equalTo("ID", item.getID())
+                                       .equalTo("ID", ID)
                                        .findAll();
         items.deleteAllFromRealm();
         mRealm.commitTransaction();
         updateItemList();
-
-        return indexOfItem;
     }
 
     public void addMoney(double money, boolean isSet) {

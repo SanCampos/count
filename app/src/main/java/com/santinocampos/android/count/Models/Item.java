@@ -23,7 +23,6 @@ public class Item extends RealmObject{
         this.mPrice = mPrice;
         this.mCount = count;
         this.mItemType = itemType;
-        this.ID = 0;
     }
 
      /**public Item(String mName, double mPrice, int count) {

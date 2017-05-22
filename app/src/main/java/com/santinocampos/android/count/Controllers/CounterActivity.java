@@ -7,7 +7,6 @@ import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -46,7 +45,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
 
     private Accountant mAccountant;
 
-    private RecyclerView       mRecyclerView;
+    private RecyclerView mRecyclerView;
     private ItemAdapter mAdapter;
 
     @Override
@@ -62,7 +61,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         mChangeTextView = (TextView) findViewById(R.id.text_view_change);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setLayoutManager(new CustomLinearLayoutManager(this));
 
         mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -93,7 +92,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         private TextView mItemInitialPriceTextView;
         private TextView mItemTotalPriceTextView;
         private TextView mItemCountTextView;
-        private TextView mItemTypeIntTextViewNOTVISIBLE;
+        private TextView mItemIdTextViewINVISIBLE;
         private ImageView mItemTypeImageView;
 
         /**
@@ -106,7 +105,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
             mItemInitialPriceTextView = (TextView) itemView.findViewById(R.id.item_initialPrice_textView);
             mItemTotalPriceTextView = (TextView) itemView.findViewById(R.id.item_totalPrice_textView);
             mItemTypeImageView = (ImageView) itemView.findViewById(R.id.itemType_imageView);
-            mItemTypeIntTextViewNOTVISIBLE = (TextView) itemView.findViewById(R.id.item_typeInt_textView_INVISIBLE);
+            mItemIdTextViewINVISIBLE = (TextView) itemView.findViewById(R.id.item_ID_textView_INVISIBLE);
         }
 
         public void bindItem(Item item) {
@@ -114,7 +113,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
             mItemCountTextView.setText(getString(R.string.text_item_count_string, mAccountant.countOf(item)));
             mItemInitialPriceTextView.setText(mAccountant.individualPriceOf(item));
             mItemTotalPriceTextView.setText(mAccountant.totalPriceOf(item));
-            mItemTypeIntTextViewNOTVISIBLE.setText(String.valueOf(item.getItemTypeInt()));
+            mItemIdTextViewINVISIBLE.setText(String.valueOf(item.getID()));
             if (Build.VERSION.SDK_INT < 21) {
                 mItemTypeImageView.setImageDrawable(getResources().getDrawable(ItemType.getImageIdOf(item.getItemTypeInt()))); //Fix this shit
             } else {
@@ -122,28 +121,9 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
             }
         }
 
-        public int getItemTypeInt() {
-            return Integer.parseInt(mItemTypeIntTextViewNOTVISIBLE.getText().toString());
+        public int getId() {
+            return Integer.parseInt(mItemIdTextViewINVISIBLE.getText().toString());
         }
-
-        public String getItemName()  {
-            return mItemNameTextView.getText().toString();
-        }
-
-        public int getItemCount() {
-            return Integer.parseInt(mItemCountTextView.getText().toString().replace("x", ""));
-        }
-
-        public String getItemPrice() {
-            String price = mItemInitialPriceTextView.getText().toString();
-            price = price.replaceAll("[^0-9]", ""); //REGEX MAKES YOUR PROBLEMS EASIER TO SOLVE, USE THIS
-            return String.valueOf(Double.parseDouble(price)); //This is how you fix bugs, highest layer of abstraction first.
-        }
-
-        public Item getItem() {
-            return new Item(getItemName(),  Double.parseDouble(getItemPrice()), getItemCount(), getItemTypeInt());
-        }
-
     }
 
     private class ItemAdapter extends RecyclerView.Adapter<ItemHolder> {
@@ -166,17 +146,23 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
         public int getItemCount() {
             return mAccountant.getItemList().size();
         }
+
+        @Override
+        public long getItemId(int position) {
+            return mAccountant.getItemList().get(position).hashCode();
+        }
     }
 
     @Override
     public void addItem(Item item) {
-        mAdapter.notifyItemInserted(mAccountant.addItem(item));
+        mAccountant.addItem(item);
+        mAdapter.notifyDataSetChanged();
         updateChange();
     }
 
-    public void removeItem(Item removedItem, int position) {
-        mAccountant.removeItem(removedItem);
-        mAdapter.notifyItemRemoved(position);
+    public void removeItem(int itemId) {
+        mAccountant.removeItem(itemId);
+        mAdapter.notifyDataSetChanged();
         updateChange();
     }
 
@@ -189,6 +175,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
     private void startUI() {
         if (mAdapter == null) {
             mAdapter = new ItemAdapter();
+            mAdapter.setHasStableIds(true);
             mRecyclerView.setAdapter(mAdapter);
         }
     }
@@ -203,7 +190,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                 ItemHolder holder = (ItemHolder) viewHolder;
-                removeItem(holder.getItem(), viewHolder.getAdapterPosition());
+                removeItem(holder.getId());
             }
         };
 
