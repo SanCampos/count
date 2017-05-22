@@ -1,4 +1,4 @@
-package com.santinocampos.android.count.ListManipulation;
+package com.santinocampos.android.count.ListSending;
 
 import android.app.AlarmManager;
 import android.app.NotificationManager;
@@ -7,12 +7,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
 import android.widget.Toast;
 
-import com.santinocampos.android.count.Controllers.CounterActivity;
+import com.santinocampos.android.count.ListActivity.ListActivity;
 import com.santinocampos.android.count.Models.Accountant;
-import com.santinocampos.android.count.Models.Item;
+import com.santinocampos.android.count.Models.Item.Item;
 import com.santinocampos.android.count.R;
 
 import java.util.Calendar;
@@ -63,7 +62,7 @@ public class ListClearingAlarm {
                                                                          .setContentTitle(context.getString(R.string.notn_title_clear))
                                                                          .setContentInfo(context.getString(R.string.notn_content_clear));
 
-            Intent resultIntent = new Intent(context, CounterActivity.class);
+            Intent resultIntent = new Intent(context, ListActivity.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             mBuilder.setContentIntent(pendingIntent);
 

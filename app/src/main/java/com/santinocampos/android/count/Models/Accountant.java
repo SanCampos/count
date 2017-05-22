@@ -3,7 +3,7 @@ package com.santinocampos.android.count.Models;
 import android.content.Context;
 
 import com.santinocampos.android.count.Database.ItemDbSchema;
-import com.santinocampos.android.count.Utils.NumberUtils;
+import com.santinocampos.android.count.Models.Item.Item;
 
 import java.util.ArrayList;
 import java.util.List;

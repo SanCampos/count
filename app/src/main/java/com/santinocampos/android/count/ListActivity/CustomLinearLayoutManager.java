@@ -1,4 +1,4 @@
-package com.santinocampos.android.count.Controllers;
+package com.santinocampos.android.count.ListActivity;
 
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;

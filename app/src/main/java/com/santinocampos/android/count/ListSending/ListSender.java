@@ -1,17 +1,15 @@
-package com.santinocampos.android.count.ListManipulation;
+package com.santinocampos.android.count.ListSending;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.telephony.SmsManager;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.santinocampos.android.count.Models.Accountant;
-import com.santinocampos.android.count.Models.Item;
+import com.santinocampos.android.count.Models.Item.Item;
 import com.santinocampos.android.count.R;
-import com.santinocampos.android.count.Settings.SettingsActivity;
 
 import java.util.List;
 

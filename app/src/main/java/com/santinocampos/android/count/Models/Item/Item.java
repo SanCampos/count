@@ -1,4 +1,4 @@
-package com.santinocampos.android.count.Models;
+package com.santinocampos.android.count.Models.Item;
 
 
 import io.realm.RealmObject;

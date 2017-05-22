@@ -1,6 +1,6 @@
 package com.santinocampos.android.count.Listeners;
 
-import com.santinocampos.android.count.Models.Item;
+import com.santinocampos.android.count.Models.Item.Item;
 
 /**
  * Created by thedr on 11/16/2016.

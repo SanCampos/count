@@ -1,4 +1,4 @@
-package com.santinocampos.android.count.ItemType;
+package com.santinocampos.android.count.Models.Item;
 
 import android.content.Context;
 import android.view.LayoutInflater;

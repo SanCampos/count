@@ -1,4 +1,4 @@
-package com.santinocampos.android.count.ItemType;
+package com.santinocampos.android.count.Models.Item;
 
 import com.santinocampos.android.count.R;
 

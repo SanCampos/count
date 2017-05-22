@@ -12,7 +12,7 @@ import android.support.v7.preference.PreferenceManager;
 import android.widget.Toast;
 
 
-import com.santinocampos.android.count.ListManipulation.ListClearingAlarm;
+import com.santinocampos.android.count.ListSending.ListClearingAlarm;
 import com.santinocampos.android.count.Models.Currency;
 import com.santinocampos.android.count.R;
 import static com.santinocampos.android.count.Utils.NumberUtils.MONEY.*;

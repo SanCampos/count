@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -14,9 +13,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.santinocampos.android.count.ItemType.ItemTypeAdapter;
-import com.santinocampos.android.count.Models.Item;
-import com.santinocampos.android.count.ItemType.ItemType;
+import com.santinocampos.android.count.Models.Item.ItemTypeAdapter;
+import com.santinocampos.android.count.Models.Item.Item;
+import com.santinocampos.android.count.Models.Item.ItemType;
 import com.santinocampos.android.count.R;
 
 public class AddItemDialog extends AbstractDialog {

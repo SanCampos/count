@@ -1,4 +1,4 @@
-package com.santinocampos.android.count.Controllers;
+package com.santinocampos.android.count.ListActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -22,12 +22,12 @@ import com.santinocampos.android.count.Dialogs.AbstractDialog;
 import com.santinocampos.android.count.Dialogs.ConfirmClearDialog;
 import com.santinocampos.android.count.Dialogs.ConfirmClearMoneyDialog;
 import com.santinocampos.android.count.Dialogs.ConfirmExportDialog;
-import com.santinocampos.android.count.ItemType.ItemType;
+import com.santinocampos.android.count.Models.Item.ItemType;
 import com.santinocampos.android.count.Settings.SettingsActivity;
-import com.santinocampos.android.count.ListManipulation.ListSender;
+import com.santinocampos.android.count.ListSending.ListSender;
 import com.santinocampos.android.count.Listeners.DialogListener;
 import com.santinocampos.android.count.Models.Accountant;
-import com.santinocampos.android.count.Models.Item;
+import com.santinocampos.android.count.Models.Item.Item;
 import com.santinocampos.android.count.R;
 import com.santinocampos.android.count.Dialogs.AddItemDialog;
 import com.santinocampos.android.count.Dialogs.AddMoneyDialog;
@@ -37,7 +37,7 @@ import java.util.List;
 
 
 
-public class CounterActivity extends AppCompatActivity implements DialogListener {
+public class ListActivity extends AppCompatActivity implements DialogListener {
 
     private static final String TOTAL_MONEY = "totalMoney";
 
@@ -263,7 +263,7 @@ public class CounterActivity extends AppCompatActivity implements DialogListener
 
         if (list.size() != 0) {
             startDialog(abstractDialog);
-        } else Toast.makeText(CounterActivity.this, R.string.toast_error_empty_list, Toast.LENGTH_SHORT).show();
+        } else Toast.makeText(ListActivity.this, R.string.toast_error_empty_list, Toast.LENGTH_SHORT).show();
     }
 
     @Override
