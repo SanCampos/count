@@ -83,8 +83,10 @@
     <string name="text_total_money">Total money:</string>
 
     <!-- Entry List Display Strings -->
-    <string name="text_item_count_string">x%1$d</string> <!-- CARE TO EXPLAIN YOURSELF PAST SELF?!??!?!?!?-->
+    <string name="text_item_count_string">x%1$d</string>
     <string name="notn_title_clear">Item list cleared!</string>
     <string name="notn_content_clear">Your item list has been cleared!</string>
+    <string name="amt_for_day">Amt. for the day: </string>
+    <string name="balance_label">Remaining balance:</string>
 
 </resources>
