@@ -82,13 +82,13 @@ public class Accountant {
         return mEntryList;
     }
 
-    public String getChange() {
+    public double getChange() {
         double cost = 0;
 
         for (Entry mEntry : mEntryList)
             cost += mEntry.getTotalPrice();
 
-        return money(mTotalMoney - cost);
+        return mTotalMoney - cost;
     }
 
     private void updateItemList() {

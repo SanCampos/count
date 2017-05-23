@@ -8,49 +8,49 @@
     android:fitsSystemWindows="true"
     tools:context="com.santinocampos.android.count.ListActivity.ListActivity">
 
-    <android.support.design.widget.AppBarLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="85dp"
+        android:minHeight="85dp"
+        android:elevation="4dp"
+        android:background="@color/colorToolBar"
+        android:paddingBottom="5dp"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:minHeight="?attr/actionBarSize"
-            android:background="@color/colorToolBar"
-            app:theme="@style/AppTheme.PopupOverlay"/>
-
-        <android.support.v7.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="38dp"
+            android:layout_height="58dp"
+            android:minHeight="58dp"
             android:background="@color/colorToolBar"
             app:theme="@style/AppTheme.PopupOverlay">
-
-            <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="@string/allowance"
-                style="@style/InfoText"/>
-
-            <TextView
-                android:id="@+id/text_view_allowance"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginRight="16dp"
-                android:layout_marginEnd="16dp"
-                style="@style/InfoText"/>
-
         </android.support.v7.widget.Toolbar>
 
-    </android.support.design.widget.AppBarLayout>
+        <TextView
+            android:id="@+id/textView"
+            style="@style/InfoText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:text="@string/allowance"/>
 
-    <include
-        android:layout_marginTop="100dp"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        layout="@layout/content_counter"/>
+        <TextView
+            android:id="@+id/text_view_allowance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp"
+            tools:text="500P"
+            style="@style/InfoText"/>
+
+    </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_addItem"
@@ -60,5 +60,11 @@
         android:layout_gravity="bottom|end"
         app:backgroundTint="@color/colorToolBar"
         android:src="@drawable/ic_fab_additem"/>
+
+    <include
+        layout="@layout/content_counter"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="100dp"/>
 
 </android.support.design.widget.CoordinatorLayout>

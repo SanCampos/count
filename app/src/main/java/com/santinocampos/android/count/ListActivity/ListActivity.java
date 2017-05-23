@@ -72,7 +72,7 @@ public class ListActivity extends AppCompatActivity implements DialogListener {
         addMoney(Double.longBitsToDouble(mPreferences.getLong(TOTAL_MONEY, 0)), true);
         setCurrentCurrencySymbol(this);
 
-        startUI();
+        initUI();
         startItemHelper();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_addItem);
@@ -177,12 +177,13 @@ public class ListActivity extends AppCompatActivity implements DialogListener {
         updateMoneyDetails();
     }
 
-    private void startUI() {
+    private void initUI() {
         if (mAdapter == null) {
             mAdapter = new ItemAdapter();
             mAdapter.setHasStableIds(true);
             mRecyclerView.setAdapter(mAdapter);
         }
+        updateMoneyDetails();
     }
 
     private void startItemHelper() {
@@ -278,6 +279,6 @@ public class ListActivity extends AppCompatActivity implements DialogListener {
     }
 
     private void updateChange() {
-        mChangeTextView.setText(mAccountant.getChange());
+        mChangeTextView.setText(money(mAccountant.getChange()));
     }
 }
