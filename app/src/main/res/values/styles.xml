@@ -15,6 +15,12 @@
         <item name="colorAccent">@color/colorWallet</item>
     </style>
 
+    <style name="ToolbarBottomStyle" parent="InfoText">
+        <item name="android:layout_marginBottom">2dp</item>
+        <item name="android:elevation">4dp</item>
+        <item name="android:layout_alignBottom">@id/toolbar_info</item>
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
