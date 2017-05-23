@@ -18,53 +18,25 @@
             android:elevation="4dp"
             app:theme="@style/AppTheme.PopupOverlay"/>
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_info"
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:layout_below="@id/toolbar"
-        android:elevation="4dp"
-        android:minHeight="20dp"
-        android:background="@color/colorToolBar"
-        app:theme="@style/AppTheme.PopupOverlay"/>
-
-    <TextView
-        android:id="@+id/textView"
+    <android.support.v7.widget.RecyclerView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/recycler_view"
+        android:orientation="vertical"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@id/toolbar_info"
-        android:layout_alignLeft="@id/toolbar_info"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        style="@style/ToolbarBottomStyle"
-        android:text="@string/allowance"/>
-
-    <TextView
-        android:id="@+id/text_view_allowance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@id/toolbar_info"
-        android:layout_alignRight="@id/toolbar_info"
-        android:layout_marginRight="16dp"
-        android:layout_marginEnd="16dp"
-        tools:text="500P"
-        style="@style/ToolbarBottomStyle"/>
+        android:layout_height="465dp"
+        android:layout_marginTop="65dp"
+        android:layout_marginBottom="13dp"
+        android:layout_centerHorizontal="true">
+    </android.support.v7.widget.RecyclerView>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_addItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_margin="10dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         app:backgroundTint="@color/colorToolBar"
         android:src="@drawable/ic_fab_additem"/>
-
-    <include
-        layout="@layout/content_counter"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="100dp"/>
-
 </RelativeLayout>
