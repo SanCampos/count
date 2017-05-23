@@ -60,8 +60,8 @@ public class ListActivity extends AppCompatActivity implements DialogListener {
 
         mAccountant = new Accountant(this);
 
-        mAllowanceTextView = (TextView) findViewById(R.id.text_view_allowance);
-        mChangeTextView = (TextView) findViewById(R.id.text_view_change);
+       // mAllowanceTextView = (TextView) findViewById(R.id.text_view_allowance);
+       // mChangeTextView = (TextView) findViewById(R.id.text_view_change);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new CustomLinearLayoutManager(this));
@@ -174,7 +174,8 @@ public class ListActivity extends AppCompatActivity implements DialogListener {
     @Override
     public void addMoney(double money, boolean isSet) {
         mAccountant.addMoney(money, isSet);
-        updateMoneyDetails();
+        //updateMoneyDetails();
+        //bro this is redundant
     }
 
     private void initUI() {
@@ -183,7 +184,7 @@ public class ListActivity extends AppCompatActivity implements DialogListener {
             mAdapter.setHasStableIds(true);
             mRecyclerView.setAdapter(mAdapter);
         }
-        updateMoneyDetails();
+        //updateMoneyDetails();
     }
 
     private void startItemHelper() {
