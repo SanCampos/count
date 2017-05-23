@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,56 +8,56 @@
     android:fitsSystemWindows="true"
     tools:context="com.santinocampos.android.count.ListActivity.ListActivity">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="85dp"
-        android:minHeight="85dp"
-        android:elevation="4dp"
-        android:background="@color/colorToolBar"
-        android:paddingBottom="5dp"
-        android:theme="@style/AppTheme.AppBarOverlay">
 
-        <android.support.v7.widget.Toolbar
+    <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="58dp"
-            android:minHeight="58dp"
+            android:layout_height="?attr/actionBarSize"
+            android:minHeight="?attr/actionBarSize"
             android:background="@color/colorToolBar"
-            app:theme="@style/AppTheme.PopupOverlay">
-        </android.support.v7.widget.Toolbar>
+            android:elevation="4dp"
+            app:theme="@style/AppTheme.PopupOverlay"/>
 
-        <TextView
-            android:id="@+id/textView"
-            style="@style/InfoText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:text="@string/allowance"/>
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_info"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_below="@id/toolbar"
+        android:elevation="4dp"
+        android:minHeight="20dp"
+        android:background="@color/colorToolBar"
+        app:theme="@style/AppTheme.PopupOverlay"/>
 
-        <TextView
-            android:id="@+id/text_view_allowance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginRight="16dp"
-            android:layout_marginEnd="16dp"
-            tools:text="500P"
-            style="@style/InfoText"/>
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/toolbar_info"
+        android:layout_alignLeft="@id/toolbar_info"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        style="@style/ToolbarBottomStyle"
+        android:text="@string/allowance"/>
 
-    </RelativeLayout>
+    <TextView
+        android:id="@+id/text_view_allowance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/toolbar_info"
+        android:layout_alignRight="@id/toolbar_info"
+        android:layout_marginRight="16dp"
+        android:layout_marginEnd="16dp"
+        tools:text="500P"
+        style="@style/ToolbarBottomStyle"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_addItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:layout_gravity="bottom|end"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         app:backgroundTint="@color/colorToolBar"
         android:src="@drawable/ic_fab_additem"/>
 
@@ -67,4 +67,4 @@
         android:layout_height="match_parent"
         android:layout_marginTop="100dp"/>
 
-</android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>
