@@ -18,13 +18,14 @@ import com.santinocampos.android.count.R;
  */
 public class AddMoneyDialog extends AbstractDialog {
 
-    private static final String TAG = "AddMoneyDialog";
+    private static final String tagString = "AddMoneyDialog";
 
     private EditText mAddMoneyEditText;
     private CheckBox mCheckBox;
 
     public AddMoneyDialog(){
-        super(TAG);
+        super();
+        this.TAG = tagString;
     }
 
     @Override

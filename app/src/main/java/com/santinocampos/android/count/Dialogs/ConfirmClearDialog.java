@@ -12,10 +12,11 @@ import com.santinocampos.android.count.R;
  */
 public class ConfirmClearDialog extends AbstractDialog {
 
-    private static final String TAG = "ConfirmClearDialog";
+    private static final String tagString = "ConfirmClearDialog";
 
     public ConfirmClearDialog() {
-        super(TAG);
+        super();
+        this.TAG = tagString;
     }
 
     public Dialog onCreateDialog(Bundle savedInstanceState) {

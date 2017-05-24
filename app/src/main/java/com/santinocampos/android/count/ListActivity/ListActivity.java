@@ -22,6 +22,7 @@ import com.santinocampos.android.count.Dialogs.AbstractDialog;
 import com.santinocampos.android.count.Dialogs.ConfirmClearDialog;
 import com.santinocampos.android.count.Dialogs.ConfirmClearMoneyDialog;
 import com.santinocampos.android.count.Dialogs.ConfirmExportDialog;
+import com.santinocampos.android.count.Dialogs.MoneyInfoDialog;
 import com.santinocampos.android.count.Models.Item.Entry;
 import com.santinocampos.android.count.Models.Item.EntryType;
 import com.santinocampos.android.count.Settings.SettingsActivity;
@@ -174,7 +175,8 @@ public class ListActivity extends AppCompatActivity implements DialogListener {
     @Override
     public void addMoney(double money, boolean isSet) {
         mAccountant.addMoney(money, isSet);
-        updateMoneyDetails();
+        //updateMoneyDetails();
+        //bro this is redundant
     }
 
     private void initUI() {
@@ -215,7 +217,7 @@ public class ListActivity extends AppCompatActivity implements DialogListener {
         int itemId = item.getItemId();
 
         switch (itemId) {
-            case R.id.action_add_money : startDialog(new AddMoneyDialog());
+            case R.id.action_money_info: startDialog(new AddMoneyDialog());
                 break;
             case R.id.action_export : checkIfListIsEmptyToStart(new ConfirmExportDialog());
                 break;

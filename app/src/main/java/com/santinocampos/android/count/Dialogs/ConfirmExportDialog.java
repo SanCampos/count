@@ -12,10 +12,11 @@ import com.santinocampos.android.count.R;
  */
 public class ConfirmExportDialog extends AbstractDialog {
 
-    private static final String TAG = "ConfirmExportDialog";
+    private static final String tagString = "ConfirmExportDialog";
 
     public ConfirmExportDialog() {
-        super(TAG);
+        super();
+        this.TAG = tagString;
     }
 
     public Dialog onCreateDialog(Bundle savedInstanceState) {
