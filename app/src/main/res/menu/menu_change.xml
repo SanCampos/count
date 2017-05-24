@@ -5,7 +5,7 @@
       tools:context=".ListActivity.ListActivity">
 
      <item
-         android:id="@+id/action_add_money"
+         android:id="@+id/action_money_info"
          android:title="@string/string_add_money"
          android:icon="@drawable/ic_action_setmoney"
          app:showAsAction="always"/>

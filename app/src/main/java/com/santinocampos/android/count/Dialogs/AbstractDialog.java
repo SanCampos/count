@@ -13,15 +13,10 @@ public abstract class AbstractDialog extends AppCompatDialogFragment {
 
     protected DialogListener mDialogListener;
 
-    private String TAG;
+    protected String TAG;
 
-
-    public AbstractDialog(String s) {
-        setTagString(s);
-    }
-
-    private void setTagString(String s) {
-        TAG = s;
+    public AbstractDialog() {
+        super();
     }
 
     public String getTagString() {

@@ -36,7 +36,7 @@ public class Accountant {
         mRealm = Realm.getDefaultInstance();
 
         updateItemList();
-       }
+    }
 
     public void addItem(final Entry latestEntry) {
         mRealm.beginTransaction();

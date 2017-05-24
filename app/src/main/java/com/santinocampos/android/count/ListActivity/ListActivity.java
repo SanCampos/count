@@ -22,6 +22,7 @@ import com.santinocampos.android.count.Dialogs.AbstractDialog;
 import com.santinocampos.android.count.Dialogs.ConfirmClearDialog;
 import com.santinocampos.android.count.Dialogs.ConfirmClearMoneyDialog;
 import com.santinocampos.android.count.Dialogs.ConfirmExportDialog;
+import com.santinocampos.android.count.Dialogs.MoneyInfoDialog;
 import com.santinocampos.android.count.Models.Item.Entry;
 import com.santinocampos.android.count.Models.Item.EntryType;
 import com.santinocampos.android.count.Settings.SettingsActivity;
@@ -60,8 +61,8 @@ public class ListActivity extends AppCompatActivity implements DialogListener {
 
         mAccountant = new Accountant(this);
 
-        mAllowanceTextView = (TextView) findViewById(R.id.text_view_allowance);
-        mChangeTextView = (TextView) findViewById(R.id.text_view_change);
+       // mAllowanceTextView = (TextView) findViewById(R.id.text_view_allowance);
+       // mChangeTextView = (TextView) findViewById(R.id.text_view_change);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new CustomLinearLayoutManager(this));
@@ -162,19 +163,20 @@ public class ListActivity extends AppCompatActivity implements DialogListener {
     public void addItem(Entry entry) {
         mAccountant.addItem(entry);
         mAdapter.notifyDataSetChanged();
-        updateChange();
+        //updateChange();
     }
 
     public void removeItem(int itemId) {
         mAccountant.removeItem(itemId);
         mAdapter.notifyDataSetChanged();
-        updateChange();
+        //updateChange();
     }
 
     @Override
     public void addMoney(double money, boolean isSet) {
         mAccountant.addMoney(money, isSet);
-        updateMoneyDetails();
+        //updateMoneyDetails();
+        //bro this is redundant
     }
 
     private void initUI() {
@@ -183,7 +185,7 @@ public class ListActivity extends AppCompatActivity implements DialogListener {
             mAdapter.setHasStableIds(true);
             mRecyclerView.setAdapter(mAdapter);
         }
-        updateMoneyDetails();
+        //updateMoneyDetails();
     }
 
     private void startItemHelper() {
@@ -215,7 +217,7 @@ public class ListActivity extends AppCompatActivity implements DialogListener {
         int itemId = item.getItemId();
 
         switch (itemId) {
-            case R.id.action_add_money : startDialog(new AddMoneyDialog());
+            case R.id.action_money_info: startDialog(new MoneyInfoDialog());
                 break;
             case R.id.action_export : checkIfListIsEmptyToStart(new ConfirmExportDialog());
                 break;
@@ -246,6 +248,7 @@ public class ListActivity extends AppCompatActivity implements DialogListener {
     }
 
     private void startDialog(AbstractDialog abstractDialog) {
+        Toast.makeText(this, abstractDialog.getTagString(), Toast.LENGTH_LONG).show();
         getSupportFragmentManager()
                 .beginTransaction()
                 .add(abstractDialog, abstractDialog.getTagString())

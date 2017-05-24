@@ -23,7 +23,7 @@ public class AddItemDialog extends AbstractDialog {
     private static final String ITEM_NAME = "itemName";
     private static final String ITEM_PRICE = "itemPrice";
 
-    private static final String TAG = "AddItemDialog";
+    private static final String tagString = "AddItemDialog";
 
     private Spinner mSpinner;
 
@@ -38,7 +38,8 @@ public class AddItemDialog extends AbstractDialog {
     private static final int MAX_ITEM_COUNT = 9;
 
     public AddItemDialog() {
-        super(TAG);
+        super();
+        this.TAG = tagString;
     }
 
     @Override
