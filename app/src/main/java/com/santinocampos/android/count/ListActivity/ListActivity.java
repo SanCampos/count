@@ -6,6 +6,8 @@ import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -22,6 +24,7 @@ import com.santinocampos.android.count.Dialogs.AbstractDialog;
 import com.santinocampos.android.count.Dialogs.ConfirmClearDialog;
 import com.santinocampos.android.count.Dialogs.ConfirmClearMoneyDialog;
 import com.santinocampos.android.count.Dialogs.ConfirmExportDialog;
+import com.santinocampos.android.count.Dialogs.MoneyInfoDialog;
 import com.santinocampos.android.count.Models.Item.Entry;
 import com.santinocampos.android.count.Models.Item.EntryType;
 import com.santinocampos.android.count.Settings.SettingsActivity;
@@ -33,8 +36,10 @@ import com.santinocampos.android.count.Dialogs.AddItemDialog;
 import com.santinocampos.android.count.Dialogs.AddMoneyDialog;
 import static com.santinocampos.android.count.Utils.NumberUtils.MONEY.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
-
+import java.util.Locale;
 
 
 public class ListActivity extends AppCompatActivity implements DialogListener {
@@ -50,13 +55,27 @@ public class ListActivity extends AppCompatActivity implements DialogListener {
 
     private RecyclerView mRecyclerView;
     private ItemAdapter mAdapter;
+    private ActionBarDrawerToggle drawerToggle;
+    private DrawerLayout mDrawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_counter);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Calendar today = Calendar.getInstance();
+        SimpleDateFormat dayFormat = new SimpleDateFormat("EEE, MMM dd", Locale.US);
+
+        getSupportActionBar().setTitle(dayFormat.format(today.getTime()));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+        drawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, android.R.string.ok, android.R.string.no);
+        mDrawerLayout.addDrawerListener(drawerToggle);
+
 
         mAccountant = new Accountant(this);
 
@@ -72,7 +91,7 @@ public class ListActivity extends AppCompatActivity implements DialogListener {
         addMoney(Double.longBitsToDouble(mPreferences.getLong(TOTAL_MONEY, 0)), true);
         setCurrentCurrencySymbol(this);
 
-        startUI();
+        initUI();
         startItemHelper();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_addItem);
@@ -174,15 +193,17 @@ public class ListActivity extends AppCompatActivity implements DialogListener {
     @Override
     public void addMoney(double money, boolean isSet) {
         mAccountant.addMoney(money, isSet);
-        updateMoneyDetails();
+        //updateMoneyDetails();
+        //bro this is redundant
     }
 
-    private void startUI() {
+    private void initUI() {
         if (mAdapter == null) {
             mAdapter = new ItemAdapter();
             mAdapter.setHasStableIds(true);
             mRecyclerView.setAdapter(mAdapter);
         }
+        updateMoneyDetails();
     }
 
     private void startItemHelper() {
@@ -214,7 +235,7 @@ public class ListActivity extends AppCompatActivity implements DialogListener {
         int itemId = item.getItemId();
 
         switch (itemId) {
-            case R.id.action_add_money : startDialog(new AddMoneyDialog());
+            case R.id.action_money_info: startDialog(new AddMoneyDialog());
                 break;
             case R.id.action_export : checkIfListIsEmptyToStart(new ConfirmExportDialog());
                 break;
@@ -277,7 +298,13 @@ public class ListActivity extends AppCompatActivity implements DialogListener {
        updateChange();
     }
 
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        drawerToggle.syncState();
+    }
+
     private void updateChange() {
-        mChangeTextView.setText(mAccountant.getChange());
+        mChangeTextView.setText(money(mAccountant.getChange()));
     }
 }

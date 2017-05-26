@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<android.support.v4.widget.DrawerLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/drawerLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,57 +13,95 @@
     android:fitsSystemWindows="true"
     tools:context="com.santinocampos.android.count.ListActivity.ListActivity">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.v7.widget.Toolbar
+    <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="52dp"
+            android:layout_height="?attr/actionBarSize"
             android:minHeight="?attr/actionBarSize"
             android:background="@color/colorToolBar"
+            android:elevation="4dp"
             app:theme="@style/AppTheme.PopupOverlay"/>
 
-        <android.support.v7.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="38dp"
-            android:background="@color/colorToolBar"
-            app:theme="@style/AppTheme.PopupOverlay">
-
-            <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="@string/allowance"
-                style="@style/InfoText"/>
-
-            <TextView
-                android:id="@+id/text_view_allowance"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginRight="16dp"
-                android:layout_marginEnd="16dp"
-                style="@style/InfoText"/>
-
-        </android.support.v7.widget.Toolbar>
-
-    </android.support.design.widget.AppBarLayout>
-
-    <include
-        android:layout_marginTop="100dp"
-        android:layout_height="match_parent"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_info"
         android:layout_width="match_parent"
-        layout="@layout/content_counter"/>
+        android:layout_height="20dp"
+        android:layout_below="@id/toolbar"
+        android:elevation="4dp"
+        android:minHeight="20dp"
+        android:background="@color/colorToolBar"
+        app:theme="@style/AppTheme.PopupOverlay"/>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/toolbar_info"
+        android:layout_alignLeft="@id/toolbar_info"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        style="@style/ToolbarBottomStyle"
+        android:text="@string/allowance"/>
+
+    <TextView
+        android:id="@+id/text_view_allowance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/toolbar_info"
+        android:layout_alignRight="@id/toolbar_info"
+        android:layout_marginRight="16dp"
+        android:layout_marginEnd="16dp"
+        tools:text="500P"
+        style="@style/ToolbarBottomStyle"/>
+
+    <android.support.v7.widget.RecyclerView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/recycler_view"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="440dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/toolbar_info"
+        android:layout_centerHorizontal="true">
+    </android.support.v7.widget.RecyclerView>
+
+    <LinearLayout
+        android:id="@+id/wallet_totalBalance"
+        android:orientation="horizontal"
+        android:layout_width="143dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="16dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/rounded_rectangle"
+        android:elevation="4dp">
+
+        <TextView
+            style="@style/Header"
+            android:text="@string/balance"/>
+
+        <TextView
+            style="@style/MoneyText"
+            android:id="@+id/text_view_change"
+            tools:text="10000P"/>
+
+    </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_addItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:layout_gravity="bottom|end"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         app:backgroundTint="@color/colorToolBar"
         android:src="@drawable/ic_fab_additem"/>
+</RelativeLayout>
 
-</android.support.design.widget.CoordinatorLayout>
+    <android.support.design.widget.NavigationView
+        android:id="@+id/navigation"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"/>
+</android.support.v4.widget.DrawerLayout>

@@ -13,10 +13,11 @@ import com.santinocampos.android.count.R;
 
 public class ConfirmClearMoneyDialog extends AbstractDialog {
 
-    private static final String TAG = "ConfirmClearMoneyDialog";
+    private static final String tagString = "ConfirmClearMoneyDialog";
 
     public ConfirmClearMoneyDialog() {
-        super(TAG);
+        super();
+        this.TAG = tagString;
     }
 
     @Override
