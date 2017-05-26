@@ -7,6 +7,7 @@ import com.santinocampos.android.count.Models.Item.Entry;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmResults;

@@ -1,0 +1,158 @@
+Index: app/src/main/java/com/santinocampos/android/count/Views/AddItemFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>windows-1252
+===================================================================
+--- app/src/main/java/com/santinocampos/android/count/Views/AddItemFragment.java	(revision )
++++ app/src/main/java/com/santinocampos/android/count/Views/AddItemFragment.java	(revision )
+@@ -32,12 +32,8 @@
+     private TextView mItemCountTextView;
+ 
+     private static final int MIN_ITEM_COUNT = 1;
+-    private static final int MAX = 9;
++    private static final int MAX_ITEM_COUNT = 9;
+ 
+-    private String mItemName = "";
+-    private String mItemPrice = "";
+-    private int mItemCount = MIN_ITEM_COUNT;
+-
+     public interface AddItemListener {
+         void addItem(Item item, int count);
+     }
+@@ -54,45 +50,16 @@
+     public Dialog onCreateDialog(Bundle savedInstanceState) {
+         View v = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_add_item, null);
+ 
+-        if (savedInstanceState != null) {
+-            mItemName = savedInstanceState.getString(ITEM_NAME, "");
+-            mItemPrice = savedInstanceState.getString(ITEM_PRICE, "");
+-            mItemCount = savedInstanceState.getInt(ITEM_COUNT, MIN_ITEM_COUNT);
+-        }
+-
+         mItemNameEditText = (EditText) v.findViewById(R.id.input_add_item_name);
+-        mItemNameEditText.setText(mItemName);
+-        mItemNameEditText.addTextChangedListener(new TextWatcher() {
+-            @Override
+-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+-
+-            @Override
+-            public void onTextChanged(CharSequence s, int start, int before, int count) {
+-                mItemName = s.toString();
+-            }
+-
+-            @Override
+-            public void afterTextChanged(Editable s) {}
+-        });
+-
+         mItemPriceEditText = (EditText) v.findViewById(R.id.input_add_item_price);
+-        mItemPriceEditText.setText(mItemPrice);
+-        mItemPriceEditText.addTextChangedListener(new TextWatcher() {
+-            @Override
+-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
++        mItemCountTextView = (TextView) v.findViewById(R.id.item_count);
+ 
+-            @Override
+-            public void onTextChanged(CharSequence s, int start, int before, int count) {
+-                mItemPrice = s.toString();
++        if (savedInstanceState != null) {
++            mItemNameEditText.setText(savedInstanceState.getString(ITEM_NAME, ""));
++            mItemPriceEditText.setText(savedInstanceState.getString(ITEM_PRICE, ""));
++            mItemCountTextView.setText(savedInstanceState.getInt(ITEM_COUNT, MIN_ITEM_COUNT));
+-            }
++        }
+ 
+-            @Override
+-            public void afterTextChanged(Editable s) {}
+-        });
+-
+-        mItemCountTextView = (TextView) v.findViewById(R.id.item_count);
+-        mItemCountTextView.setText(String.valueOf(mItemCount));
+-
+         mDecreaseCount = (ImageButton) v.findViewById(R.id.btn_decrease_count);
+         mDecreaseCount.setOnClickListener(new View.OnClickListener() {
+             @Override
+@@ -109,26 +76,29 @@
+             }
+         });
+ 
+-        checkToHideButton();
+ 
++
+         final AlertDialog dialog = new AlertDialog.Builder(getActivity())
+-                              .setView(v)
+-                              .setTitle(R.string.label_add_item_title)
++                            .setView(v)
++                            .setTitle(R.string.label_add_item_title)
+-                              .setPositiveButton(R.string.label_add_item_button, null)
++                            .setNegativeButton(R.string.button_cancel_add_item, null)
++                            .setPositiveButton(R.string.button_add_item, null)
+-                              .create();
++                            .create();
+ 
+         dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+-
+             @Override
+             public void onShow(DialogInterface dialog) {
+                 Button addItem = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                 addItem.setOnClickListener(new View.OnClickListener() {
+                     @Override
+                     public void onClick(View v) {
+-                        if (mItemCount == 0 || mItemName.length() == 0 || Double.parseDouble(mItemPrice) == 0)
++                        int itemCount = Integer.parseInt(mItemCountTextView.getText().toString());
++                        double itemPrice = Double.parseDouble(mItemPriceEditText.getText().toString());
++                        String itemName = mItemNameEditText.getText().toString();
++                        if (itemCount == 0 || itemName.length() == 0 || itemPrice == 0)
+                             Toast.makeText(getActivity(), R.string.toast_error_adding_item, Toast.LENGTH_SHORT).show();
+                         else {
+-                            mAddItemListener.addItem(new Item(mItemName, Double.parseDouble(mItemPrice)), mItemCount);
++                            mAddItemListener.addItem(new Item(itemName, itemPrice), itemCount);
+                             dismiss();
+                         }
+                     }
+@@ -138,27 +108,29 @@
+         return dialog;
+     }
+ 
+-    private void changeCount(int i) {
+-        int changedCount = mItemCount + i;
+-        mItemCount = changedCount >= MIN_ITEM_COUNT && changedCount <= MAX ? changedCount : mItemCount;
+-        mItemCountTextView.setText(String.valueOf(mItemCount));
+-        checkToHideButton();
+-    }
+-
+     @Override
+     public void onSaveInstanceState(Bundle savedInstanceState) {
+-        savedInstanceState.putInt(ITEM_COUNT, mItemCount);
+-        savedInstanceState.putString(ITEM_PRICE, mItemPrice);
+-        savedInstanceState.putString(ITEM_NAME, mItemName);
++        savedInstanceState.putInt(ITEM_COUNT, Integer.parseInt(mItemCountTextView.getText().toString()));
++        savedInstanceState.putString(ITEM_PRICE, mItemPriceEditText.getText().toString());
++        savedInstanceState.putString(ITEM_NAME, mItemNameEditText.getText().toString());
+     }
+ 
+     private void checkToHideButton() {
+-        if (mItemCount == MAX) mIncreaseCount.setVisibility(View.INVISIBLE);
+-        else if (mItemCount == MIN_ITEM_COUNT) mDecreaseCount.setVisibility(View.INVISIBLE);
+-        else {
+-            mIncreaseCount.setVisibility(View.VISIBLE);
+-            mDecreaseCount.setVisibility(View.VISIBLE);
++        //Hides respective buttons if item count reaches limit
++        if (Integer.parseInt(mItemCountTextView.getText().toString()) == MAX_ITEM_COUNT)
++            mIncreaseCount.setVisibility(View.INVISIBLE);
++        else if (Integer.parseInt(mItemCountTextView.getText().toString()) == MIN_ITEM_COUNT)
++            mDecreaseCount.setVisibility(View.INVISIBLE);
++
++        //Sets visibility of invisible buttons if not touching limit
++        else if (mIncreaseCount.getVisibility() == View.INVISIBLE) mIncreaseCount.setVisibility(View.VISIBLE);
++        else if (mDecreaseCount.getVisibility() == View.INVISIBLE) mDecreaseCount.setVisibility(View.VISIBLE);
+-        }
++    }
+-    }
+ 
++    private void changeCount(int i) {
++        if (Integer.parseInt(mItemCountTextView.getText().toString()) + i <= MAX_ITEM_COUNT &&
++            Integer.parseInt(mItemCountTextView.getText().toString()) + i >= MIN_ITEM_COUNT)
++            mItemCountTextView.setText(Integer.parseInt(mItemCountTextView.getText().toString()) + i);
++        checkToHideButton();
++    }
+ }
